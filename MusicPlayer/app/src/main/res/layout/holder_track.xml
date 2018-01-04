@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="32dp"
+    android:paddingEnd="32dp"
+    android:paddingTop="16dp"
+    android:paddingBottom="16dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <TextView
+        android:id="@+id/track"
+        tools:text="American Idiot"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        android:textColor="@android:color/white"
+        android:paddingEnd="32dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/duration"
+        app:layout_constraintBottom_toTopOf="@id/artist"
+        app:layout_constraintVertical_chainStyle="packed"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/artist"
+        tools:text="Green Day"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        android:textColor="@android:color/white"
+        android:paddingStart="0dp"
+        android:paddingEnd="32dp"
+        android:fontFamily="sans-serif-thin"
+        app:layout_constraintTop_toBottomOf="@id/track"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/duration"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/duration"
+        tools:text="2:43"
+        android:textColor="@android:color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+
+
+</android.support.constraint.ConstraintLayout>

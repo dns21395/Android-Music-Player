@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingTop="16dp"
+    android:paddingBottom="8dp"
+    android:background="@color/colorPrimary"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/title"
+        android:paddingStart="24dp"
+        android:paddingEnd="16dp"
+        android:textColor="@android:color/white"
+        android:text="@string/create_playlist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <denis.musicplayer.ui.custom.PreventEnterKeyEditText
+        android:id="@+id/playlistName"
+        android:paddingTop="16dp"
+        android:paddingStart="24dp"
+        android:paddingEnd="16dp"
+        app:layout_constraintWidth_default="spread"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:textCursorDrawable="@android:color/transparent"
+        android:shadowColor="@android:color/white"
+        android:textColorLink="@android:color/white"
+        android:textColor="@android:color/white"
+        android:textColorHighlight="@android:color/white"
+        android:background="@android:color/transparent"
+        android:hint="@string/playlist"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/positiveButton"
+        android:text="@string/add"
+        android:paddingStart="0dp"
+        android:paddingEnd="8dp"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:textColor="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@id/playlistName"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/negativeButton"
+        android:text="@string/cancel"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:textColor="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@id/playlistName"
+        app:layout_constraintRight_toLeftOf="@id/positiveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+
+</android.support.constraint.ConstraintLayout>
