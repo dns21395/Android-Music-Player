@@ -22,6 +22,7 @@ import denis.musicplayer.ui.main.artist.ArtistAdapter
 import denis.musicplayer.ui.main.artist.ArtistMvpPresenter
 import denis.musicplayer.ui.main.artist.ArtistMvpView
 import denis.musicplayer.ui.main.artist.ArtistPresenter
+import denis.musicplayer.ui.main.base.MainRxBus
 import denis.musicplayer.ui.main.genre.GenreAdapter
 import denis.musicplayer.ui.main.genre.GenreMvpPresenter
 import denis.musicplayer.ui.main.genre.GenreMvpView
@@ -45,6 +46,7 @@ import denis.musicplayer.ui.splash.SplashMvpView
 import denis.musicplayer.ui.splash.SplashPresenter
 import io.reactivex.disposables.CompositeDisposable
 import java.nio.charset.MalformedInputException
+import javax.inject.Singleton
 
 /**
  * Created by denis on 30/12/2017.
@@ -60,6 +62,10 @@ class ActivityModule(val activity: AppCompatActivity) {
 
     @Provides
     fun provideLinearLayoutManager(@ActivityContext context: Context): LinearLayoutManager = LinearLayoutManager(context)
+
+    @Provides
+    @PerActivity
+    fun provideRxBus(): MainRxBus = MainRxBus()
 
     // Activity
 

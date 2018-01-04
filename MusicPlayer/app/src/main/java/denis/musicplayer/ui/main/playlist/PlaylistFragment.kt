@@ -34,6 +34,7 @@ class PlaylistFragment : MainBaseFragment(), PlaylistMvpView {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_playlist, container, false)
 
+
         activityComponent?.inject(this)
         presenter.onAttach(this)
 
@@ -49,8 +50,11 @@ class PlaylistFragment : MainBaseFragment(), PlaylistMvpView {
         }
     }
 
+
+
     override fun updateArray(array: ArrayList<Playlist>) {
         adapter.updateArray(array)
     }
+
 
 }
