@@ -8,4 +8,5 @@ import denis.musicplayer.ui.base.MvpView
 interface MainBaseMvpView : MvpView {
     fun showSelectFragment()
     fun hideSelectFragment()
+    fun updateCountSelectFragment(count: Int)
 }

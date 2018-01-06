@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import denis.musicplayer.R
 import denis.musicplayer.ui.base.BaseFragment
+import kotlinx.android.synthetic.main.fragment_select.*
 import javax.inject.Inject
 
 /**
@@ -34,6 +35,10 @@ class SelectFragment : BaseFragment(), SelectMvpView {
     }
 
     override fun setUp(view: View?) {
+        updateCount(1)
+    }
 
+    override fun updateCount(count: Int) {
+        selectedCount.text = getString(R.string.items_selected, count)
     }
 }

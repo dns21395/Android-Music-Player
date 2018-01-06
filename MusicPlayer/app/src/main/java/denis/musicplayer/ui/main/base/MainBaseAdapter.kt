@@ -56,11 +56,11 @@ abstract class MainBaseAdapter<A : MainBaseViewHolder,
         when(selectedArray.contains(array[position])) {
             true -> {
                 selectedArray.remove(array[position])
-                Log.d(TAG, "$selectedArray")
                 if(selectedArray.size == 0) callback.stopSelecting()
             }
             false -> {
                 selectedArray.add(array[position])
+                callback.updateSelectedCount(selectedArray.size)
             }
         }
         setBackground(holder, position)
@@ -81,5 +81,6 @@ abstract class MainBaseAdapter<A : MainBaseViewHolder,
     interface Callback {
         fun startSelecting()
         fun stopSelecting()
+        fun updateSelectedCount(count: Int)
     }
 }

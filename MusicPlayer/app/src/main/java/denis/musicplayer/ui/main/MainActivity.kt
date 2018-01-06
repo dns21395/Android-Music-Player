@@ -20,8 +20,6 @@ class MainActivity : BaseActivity(), MainMvpView {
         fun getStartIntent(context: Context): Intent = Intent(context, MainActivity::class.java)
     }
 
-
-
     private val TAG = "MainActivity"
 
     @Inject lateinit var presenter: MainMvpPresenter<MainMvpView>
@@ -49,5 +47,7 @@ class MainActivity : BaseActivity(), MainMvpView {
     override fun replaceFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction().replace(R.id.frameLayout, fragment).commit()
     }
+
+
 
 }
