@@ -3,7 +3,6 @@ package denis.musicplayer.ui.playlist
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import denis.musicplayer.R
 import denis.musicplayer.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_playlist.*
@@ -16,8 +15,12 @@ import javax.inject.Inject
 class PlaylistActivity : BaseActivity(), PlaylistMvpView {
 
     companion object {
+        val CODE_PLAYLIST_DELETED = 48
+        val KEY_DELETED = "key_deleted"
+
         val KEY_ID = "key_id"
-        val TITLE_ID = "title_id"
+        val KEY_TITLE = "key_title"
+
 
         fun getStartIntent(context: Context): Intent = Intent(context, PlaylistActivity::class.java)
     }
@@ -39,7 +42,7 @@ class PlaylistActivity : BaseActivity(), PlaylistMvpView {
 
     override fun setUp() {
         id = intent.extras?.getInt(KEY_ID) ?: 0
-        title = intent.extras?.getString(TITLE_ID) ?: ""
+        title = intent.extras?.getString(KEY_TITLE) ?: ""
 
         playlistTitle.text = title
 
@@ -50,6 +53,11 @@ class PlaylistActivity : BaseActivity(), PlaylistMvpView {
 
     override fun onPlaylistDeleted() {
         toast(getString(R.string.playlist_deleted, title))
+
+        val intent = Intent()
+        intent.putExtra(KEY_DELETED, true)
+        setResult(48, intent)
+
         finish()
     }
 }

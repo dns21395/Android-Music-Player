@@ -1,7 +1,9 @@
 package denis.musicplayer.ui.main.playlist
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,7 +28,9 @@ class MainPlaylistFragment : MainBaseFragment(), MainPlaylistMvpView, MainPlayli
         }
     }
 
-    @Inject lateinit var presenterMain: MainPlaylistMvpPresenter<MainPlaylistMvpView>
+    private val TAG = "MainPlaylistFragment"
+
+    @Inject lateinit var presenter: MainPlaylistMvpPresenter<MainPlaylistMvpView>
 
     @Inject lateinit var layoutManager: LinearLayoutManager
 
@@ -36,7 +40,7 @@ class MainPlaylistFragment : MainBaseFragment(), MainPlaylistMvpView, MainPlayli
         val view = inflater.inflate(R.layout.fragment_playlist, container, false)
 
         activityComponent?.inject(this)
-        presenterMain.onAttach(this)
+        presenter.onAttach(this)
 
         return view
     }
@@ -52,8 +56,6 @@ class MainPlaylistFragment : MainBaseFragment(), MainPlaylistMvpView, MainPlayli
         }
     }
 
-
-
     override fun updateArray(array: ArrayList<Playlist>) {
         adapter.updateArray(array)
     }
@@ -63,10 +65,22 @@ class MainPlaylistFragment : MainBaseFragment(), MainPlaylistMvpView, MainPlayli
 
         val bundle = Bundle()
         bundle.putInt(PlaylistActivity.KEY_ID, id)
-        bundle.putString(PlaylistActivity.TITLE_ID, title)
+        bundle.putString(PlaylistActivity.KEY_TITLE, title)
 
         intent.putExtras(bundle)
 
-        startActivity(intent)
+        startActivityForResult(intent, PlaylistActivity.CODE_PLAYLIST_DELETED)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if(requestCode == PlaylistActivity.CODE_PLAYLIST_DELETED &&
+                resultCode == PlaylistActivity.CODE_PLAYLIST_DELETED) {
+            if(data?.getBooleanExtra(PlaylistActivity.KEY_DELETED, false) == true) {
+                presenter.getPlaylists()
+            }
+        }
     }
 }
+
