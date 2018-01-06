@@ -9,7 +9,7 @@ import denis.musicplayer.di.ActivityContext
 import denis.musicplayer.ui.main.album.AlbumFragment
 import denis.musicplayer.ui.main.artist.ArtistFragment
 import denis.musicplayer.ui.main.genre.GenreFragment
-import denis.musicplayer.ui.main.playlist.PlaylistFragment
+import denis.musicplayer.ui.main.playlist.MainPlaylistFragment
 import denis.musicplayer.ui.main.track.TrackFragment
 
 /**
@@ -17,7 +17,7 @@ import denis.musicplayer.ui.main.track.TrackFragment
  */
 class MainAdapter(@ActivityContext val context: Context, fm: FragmentManager?) : FragmentStatePagerAdapter(fm) {
     private val fragments = arrayOf(TrackFragment.newInstance(),
-                                    PlaylistFragment.newInstance(),
+                                    MainPlaylistFragment.newInstance(),
                                     AlbumFragment.newInstance(),
                                     ArtistFragment.newInstance(),
                                     GenreFragment.newInstance())

@@ -30,10 +30,7 @@ import denis.musicplayer.ui.main.genre.GenrePresenter
 import denis.musicplayer.ui.main.main.MainContentMvpPresenter
 import denis.musicplayer.ui.main.main.MainContentMvpView
 import denis.musicplayer.ui.main.main.MainContentPresenter
-import denis.musicplayer.ui.main.playlist.PlaylistAdapter
-import denis.musicplayer.ui.main.playlist.PlaylistMvpPresenter
-import denis.musicplayer.ui.main.playlist.PlaylistMvpView
-import denis.musicplayer.ui.main.playlist.PlaylistPresenter
+import denis.musicplayer.ui.main.playlist.*
 import denis.musicplayer.ui.main.track.TrackAdapter
 import denis.musicplayer.ui.main.track.TrackMvpPresenter
 import denis.musicplayer.ui.main.track.TrackMvpView
@@ -41,12 +38,12 @@ import denis.musicplayer.ui.main.track.TrackPresenter
 import denis.musicplayer.ui.permission.PermissionMvpPresenter
 import denis.musicplayer.ui.permission.PermissionMvpView
 import denis.musicplayer.ui.permission.PermissionPresenter
+import denis.musicplayer.ui.playlist.PlaylistMvpPresenter
+import denis.musicplayer.ui.playlist.PlaylistMvpView
+import denis.musicplayer.ui.playlist.PlaylistPresenter
 import denis.musicplayer.ui.splash.SplashMvpPresenter
 import denis.musicplayer.ui.splash.SplashMvpView
 import denis.musicplayer.ui.splash.SplashPresenter
-import io.reactivex.disposables.CompositeDisposable
-import java.nio.charset.MalformedInputException
-import javax.inject.Singleton
 
 /**
  * Created by denis on 30/12/2017.
@@ -81,6 +78,10 @@ class ActivityModule(val activity: AppCompatActivity) {
     @PerActivity
     fun providePermissionPresenter(presenter: PermissionPresenter<PermissionMvpView>): PermissionMvpPresenter<PermissionMvpView> = presenter
 
+    @Provides
+    @PerActivity
+    fun providePlaylistPresenter(presenter: PlaylistPresenter<PlaylistMvpView>): PlaylistMvpPresenter<PlaylistMvpView> = presenter
+
     // Fragment
 
     @Provides
@@ -93,7 +94,7 @@ class ActivityModule(val activity: AppCompatActivity) {
     fun provideAlbumPresenter(presenter: AlbumPresenter<AlbumMvpView>): AlbumMvpPresenter<AlbumMvpView> = presenter
 
     @Provides
-    fun providePlaylistPresenter(presenter: PlaylistPresenter<PlaylistMvpView>): PlaylistMvpPresenter<PlaylistMvpView> = presenter
+    fun provideMainPlaylistPresenter(presenter: MainPlaylistPresenter<MainPlaylistMvpView>): MainPlaylistMvpPresenter<MainPlaylistMvpView> = presenter
 
     @Provides
     fun provideArtistPresenter(presenter: ArtistPresenter<ArtistMvpView>): ArtistMvpPresenter<ArtistMvpView> = presenter
@@ -111,7 +112,7 @@ class ActivityModule(val activity: AppCompatActivity) {
     fun provideMainAdapter(@ActivityContext context: Context) = MainAdapter(context, activity.supportFragmentManager)
 
     @Provides
-    fun providePlaylistAdapter(@ActivityContext context: Context) = PlaylistAdapter(context)
+    fun providePlaylistAdapter(@ActivityContext context: Context) = MainPlaylistAdapter(context)
 
     @Provides
     fun provideAlbumAdapter(@ActivityContext context: Context) = AlbumAdapter(context)

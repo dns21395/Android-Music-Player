@@ -6,6 +6,6 @@ import denis.musicplayer.ui.main.base.MainBasePresenter
 /**
  * Created by denis on 01/01/2018.
  */
-interface PlaylistMvpPresenter<V : PlaylistMvpView> : MainBaseMvpPresenter<V> {
+interface MainPlaylistMvpPresenter<V : MainPlaylistMvpView> : MainBaseMvpPresenter<V> {
     fun getPlaylists()
 }

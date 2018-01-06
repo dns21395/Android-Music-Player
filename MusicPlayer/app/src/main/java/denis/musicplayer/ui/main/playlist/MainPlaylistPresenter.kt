@@ -16,14 +16,14 @@ import javax.inject.Inject
 /**
  * Created by denis on 01/01/2018.
  */
-class PlaylistPresenter<V: PlaylistMvpView>
+class MainPlaylistPresenter<V: MainPlaylistMvpView>
     @Inject constructor(@ActivityContext context: Context,
                         dataManager: DataManager,
                         compositeDisposable: CompositeDisposable,
                         val rxBus: MainRxBus)
-    : MainBasePresenter<V>(context, dataManager, compositeDisposable), PlaylistMvpPresenter<V> {
+    : MainBasePresenter<V>(context, dataManager, compositeDisposable), MainPlaylistMvpPresenter<V> {
 
-    private val TAG = "PlaylistPresenter"
+    private val TAG = "MainPlaylistPresenter"
 
     override fun onAttach(mvpView: V) {
         super.onAttach(mvpView)
