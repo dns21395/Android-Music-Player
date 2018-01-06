@@ -42,6 +42,10 @@ class AppDataManager
         playlistManager.createPlaylist(name)
     }
 
+    override fun deletePlaylist(id: Int) {
+        playlistManager.deletePlaylist(id)
+    }
+
 
 
 }

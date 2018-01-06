@@ -9,4 +9,6 @@ interface PlaylistManager {
     fun scanPlaylist(): ArrayList<Playlist>
 
     fun createPlaylist(name: String)
+
+    fun deletePlaylist(id: Int)
 }

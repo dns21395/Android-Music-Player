@@ -24,6 +24,9 @@ class PlaylistActivity : BaseActivity(), PlaylistMvpView {
 
     @Inject lateinit var presenter: PlaylistMvpPresenter<PlaylistMvpView>
 
+    var id = 0
+    var title = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_playlist)
@@ -31,13 +34,22 @@ class PlaylistActivity : BaseActivity(), PlaylistMvpView {
         activityComponent.inject(this)
         presenter.onAttach(this)
 
-
-        toast( "${intent.extras?.getInt(KEY_ID)}")
-
         setUp()
     }
 
     override fun setUp() {
-        playlistTitle.text = "${intent.extras?.getString(TITLE_ID)}"
+        id = intent.extras?.getInt(KEY_ID) ?: 0
+        title = intent.extras?.getString(TITLE_ID) ?: ""
+
+        playlistTitle.text = title
+
+        delete.setOnClickListener {
+            presenter.deletePlaylist(id)
+        }
+    }
+
+    override fun onPlaylistDeleted() {
+        toast(getString(R.string.playlist_deleted, title))
+        finish()
     }
 }

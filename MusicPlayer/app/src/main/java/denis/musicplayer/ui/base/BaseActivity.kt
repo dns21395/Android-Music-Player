@@ -42,4 +42,5 @@ abstract class BaseActivity : AppCompatActivity(), MvpView {
 
 
 
+
 }
