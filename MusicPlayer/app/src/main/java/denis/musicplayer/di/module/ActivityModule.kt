@@ -31,6 +31,9 @@ import denis.musicplayer.ui.main.main.MainContentMvpPresenter
 import denis.musicplayer.ui.main.main.MainContentMvpView
 import denis.musicplayer.ui.main.main.MainContentPresenter
 import denis.musicplayer.ui.main.playlist.*
+import denis.musicplayer.ui.main.select.SelectMvpPresenter
+import denis.musicplayer.ui.main.select.SelectMvpView
+import denis.musicplayer.ui.main.select.SelectPresenter
 import denis.musicplayer.ui.main.track.TrackAdapter
 import denis.musicplayer.ui.main.track.TrackMvpPresenter
 import denis.musicplayer.ui.main.track.TrackMvpView
@@ -101,6 +104,9 @@ class ActivityModule(val activity: AppCompatActivity) {
 
     @Provides
     fun provideGenrePresenter(presenter: GenrePresenter<GenreMvpView>): GenreMvpPresenter<GenreMvpView> = presenter
+
+    @Provides
+    fun provideSelectPresenter(presenter: SelectPresenter<SelectMvpView>): SelectMvpPresenter<SelectMvpView> = presenter
 
     // Dialog
 

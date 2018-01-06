@@ -1,6 +1,7 @@
 package denis.musicplayer.ui.main.track
 
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +14,7 @@ import javax.inject.Inject
 /**
  * Created by denis on 31/12/2017.
  */
-class TrackFragment : MainBaseFragment(), TrackMvpView {
+class TrackFragment : MainBaseFragment(), TrackMvpView, TrackAdapter.Callback {
 
     companion object {
         fun newInstance(): TrackFragment {
@@ -26,6 +27,10 @@ class TrackFragment : MainBaseFragment(), TrackMvpView {
 
     @Inject lateinit var presenter: TrackMvpPresenter<TrackMvpView>
 
+    @Inject lateinit var layoutManager: LinearLayoutManager
+
+    @Inject lateinit var adapter: TrackAdapter
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_main, container, false)
 
@@ -36,5 +41,12 @@ class TrackFragment : MainBaseFragment(), TrackMvpView {
     }
 
     override fun setUp(view: View?) {
+        recyclerView.layoutManager = layoutManager
+        recyclerView.adapter = adapter
+        adapter.callback = this
+    }
+
+    override fun updateArray(array: ArrayList<Track>) {
+        adapter.updateArray(array)
     }
 }

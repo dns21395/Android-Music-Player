@@ -11,7 +11,7 @@
 
 
     <TextView
-        android:id="@+id/track"
+        android:id="@+id/trackName"
         tools:text="American Idiot"
         android:ellipsize="marquee"
         android:singleLine="true"
@@ -34,7 +34,7 @@
         android:paddingStart="0dp"
         android:paddingEnd="32dp"
         android:fontFamily="sans-serif-thin"
-        app:layout_constraintTop_toBottomOf="@id/track"
+        app:layout_constraintTop_toBottomOf="@id/trackName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/duration"

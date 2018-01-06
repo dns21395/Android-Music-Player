@@ -31,11 +31,7 @@ class MainPlaylistPresenter<V: MainPlaylistMvpView>
         compositeDisposable.add(
                 rxBus.toObservable()
                         .subscribe {
-                            Log.d(TAG, "$it")
-
                             if(it == UPDATE_PLAYLIST) getPlaylists()
-
-
                         }
         )
 
@@ -49,7 +45,6 @@ class MainPlaylistPresenter<V: MainPlaylistMvpView>
                 }.subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe {
-                            Log.d(TAG, "update array")
                             mvpView?.updateArray(it)
                         }
         )

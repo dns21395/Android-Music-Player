@@ -11,6 +11,7 @@ abstract class MainBaseAdapter<A : MainBaseViewHolder, B: Any> : RecyclerView.Ad
     private val TAG = "MainBaseAdapter"
 
     var array = ArrayList<B>()
+    val selectedArray = ArrayList<B>()
 
     override fun onBindViewHolder(holder: A, position: Int) {
         holder.setBackground(position)

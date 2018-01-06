@@ -6,4 +6,8 @@ package denis.musicplayer.data.media.model
 data class Artist(val id: Int,
                   val artist: String,
                   val albumCount: String,
-                  val trackCount: String)
+                  val trackCount: String) {
+    override fun equals(other: Any?): Boolean {
+        return id == (other as Artist).id
+    }
+}
