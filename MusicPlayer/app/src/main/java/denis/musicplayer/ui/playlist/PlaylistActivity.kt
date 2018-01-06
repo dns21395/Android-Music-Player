@@ -46,6 +46,10 @@ class PlaylistActivity : BaseActivity(), PlaylistMvpView {
 
         playlistTitle.text = title
 
+        back.setOnClickListener {
+            finish()
+        }
+
         delete.setOnClickListener {
             presenter.deletePlaylist(id)
         }

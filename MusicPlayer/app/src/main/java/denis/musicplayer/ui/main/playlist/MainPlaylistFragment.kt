@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import denis.musicplayer.R
 import denis.musicplayer.data.playlist.model.Playlist
+import denis.musicplayer.ui.base.BaseFragment
 import denis.musicplayer.ui.main.add_playlist.AddPlaylistDialog
 import denis.musicplayer.ui.main.base.MainBaseFragment
 import denis.musicplayer.ui.playlist.PlaylistActivity
@@ -18,7 +19,7 @@ import javax.inject.Inject
 /**
  * Created by denis on 01/01/2018.
  */
-class MainPlaylistFragment : MainBaseFragment(), MainPlaylistMvpView, MainPlaylistAdapter.Callback {
+class MainPlaylistFragment : BaseFragment(), MainPlaylistMvpView, MainPlaylistAdapter.Callback {
     companion object {
         fun newInstance(): MainPlaylistFragment {
             val args = Bundle()

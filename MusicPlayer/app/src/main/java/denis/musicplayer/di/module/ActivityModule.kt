@@ -41,6 +41,9 @@ import denis.musicplayer.ui.main.track.TrackPresenter
 import denis.musicplayer.ui.permission.PermissionMvpPresenter
 import denis.musicplayer.ui.permission.PermissionMvpView
 import denis.musicplayer.ui.permission.PermissionPresenter
+import denis.musicplayer.ui.player.fragment.PlayerFragmentMvpPresenter
+import denis.musicplayer.ui.player.fragment.PlayerFragmentMvpView
+import denis.musicplayer.ui.player.fragment.PlayerFragmentPresenter
 import denis.musicplayer.ui.playlist.PlaylistMvpPresenter
 import denis.musicplayer.ui.playlist.PlaylistMvpView
 import denis.musicplayer.ui.playlist.PlaylistPresenter
@@ -107,6 +110,9 @@ class ActivityModule(val activity: AppCompatActivity) {
 
     @Provides
     fun provideSelectPresenter(presenter: SelectPresenter<SelectMvpView>): SelectMvpPresenter<SelectMvpView> = presenter
+
+    @Provides
+    fun provideFragmentPlayerPresenter(presenter: PlayerFragmentPresenter<PlayerFragmentMvpView>): PlayerFragmentMvpPresenter<PlayerFragmentMvpView> = presenter
 
     // Dialog
 

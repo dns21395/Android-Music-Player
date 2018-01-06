@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import denis.musicplayer.data.DataManager
 import denis.musicplayer.di.ActivityContext
+import denis.musicplayer.ui.base.BasePresenter
 import denis.musicplayer.ui.main.base.MainBasePresenter
 import denis.musicplayer.ui.main.base.MainRxBus
 import io.reactivex.Flowable
@@ -21,7 +22,7 @@ class MainPlaylistPresenter<V: MainPlaylistMvpView>
                         dataManager: DataManager,
                         compositeDisposable: CompositeDisposable,
                         val rxBus: MainRxBus)
-    : MainBasePresenter<V>(context, dataManager, compositeDisposable), MainPlaylistMvpPresenter<V> {
+    : BasePresenter<V>(context, dataManager, compositeDisposable), MainPlaylistMvpPresenter<V> {
 
     private val TAG = "MainPlaylistPresenter"
 

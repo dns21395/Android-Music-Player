@@ -28,3 +28,4 @@ class MainRxBus {
 enum class MainEnumRxBus {
     UPDATE_PLAYLIST
 }
+

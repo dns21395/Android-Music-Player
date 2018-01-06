@@ -1,6 +1,7 @@
 package denis.musicplayer.ui.main.playlist
 
 import android.content.Context
+import android.support.v7.widget.RecyclerView
 import android.telecom.Call
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -11,13 +12,15 @@ import denis.musicplayer.ui.main.base.MainBaseAdapter
 /**
  * Created by denis on 02/01/2018.
  */
-class MainPlaylistAdapter(val context: Context) : MainBaseAdapter<MainPlaylistViewHolder, Playlist>() {
+class MainPlaylistAdapter(val context: Context) : RecyclerView.Adapter<MainPlaylistViewHolder>() {
 
     lateinit var callback: Callback
 
+    var array = ArrayList<Playlist>()
+
     override fun onBindViewHolder(holder: MainPlaylistViewHolder, position: Int) {
-        super.onBindViewHolder(holder, position)
         holder.onBind(array[position])
+        holder.setBackground(position)
         holder.itemView.setOnClickListener {
             val playlist = array[position]
             callback.onPlaylistClicked(playlist.id, playlist.name)
@@ -27,7 +30,14 @@ class MainPlaylistAdapter(val context: Context) : MainBaseAdapter<MainPlaylistVi
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): MainPlaylistViewHolder =
             MainPlaylistViewHolder(LayoutInflater.from(context).inflate(R.layout.holder_playlist, parent, false))
 
-    interface Callback {
+    override fun getItemCount(): Int = array.size
+
+    fun updateArray(array: ArrayList<Playlist>) {
+        this.array = array
+        notifyDataSetChanged()
+    }
+
+    interface Callback  {
         fun onPlaylistClicked(id: Int, title: String)
     }
 }

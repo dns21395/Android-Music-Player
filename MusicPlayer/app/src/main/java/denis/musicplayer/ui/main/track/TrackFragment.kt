@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import denis.musicplayer.R
 import denis.musicplayer.data.media.model.Track
+import denis.musicplayer.ui.main.MainActivity
 import denis.musicplayer.ui.main.base.MainBaseFragment
 import kotlinx.android.synthetic.main.fragment_main.*
 import javax.inject.Inject
@@ -48,5 +49,13 @@ class TrackFragment : MainBaseFragment(), TrackMvpView, TrackAdapter.Callback {
 
     override fun updateArray(array: ArrayList<Track>) {
         adapter.updateArray(array)
+    }
+
+    override fun startSelecting() {
+        showSelectFragment()
+    }
+
+    override fun stopSelecting() {
+        hideSelectFragment()
     }
 }
