@@ -15,4 +15,11 @@ abstract class MainBaseViewHolder(itemView: View) : RecyclerView.ViewHolder(item
             else -> itemView.background = ContextCompat.getDrawable(itemView.context, R.color.item_odd)
         }
     }
+
+    fun setSelectedBackground(position: Int) = with(itemView) {
+        when(position % 2) {
+            0 -> itemView.background = ContextCompat.getDrawable(itemView.context, R.color.item_selected_even)
+            else -> itemView.background = ContextCompat.getDrawable(itemView.context, R.color.item_selected_odd)
+        }
+    }
 }

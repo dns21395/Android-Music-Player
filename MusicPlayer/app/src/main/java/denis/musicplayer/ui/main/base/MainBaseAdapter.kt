@@ -14,7 +14,33 @@ abstract class MainBaseAdapter<A : MainBaseViewHolder, B: Any> : RecyclerView.Ad
     val selectedArray = ArrayList<B>()
 
     override fun onBindViewHolder(holder: A, position: Int) {
-        holder.setBackground(position)
+        setBackground(holder, position)
+
+        holder.itemView.setOnLongClickListener {
+            selectedArray.add(array[position])
+            setBackground(holder, position)
+            true
+        }
+
+        holder.itemView.setOnClickListener {
+            if(selectedArray.contains(array[position])) selectedArray.remove(array[position])
+            else if(selectedArray.size > 0) selectedArray.add(array[position])
+            setBackground(holder, position)
+        }
+
+    }
+
+    private fun setBackground(holder: A, position: Int) {
+        when(selectedArray.size) {
+            0 -> holder.setBackground(position)
+            else -> {
+                when(selectedArray.contains(array[position])){
+                    true -> holder.setSelectedBackground(position)
+                    false -> holder.setBackground(position)
+                }
+
+            }
+        }
     }
 
     override fun getItemCount(): Int = array.size
