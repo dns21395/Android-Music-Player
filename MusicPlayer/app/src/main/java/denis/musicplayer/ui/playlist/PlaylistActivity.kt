@@ -27,7 +27,7 @@ class PlaylistActivity : BaseActivity(), PlaylistMvpView {
 
     @Inject lateinit var presenter: PlaylistMvpPresenter<PlaylistMvpView>
 
-    var id = 0
+    var id = 0L
     var title = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,7 +41,7 @@ class PlaylistActivity : BaseActivity(), PlaylistMvpView {
     }
 
     override fun setUp() {
-        id = intent.extras?.getInt(KEY_ID) ?: 0
+        id = intent.extras?.getLong(KEY_ID) ?: 0
         title = intent.extras?.getString(KEY_TITLE) ?: ""
 
         playlistTitle.text = title
@@ -53,6 +53,8 @@ class PlaylistActivity : BaseActivity(), PlaylistMvpView {
         delete.setOnClickListener {
             presenter.deletePlaylist(id)
         }
+
+        presenter.getTracks(id)
     }
 
     override fun onPlaylistDeleted() {

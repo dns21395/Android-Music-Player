@@ -1,5 +1,6 @@
 package denis.musicplayer.data.playlist
 
+import denis.musicplayer.data.media.model.Track
 import denis.musicplayer.data.playlist.model.Playlist
 
 /**
@@ -10,5 +11,9 @@ interface PlaylistManager {
 
     fun createPlaylist(name: String)
 
-    fun deletePlaylist(id: Int)
+    fun deletePlaylist(id: Long)
+
+    fun addTracksToPlaylist(id: Long, tracks: ArrayList<Track>)
+
+    fun getPlaylistTracks(id: Long): ArrayList<Track>
 }

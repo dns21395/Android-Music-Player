@@ -59,11 +59,11 @@ class MainPlaylistFragment : BaseFragment(), MainPlaylistMvpView, MainPlaylistAd
         adapter.updateArray(array)
     }
 
-    override fun onPlaylistClicked(id: Int, title: String) {
+    override fun onPlaylistClicked(id: Long, title: String) {
         val intent = PlaylistActivity.getStartIntent(context!!)
 
         val bundle = Bundle()
-        bundle.putInt(PlaylistActivity.KEY_ID, id)
+        bundle.putLong(PlaylistActivity.KEY_ID, id)
         bundle.putString(PlaylistActivity.KEY_TITLE, title)
 
         intent.putExtras(bundle)

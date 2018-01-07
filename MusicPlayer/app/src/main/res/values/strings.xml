@@ -12,6 +12,8 @@
     <string name="playlist_deleted">Playlist \"%1$s\" deleted</string>
     <string name="items_selected">%1$d item(s) selected</string>
     <string name="select_playlist">Select Playlist</string>
+    <string name="playlist_updated">Playlist Updated</string>
+    <string name="unknown_error">Unknown Error</string>
 
     <string-array name="main_fragments">
         <item>Tracks</item>

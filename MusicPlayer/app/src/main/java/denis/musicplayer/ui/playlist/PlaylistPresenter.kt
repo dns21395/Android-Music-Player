@@ -1,6 +1,7 @@
 package denis.musicplayer.ui.playlist
 
 import android.content.Context
+import android.util.Log
 import denis.musicplayer.data.DataManager
 import denis.musicplayer.di.ActivityContext
 import denis.musicplayer.ui.base.BasePresenter
@@ -19,7 +20,28 @@ class PlaylistPresenter<V: PlaylistMvpView>
                         dataManager: DataManager,
                         compositeDisposable: CompositeDisposable)
     : BasePresenter<V>(context, dataManager, compositeDisposable), PlaylistMvpPresenter<V> {
-    override fun deletePlaylist(id: Int) {
+
+    private val TAG = "PlaylistPresenter"
+
+    override fun onAttach(mvpView: V) {
+        super.onAttach(mvpView)
+    }
+
+    override fun getTracks(id: Long) {
+        compositeDisposable.add(
+                Observable.fromCallable {
+                    dataManager.getPlaylistTracks(id)
+                }.subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe {
+                            for(item in it) {
+                                Log.d(TAG, "$item")
+                            }
+                        }
+        )
+    }
+
+    override fun deletePlaylist(id: Long) {
         compositeDisposable.add(
                 Observable.fromCallable {
                     dataManager.deletePlaylist(id)

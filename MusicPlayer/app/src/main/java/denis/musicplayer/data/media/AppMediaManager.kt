@@ -38,12 +38,12 @@ class AppMediaManager
             cursor.moveToFirst()
 
             while(!cursor.isAfterLast) {
-                val id = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media._ID)).toInt()
+                val id = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media._ID)).toLong()
                 val title = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.TITLE))
                 val artist = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST))
                 val data = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DATA))
-                val duration = convertDuration(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DURATION)).toLong())
-                val albumId = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID)).toInt()
+                val duration = Track.convertDuration(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DURATION)).toLong())
+                val albumId = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ALBUM_ID)).toLong()
 
                 cursor.moveToNext()
 
@@ -74,7 +74,7 @@ class AppMediaManager
         if(cursor != null) {
             cursor.moveToFirst()
             while(!cursor.isAfterLast) {
-                val id = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Albums._ID)).toInt()
+                val id = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Albums._ID)).toLong()
                 val album = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Albums.ALBUM))
                 val artist = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Albums.ARTIST))
                 val cover = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Albums.ALBUM_ART))
@@ -107,7 +107,7 @@ class AppMediaManager
         if(cursor != null) {
             cursor.moveToFirst()
             while(!cursor.isAfterLast) {
-                val id = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Artists._ID)).toInt()
+                val id = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Artists._ID)).toLong()
                 val artist = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Artists.ARTIST))
                 val albumsCount = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Artists.NUMBER_OF_ALBUMS))
                 val tracksCount = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Artists.NUMBER_OF_TRACKS))
@@ -140,7 +140,7 @@ class AppMediaManager
         if(cursor != null) {
             cursor.moveToFirst()
             while(!cursor.isAfterLast) {
-                val id: Int = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Genres._ID)).toInt()
+                val id = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Genres._ID)).toLong()
                 val name: String = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Genres.NAME))
 
                 cursor.moveToNext()
@@ -153,16 +153,4 @@ class AppMediaManager
 
         return array
     }
-
-    private fun convertDuration(value: Long): String {
-        val hrs = value / 3600000
-        val mns = value / 60000 % 60000
-        val scs = value % 60000 / 1000
-
-        return when(hrs) {
-            0L -> String.format("%02d:%02d", mns, scs)
-            else -> String.format("%02d:%02d:%02d", hrs, mns, scs)
-        }
-    }
-
 }

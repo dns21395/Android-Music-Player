@@ -38,6 +38,6 @@ class MainPlaylistAdapter(val context: Context) : RecyclerView.Adapter<MainPlayl
     }
 
     interface Callback  {
-        fun onPlaylistClicked(id: Int, title: String)
+        fun onPlaylistClicked(id: Long, title: String)
     }
 }

@@ -1,6 +1,8 @@
 package denis.musicplayer.ui.main.updateplaylist
 
+import android.app.Dialog
 import android.os.Bundle
+import android.support.constraint.ConstraintLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,15 +10,17 @@ import android.view.View
 import android.view.ViewGroup
 import denis.musicplayer.R
 import denis.musicplayer.data.media.model.Track
+import denis.musicplayer.data.playlist.model.Playlist
 import denis.musicplayer.ui.base.BaseDialog
 import denis.musicplayer.utils.BytesUtil
 import kotlinx.android.synthetic.main.dialog_update_playlist.*
+import org.jetbrains.anko.support.v4.toast
 import javax.inject.Inject
 
 /**
  * Created by denis on 06/01/2018.
  */
-class UpdatePlaylistDialog : BaseDialog(), UpdatePlaylistMvpView {
+class UpdatePlaylistDialog : BaseDialog(), UpdatePlaylistMvpView, UpdatePlaylistAdapter.Callback {
 
     companion object {
         val TAG = "UpdatePlaylistDialog"
@@ -46,17 +50,34 @@ class UpdatePlaylistDialog : BaseDialog(), UpdatePlaylistMvpView {
         return view
     }
 
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val dialog = Dialog(context)
+        dialog.setContentView(R.layout.dialog_update_playlist)
+
+        dialog.window?.setLayout(ConstraintLayout.LayoutParams.MATCH_PARENT, ConstraintLayout.LayoutParams.MATCH_PARENT)
+
+        return dialog
+    }
+
     override fun setUp(view: View?) {
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = adapter
+        adapter.callback = this
+    }
 
-        val objects = arguments?.getByteArray(KEY_TRACKS)
-        if(objects != null) {
-            val tracks = BytesUtil.toObject<Track>(objects)
+    override fun updateArray(array: ArrayList<Playlist>) {
+        adapter.updateArray(array)
+    }
 
-            for(track in tracks) {
-                Log.d(TAG, "$track")
-            }
+    override fun onPlaylistChose(id: Long) {
+        when(arguments) {
+            null -> finishDialog(R.string.unknown_error)
+            else -> presenter.updatePlaylist(arguments!!, id)
         }
+    }
+
+    override fun finishDialog(toastText: Int) {
+        toast(toastText)
+        dismissDialog(TAG)
     }
 }

@@ -35,6 +35,6 @@ class UpdatePlaylistAdapter(val context: Context) : RecyclerView.Adapter<UpdateP
     }
 
     interface Callback {
-        fun onPlaylistChose(id: Int)
+        fun onPlaylistChose(id: Long)
     }
 }

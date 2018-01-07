@@ -38,13 +38,17 @@ class AppDataManager
     override fun scanPlaylist(): ArrayList<Playlist> =
             playlistManager.scanPlaylist()
 
-    override fun createPlaylist(name: String) {
-        playlistManager.createPlaylist(name)
-    }
+    override fun createPlaylist(name: String) =
+            playlistManager.createPlaylist(name)
 
-    override fun deletePlaylist(id: Int) {
-        playlistManager.deletePlaylist(id)
-    }
+    override fun deletePlaylist(id: Long) =
+            playlistManager.deletePlaylist(id)
+
+    override fun addTracksToPlaylist(id: Long, tracks: ArrayList<Track>) =
+            playlistManager.addTracksToPlaylist(id, tracks)
+
+    override fun getPlaylistTracks(id: Long): ArrayList<Track> =
+            playlistManager.getPlaylistTracks(id)
 
 
 
