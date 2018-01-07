@@ -8,4 +8,6 @@ import denis.musicplayer.ui.main.base.MainBaseMvpView
  */
 interface TrackMvpView : MainBaseMvpView {
     fun updateArray(array: ArrayList<Track>)
+
+    fun showUpdatePlaylist()
 }

@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import denis.musicplayer.R
 import denis.musicplayer.data.media.model.Track
-import denis.musicplayer.ui.main.MainActivity
 import denis.musicplayer.ui.main.base.MainBaseFragment
+import denis.musicplayer.ui.main.updateplaylist.UpdatePlaylistDialog
 import kotlinx.android.synthetic.main.fragment_main.*
 import javax.inject.Inject
 
@@ -16,7 +16,6 @@ import javax.inject.Inject
  * Created by denis on 31/12/2017.
  */
 class TrackFragment : MainBaseFragment(), TrackMvpView, TrackAdapter.Callback {
-
     companion object {
         fun newInstance(): TrackFragment {
             val args = Bundle()
@@ -61,5 +60,9 @@ class TrackFragment : MainBaseFragment(), TrackMvpView, TrackAdapter.Callback {
 
     override fun updateSelectedCount(count: Int) {
         updateCountSelectFragment(count)
+    }
+
+    override fun showUpdatePlaylist() {
+        UpdatePlaylistDialog.newInstance(adapter.selectedArray).show(activity?.supportFragmentManager, UpdatePlaylistDialog.TAG)
     }
 }

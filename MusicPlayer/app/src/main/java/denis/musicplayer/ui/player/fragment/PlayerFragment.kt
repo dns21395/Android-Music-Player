@@ -1,17 +1,22 @@
 package denis.musicplayer.ui.player.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import denis.musicplayer.R
+import denis.musicplayer.data.media.model.Track
 import denis.musicplayer.ui.base.BaseFragment
+import denis.musicplayer.utils.BytesUtil
 import javax.inject.Inject
 
 /**
  * Created by denis on 06/01/2018.
  */
 class PlayerFragment : BaseFragment(), PlayerFragmentMvpView {
+
+    private val TAG = "PlayerFragment"
 
     companion object {
         fun newInstance(): PlayerFragment {
@@ -21,6 +26,7 @@ class PlayerFragment : BaseFragment(), PlayerFragmentMvpView {
             return fragment
         }
     }
+
 
     @Inject lateinit var presenter: PlayerFragmentMvpPresenter<PlayerFragmentMvpView>
 
@@ -35,6 +41,7 @@ class PlayerFragment : BaseFragment(), PlayerFragmentMvpView {
     }
 
     override fun setUp(view: View?) {
+
 
     }
 }

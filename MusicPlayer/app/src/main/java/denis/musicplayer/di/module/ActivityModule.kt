@@ -11,9 +11,9 @@ import denis.musicplayer.ui.main.MainAdapter
 import denis.musicplayer.ui.main.MainMvpPresenter
 import denis.musicplayer.ui.main.MainMvpView
 import denis.musicplayer.ui.main.MainPresenter
-import denis.musicplayer.ui.main.add_playlist.AddPlaylistMvpPresenter
-import denis.musicplayer.ui.main.add_playlist.AddPlaylistMvpView
-import denis.musicplayer.ui.main.add_playlist.AddPlaylistPresenter
+import denis.musicplayer.ui.main.addplaylist.AddPlaylistMvpPresenter
+import denis.musicplayer.ui.main.addplaylist.AddPlaylistMvpView
+import denis.musicplayer.ui.main.addplaylist.AddPlaylistPresenter
 import denis.musicplayer.ui.main.album.AlbumAdapter
 import denis.musicplayer.ui.main.album.AlbumMvpPresenter
 import denis.musicplayer.ui.main.album.AlbumMvpView
@@ -38,6 +38,10 @@ import denis.musicplayer.ui.main.track.TrackAdapter
 import denis.musicplayer.ui.main.track.TrackMvpPresenter
 import denis.musicplayer.ui.main.track.TrackMvpView
 import denis.musicplayer.ui.main.track.TrackPresenter
+import denis.musicplayer.ui.main.updateplaylist.UpdatePlaylistAdapter
+import denis.musicplayer.ui.main.updateplaylist.UpdatePlaylistMvpPresenter
+import denis.musicplayer.ui.main.updateplaylist.UpdatePlaylistMvpView
+import denis.musicplayer.ui.main.updateplaylist.UpdatePlaylistPresenter
 import denis.musicplayer.ui.permission.PermissionMvpPresenter
 import denis.musicplayer.ui.permission.PermissionMvpView
 import denis.musicplayer.ui.permission.PermissionPresenter
@@ -119,7 +123,11 @@ class ActivityModule(val activity: AppCompatActivity) {
     @Provides
     fun provideAddDialogPresenter(presenter: AddPlaylistPresenter<AddPlaylistMvpView>): AddPlaylistMvpPresenter<AddPlaylistMvpView> = presenter
 
+    @Provides
+    fun provideUpdatePlaylistPresenter(presenter: UpdatePlaylistPresenter<UpdatePlaylistMvpView>): UpdatePlaylistMvpPresenter<UpdatePlaylistMvpView> = presenter
+
     // Adapter
+
     @Provides
     fun provideMainAdapter(@ActivityContext context: Context) = MainAdapter(context, activity.supportFragmentManager)
 
@@ -137,5 +145,8 @@ class ActivityModule(val activity: AppCompatActivity) {
 
     @Provides
     fun provideTrackAdapter(@ActivityContext context: Context) = TrackAdapter(context)
+
+    @Provides
+    fun provideUpdatePlaylistAdapter(@ActivityContext context: Context) = UpdatePlaylistAdapter(context)
 
 }

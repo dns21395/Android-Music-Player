@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import denis.musicplayer.R
 import denis.musicplayer.ui.base.BaseFragment
+import denis.musicplayer.ui.main.base.MainEnumRxBus
+import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.fragment_select.*
 import javax.inject.Inject
 
@@ -36,6 +38,10 @@ class SelectFragment : BaseFragment(), SelectMvpView {
 
     override fun setUp(view: View?) {
         updateCount(1)
+
+        addToPlaylist.setOnClickListener {
+            presenter.sendMessageToUpdatePlaylist()
+        }
     }
 
     override fun updateCount(count: Int) {

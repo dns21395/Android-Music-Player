@@ -3,15 +3,13 @@ package denis.musicplayer.ui.main.playlist
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import denis.musicplayer.R
 import denis.musicplayer.data.playlist.model.Playlist
 import denis.musicplayer.ui.base.BaseFragment
-import denis.musicplayer.ui.main.add_playlist.AddPlaylistDialog
-import denis.musicplayer.ui.main.base.MainBaseFragment
+import denis.musicplayer.ui.main.addplaylist.AddPlaylistDialog
 import denis.musicplayer.ui.playlist.PlaylistActivity
 import kotlinx.android.synthetic.main.fragment_playlist.*
 import javax.inject.Inject

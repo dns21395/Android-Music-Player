@@ -1,13 +1,13 @@
 package denis.musicplayer.ui.main.track
 
 import android.content.Context
-import android.util.Log
 import denis.musicplayer.data.DataManager
-import denis.musicplayer.data.media.model.Track
 import denis.musicplayer.di.ActivityContext
 import denis.musicplayer.ui.main.base.MainBasePresenter
+import denis.musicplayer.ui.main.base.MainRxBus
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
+import denis.musicplayer.ui.main.base.MainEnumRxBus.*
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
@@ -18,13 +18,20 @@ import javax.inject.Inject
 class TrackPresenter<V : TrackMvpView>
     @Inject constructor(@ActivityContext context: Context,
                         dataManager: DataManager,
-                        compositeDisposable: CompositeDisposable)
+                        compositeDisposable: CompositeDisposable,
+                        val rxBus: MainRxBus)
     : MainBasePresenter<V>(context, dataManager, compositeDisposable), TrackMvpPresenter<V> {
 
     private val TAG = "TrackPresenter"
 
     override fun onAttach(mvpView: V) {
         super.onAttach(mvpView)
+
+        compositeDisposable.add(
+                rxBus.toObservable().subscribe {
+                    if(it == SHOW_UPDATE_PLAYLIST_DIALOG) mvpView.showUpdatePlaylist()
+                }
+        )
 
         getTracks()
     }

@@ -26,6 +26,7 @@ class MainRxBus {
 }
 
 enum class MainEnumRxBus {
-    UPDATE_PLAYLIST
+    UPDATE_PLAYLIST,
+    SHOW_UPDATE_PLAYLIST_DIALOG
 }
 

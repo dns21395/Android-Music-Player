@@ -16,7 +16,7 @@ class MainPlaylistAdapter(val context: Context) : RecyclerView.Adapter<MainPlayl
 
     lateinit var callback: Callback
 
-    var array = ArrayList<Playlist>()
+    private var array = ArrayList<Playlist>()
 
     override fun onBindViewHolder(holder: MainPlaylistViewHolder, position: Int) {
         holder.onBind(array[position])

@@ -1,4 +1,4 @@
-package denis.musicplayer.ui.main.add_playlist
+package denis.musicplayer.ui.main.addplaylist
 
 import denis.musicplayer.ui.base.DialogMvpView
 
