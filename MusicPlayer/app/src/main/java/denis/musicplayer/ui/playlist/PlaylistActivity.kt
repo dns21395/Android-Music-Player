@@ -14,8 +14,7 @@ import javax.inject.Inject
 /**
  * Created by denis on 04/01/2018.
  */
-class PlaylistActivity : BaseActivity(), PlaylistMvpView {
-
+class PlaylistActivity : BaseActivity(), PlaylistMvpView, PlaylistAdapter.Callback {
     companion object {
         val CODE_PLAYLIST_DELETED = 48
         val KEY_DELETED = "key_deleted"
@@ -47,11 +46,12 @@ class PlaylistActivity : BaseActivity(), PlaylistMvpView {
     }
 
     override fun setUp() {
-        id = intent.extras?.getLong(KEY_ID) ?: 0
-        title = intent.extras?.getString(KEY_TITLE) ?: ""
+        getArguments()
+        setButtons()
+        setRecyclerView()
+    }
 
-        playlistTitle.text = title
-
+    private fun setButtons() {
         back.setOnClickListener {
             finish()
         }
@@ -59,11 +59,22 @@ class PlaylistActivity : BaseActivity(), PlaylistMvpView {
         delete.setOnClickListener {
             presenter.deletePlaylist(id)
         }
+    }
+
+    private fun getArguments() {
+        id = intent.extras?.getLong(KEY_ID) ?: 0
+        title = intent.extras?.getString(KEY_TITLE) ?: ""
+
+        playlistTitle.text = title
 
         presenter.getTracks(id)
+    }
 
+    private fun setRecyclerView() {
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = adapter
+        adapter.callback = this
+        adapter.setItemTouchHelper(recyclerView)
     }
 
     override fun onPlaylistDeleted() {
@@ -79,4 +90,13 @@ class PlaylistActivity : BaseActivity(), PlaylistMvpView {
     override fun updateArray(array: ArrayList<Track>) {
         adapter.updateArray(array)
     }
+
+    override fun onItemMove(oldPos: Int, newPos: Int) {
+        presenter.onItemMove(id, oldPos, newPos)
+    }
+
+    override fun onItemSwipe(trackId: Long) {
+        presenter.onItemSwipe(id, trackId)
+    }
 }
+

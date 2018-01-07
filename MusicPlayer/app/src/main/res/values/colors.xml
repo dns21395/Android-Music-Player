@@ -8,4 +8,6 @@
     <color name="item_odd">#25252f</color>
     <color name="item_selected_even">#AD1457</color>
     <color name="item_selected_odd">#C2185B</color>
+
+    <color name="item_drag">#7B1FA2</color>
 </resources>

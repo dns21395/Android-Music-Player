@@ -50,6 +50,9 @@ class AppDataManager
     override fun getPlaylistTracks(id: Long): ArrayList<Track> =
             playlistManager.getPlaylistTracks(id)
 
+    override fun deletePlaylistTrack(playlistId: Long, trackId: Long) =
+            playlistManager.deletePlaylistTrack(playlistId, trackId)
 
-
+    override fun playlistItemReorder(playlistId: Long, oldPos: Int, newPos: Int) =
+            playlistManager.playlistItemReorder(playlistId, oldPos, newPos)
 }

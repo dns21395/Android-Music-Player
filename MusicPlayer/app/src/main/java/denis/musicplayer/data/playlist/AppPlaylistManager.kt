@@ -147,4 +147,15 @@ class AppPlaylistManager
 
         return array
     }
+
+    override fun deletePlaylistTrack(playlistId: Long, trackId: Long) {
+        val uri = MediaStore.Audio.Playlists.Members.getContentUri("external", playlistId)
+        val where = MediaStore.Audio.Playlists.Members._ID + "=?"
+        val whereval = arrayOf(trackId.toString())
+        context.contentResolver.delete(uri, where, whereval)
+    }
+
+    override fun playlistItemReorder(playlistId: Long, oldPos: Int, newPos: Int) {
+        MediaStore.Audio.Playlists.Members.moveItem(context.contentResolver, playlistId, oldPos, newPos)
+    }
 }

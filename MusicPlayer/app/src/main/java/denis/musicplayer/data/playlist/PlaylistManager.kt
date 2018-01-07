@@ -15,5 +15,10 @@ interface PlaylistManager {
 
     fun addTracksToPlaylist(id: Long, tracks: ArrayList<Track>)
 
+    fun deletePlaylistTrack(playlistId: Long, trackId: Long)
+
+    fun playlistItemReorder(playlistId: Long, oldPos: Int, newPos: Int)
+
     fun getPlaylistTracks(id: Long): ArrayList<Track>
+
 }

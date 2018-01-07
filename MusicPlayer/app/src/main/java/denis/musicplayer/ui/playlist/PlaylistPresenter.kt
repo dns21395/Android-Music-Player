@@ -50,4 +50,24 @@ class PlaylistPresenter<V: PlaylistMvpView>
                         }
         )
     }
+
+    override fun onItemSwipe(playlistId: Long, trackId: Long) {
+        compositeDisposable.add(
+                Observable.fromCallable {
+                    dataManager.deletePlaylistTrack(playlistId, trackId)
+                }.subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe()
+        )
+    }
+
+    override fun onItemMove(playlistId: Long, oldPos: Int, newPos: Int) {
+        compositeDisposable.add(
+                Observable.fromCallable {
+                    dataManager.playlistItemReorder(playlistId, oldPos, newPos)
+                }.subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe()
+        )
+    }
 }
