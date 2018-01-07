@@ -48,6 +48,7 @@ import denis.musicplayer.ui.permission.PermissionPresenter
 import denis.musicplayer.ui.player.fragment.PlayerFragmentMvpPresenter
 import denis.musicplayer.ui.player.fragment.PlayerFragmentMvpView
 import denis.musicplayer.ui.player.fragment.PlayerFragmentPresenter
+import denis.musicplayer.ui.playlist.PlaylistAdapter
 import denis.musicplayer.ui.playlist.PlaylistMvpPresenter
 import denis.musicplayer.ui.playlist.PlaylistMvpView
 import denis.musicplayer.ui.playlist.PlaylistPresenter
@@ -132,21 +133,24 @@ class ActivityModule(val activity: AppCompatActivity) {
     fun provideMainAdapter(@ActivityContext context: Context) = MainAdapter(context, activity.supportFragmentManager)
 
     @Provides
-    fun providePlaylistAdapter(@ActivityContext context: Context) = MainPlaylistAdapter(context)
+    fun provideMainPlaylistAdapter(@ActivityContext context: Context): MainPlaylistAdapter = MainPlaylistAdapter(context)
 
     @Provides
-    fun provideAlbumAdapter(@ActivityContext context: Context) = AlbumAdapter(context)
+    fun provideAlbumAdapter(@ActivityContext context: Context): AlbumAdapter = AlbumAdapter(context)
 
     @Provides
-    fun provideArtistAdapter(@ActivityContext context: Context) = ArtistAdapter(context)
+    fun provideArtistAdapter(@ActivityContext context: Context): ArtistAdapter = ArtistAdapter(context)
 
     @Provides
-    fun provideGenreAdapter(@ActivityContext context: Context) = GenreAdapter(context)
+    fun provideGenreAdapter(@ActivityContext context: Context): GenreAdapter = GenreAdapter(context)
 
     @Provides
-    fun provideTrackAdapter(@ActivityContext context: Context) = TrackAdapter(context)
+    fun provideTrackAdapter(@ActivityContext context: Context): TrackAdapter = TrackAdapter(context)
 
     @Provides
-    fun provideUpdatePlaylistAdapter(@ActivityContext context: Context) = UpdatePlaylistAdapter(context)
+    fun provideUpdatePlaylistAdapter(@ActivityContext context: Context): UpdatePlaylistAdapter = UpdatePlaylistAdapter(context)
+
+    @Provides
+    fun providePlaylistAdapter(@ActivityContext context: Context): PlaylistAdapter = PlaylistAdapter(context)
 
 }

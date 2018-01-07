@@ -3,7 +3,9 @@ package denis.musicplayer.ui.playlist
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
 import denis.musicplayer.R
+import denis.musicplayer.data.media.model.Track
 import denis.musicplayer.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_playlist.*
 import org.jetbrains.anko.toast
@@ -26,6 +28,10 @@ class PlaylistActivity : BaseActivity(), PlaylistMvpView {
     }
 
     @Inject lateinit var presenter: PlaylistMvpPresenter<PlaylistMvpView>
+
+    @Inject lateinit var layoutManager: LinearLayoutManager
+
+    @Inject lateinit var adapter: PlaylistAdapter
 
     var id = 0L
     var title = ""
@@ -55,6 +61,9 @@ class PlaylistActivity : BaseActivity(), PlaylistMvpView {
         }
 
         presenter.getTracks(id)
+
+        recyclerView.layoutManager = layoutManager
+        recyclerView.adapter = adapter
     }
 
     override fun onPlaylistDeleted() {
@@ -65,5 +74,9 @@ class PlaylistActivity : BaseActivity(), PlaylistMvpView {
         setResult(48, intent)
 
         finish()
+    }
+
+    override fun updateArray(array: ArrayList<Track>) {
+        adapter.updateArray(array)
     }
 }

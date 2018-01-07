@@ -11,14 +11,19 @@ import denis.musicplayer.data.media.model.Track
  * Created by denis on 07/01/2018.
  */
 class PlaylistAdapter(val context: Context) : RecyclerView.Adapter<PlaylistViewHolder>() {
-    val array = ArrayList<Track>()
+    var array = ArrayList<Track>()
 
-    override fun onBindViewHolder(holder: PlaylistViewHolder?, position: Int) {
-
+    override fun onBindViewHolder(holder: PlaylistViewHolder, position: Int) {
+        holder.onBind(array[position])
     }
 
     override fun getItemCount(): Int = array.size
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): PlaylistViewHolder =
             PlaylistViewHolder(LayoutInflater.from(context).inflate(R.layout.holder_moveable_playlist, parent, false))
+
+    fun updateArray(tracks: ArrayList<Track>) {
+        array = tracks
+        notifyDataSetChanged()
+    }
 }

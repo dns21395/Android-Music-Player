@@ -1,5 +1,6 @@
 package denis.musicplayer.ui.playlist
 
+import denis.musicplayer.data.media.model.Track
 import denis.musicplayer.ui.base.MvpView
 
 /**
@@ -7,4 +8,6 @@ import denis.musicplayer.ui.base.MvpView
  */
 interface PlaylistMvpView : MvpView {
     fun onPlaylistDeleted()
+
+    fun updateArray(array: ArrayList<Track>)
 }
