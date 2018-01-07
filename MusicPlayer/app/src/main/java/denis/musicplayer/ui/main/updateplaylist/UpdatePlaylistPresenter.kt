@@ -8,6 +8,8 @@ import denis.musicplayer.data.DataManager
 import denis.musicplayer.data.media.model.Track
 import denis.musicplayer.di.ActivityContext
 import denis.musicplayer.ui.base.BasePresenter
+import denis.musicplayer.ui.main.base.MainEnumRxBus
+import denis.musicplayer.ui.main.base.MainRxBus
 import denis.musicplayer.utils.BytesUtil
 import io.reactivex.Flowable
 import io.reactivex.Observable
@@ -22,7 +24,8 @@ import javax.inject.Inject
 class UpdatePlaylistPresenter<V: UpdatePlaylistMvpView>
     @Inject constructor(@ActivityContext context: Context,
                         dataManager: DataManager,
-                        compositeDisposable: CompositeDisposable)
+                        compositeDisposable: CompositeDisposable,
+                        val rxBus: MainRxBus)
     : BasePresenter<V>(context, dataManager, compositeDisposable), UpdatePlaylistMvpPresenter<V> {
 
     private val TAG = "UpdatePlaylistPresenter"
@@ -51,15 +54,12 @@ class UpdatePlaylistPresenter<V: UpdatePlaylistMvpView>
                     val objects = bundle.getByteArray(UpdatePlaylistDialog.KEY_TRACKS)
                     if(objects != null) {
                         val tracks = BytesUtil.toObject<Track>(objects)
-                        for(track in tracks) {
-                            Log.d(TAG, "$track")
-                        }
-                        Log.d(TAG, "ID : $playlistId")
                         dataManager.addTracksToPlaylist(playlistId, tracks)
                     }
                 }.subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
                         .subscribe {
+                            rxBus.send(MainEnumRxBus.CANCEL_SELECTING)
                             mvpView?.finishDialog(R.string.playlist_updated)
                         })
 

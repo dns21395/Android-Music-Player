@@ -10,4 +10,6 @@ interface TrackMvpView : MainBaseMvpView {
     fun updateArray(array: ArrayList<Track>)
 
     fun showUpdatePlaylist()
+
+    fun cancelSelecting()
 }

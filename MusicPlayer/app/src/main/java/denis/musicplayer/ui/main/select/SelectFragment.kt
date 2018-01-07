@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import denis.musicplayer.R
 import denis.musicplayer.ui.base.BaseFragment
 import denis.musicplayer.ui.main.base.MainEnumRxBus
+import denis.musicplayer.ui.main.base.MainRxBus
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.fragment_select.*
 import javax.inject.Inject
@@ -27,6 +28,8 @@ class SelectFragment : BaseFragment(), SelectMvpView {
 
     @Inject lateinit var presenter: SelectMvpPresenter<SelectMvpView>
 
+    @Inject lateinit var rxBus: MainRxBus
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_select, container, false)
 
@@ -41,6 +44,10 @@ class SelectFragment : BaseFragment(), SelectMvpView {
 
         addToPlaylist.setOnClickListener {
             presenter.sendMessageToUpdatePlaylist()
+        }
+
+        cancel.setOnClickListener {
+            rxBus.send(MainEnumRxBus.CANCEL_SELECTING)
         }
     }
 

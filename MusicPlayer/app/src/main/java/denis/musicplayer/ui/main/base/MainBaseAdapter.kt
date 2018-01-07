@@ -2,6 +2,7 @@ package denis.musicplayer.ui.main.base
 
 import android.support.v7.widget.RecyclerView
 import android.util.Log
+import javax.inject.Inject
 
 /**
  * Created by denis on 02/01/2018.
@@ -75,6 +76,13 @@ abstract class MainBaseAdapter<A : MainBaseViewHolder,
 
         for(item in array) {
             Log.d(TAG, "$item")
+        }
+    }
+
+    fun cancelSelecting() {
+        if(selectedArray.size > 0) {
+            selectedArray.clear()
+            notifyDataSetChanged()
         }
     }
 

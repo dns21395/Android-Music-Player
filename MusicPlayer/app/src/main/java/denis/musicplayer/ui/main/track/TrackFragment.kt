@@ -58,6 +58,11 @@ class TrackFragment : MainBaseFragment(), TrackMvpView, TrackAdapter.Callback {
         hideSelectFragment()
     }
 
+    override fun cancelSelecting() {
+        adapter.cancelSelecting()
+        stopSelecting()
+    }
+
     override fun updateSelectedCount(count: Int) {
         updateCountSelectFragment(count)
     }

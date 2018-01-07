@@ -27,9 +27,12 @@ class TrackPresenter<V : TrackMvpView>
     override fun onAttach(mvpView: V) {
         super.onAttach(mvpView)
 
-        compositeDisposable.add(
+        compositeDisposable.addAll(
                 rxBus.toObservable().subscribe {
                     if(it == SHOW_UPDATE_PLAYLIST_DIALOG) mvpView.showUpdatePlaylist()
+                },
+                rxBus.toObservable().subscribe {
+                    if(it == CANCEL_SELECTING) mvpView.cancelSelecting()
                 }
         )
 
