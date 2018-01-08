@@ -6,8 +6,6 @@ import denis.musicplayer.ui.main.base.MainBaseMvpPresenter
 /**
  * Created by denis on 01/01/2018.
  */
-interface AlbumMvpPresenter<V : AlbumMvpView> : MainBaseMvpPresenter<V> {
-    fun getAlbums()
+interface AlbumMvpPresenter<V : AlbumMvpView> : MainBaseMvpPresenter<V, Album> {
 
-    fun getAlbumTracks(array: ArrayList<Album>)
 }

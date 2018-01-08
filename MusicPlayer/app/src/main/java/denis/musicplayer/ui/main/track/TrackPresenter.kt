@@ -2,6 +2,7 @@ package denis.musicplayer.ui.main.track
 
 import android.content.Context
 import denis.musicplayer.data.DataManager
+import denis.musicplayer.data.media.model.Track
 import denis.musicplayer.di.ActivityContext
 import denis.musicplayer.ui.main.base.MainBasePresenter
 import denis.musicplayer.ui.main.base.MainRxBus
@@ -19,27 +20,14 @@ class TrackPresenter<V : TrackMvpView>
     @Inject constructor(@ActivityContext context: Context,
                         dataManager: DataManager,
                         compositeDisposable: CompositeDisposable,
-                        val rxBus: MainRxBus)
-    : MainBasePresenter<V>(context, dataManager, compositeDisposable), TrackMvpPresenter<V> {
+                        rxBus: MainRxBus)
+    : MainBasePresenter<V, Track>(context, dataManager, compositeDisposable, rxBus), TrackMvpPresenter<V> {
 
     private val TAG = "TrackPresenter"
 
-    override fun onAttach(mvpView: V) {
-        super.onAttach(mvpView)
 
-        compositeDisposable.addAll(
-                rxBus.toObservable().subscribe {
-                    if(it == SHOW_UPDATE_PLAYLIST_DIALOG) mvpView.showUpdatePlaylist()
-                },
-                rxBus.toObservable().subscribe {
-                    if(it == CANCEL_SELECTING) mvpView.cancelSelecting()
-                }
-        )
 
-        getTracks()
-    }
-
-    override fun getTracks() {
+    override fun getItems() {
         compositeDisposable.add(Observable.fromCallable {
             dataManager.scanTracks()
         }.subscribeOn(Schedulers.io())
@@ -47,6 +35,10 @@ class TrackPresenter<V : TrackMvpView>
                 .subscribe {
                     mvpView?.updateArray(it)
                 })
+    }
+
+    override fun getItemsForPlaylist() {
+        mvpView?.showUpdatePlaylist(getArray())
     }
 
 }

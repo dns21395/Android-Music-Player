@@ -7,8 +7,6 @@ import denis.musicplayer.ui.main.base.MainBaseViewHolder
 /**
  * Created by denis on 02/01/2018.
  */
-class ArtistViewHolder(itemView: View) : MainBaseViewHolder(itemView) {
-    fun onBind(artist: Artist) = with(itemView) {
-
-    }
-}
+//class ArtistViewHolder(itemView: View) : MainBaseViewHolder(itemView) {
+//
+//}

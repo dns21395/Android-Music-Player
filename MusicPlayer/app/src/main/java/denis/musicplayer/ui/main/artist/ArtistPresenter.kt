@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import denis.musicplayer.data.DataManager
 import denis.musicplayer.di.ActivityContext
+import denis.musicplayer.ui.base.BasePresenter
 import denis.musicplayer.ui.main.base.MainBasePresenter
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -18,7 +19,7 @@ class ArtistPresenter<V : ArtistMvpView>
     @Inject constructor(@ActivityContext context: Context,
                         dataManager: DataManager,
                         compositeDisposable: CompositeDisposable)
-    : MainBasePresenter<V>(context, dataManager, compositeDisposable), ArtistMvpPresenter<V> {
+    : BasePresenter<V>(context, dataManager, compositeDisposable), ArtistMvpPresenter<V> {
 
     private val TAG = "ArtistPresenter"
 

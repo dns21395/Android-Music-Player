@@ -2,9 +2,11 @@ package denis.musicplayer.ui.main.base
 
 import android.util.Log
 import denis.musicplayer.R
+import denis.musicplayer.data.media.model.Track
 import denis.musicplayer.ui.base.BaseFragment
 import denis.musicplayer.ui.main.MainActivity
 import denis.musicplayer.ui.main.select.SelectFragment
+import denis.musicplayer.ui.main.updateplaylist.UpdatePlaylistDialog
 import kotlinx.android.synthetic.main.activity_main.view.*
 
 /**
@@ -25,9 +27,11 @@ abstract class MainBaseFragment: BaseFragment(), MainBaseMvpView {
     override fun updateCountSelectFragment(count: Int) {
         val fragment = activity?.supportFragmentManager?.findFragmentById(R.id.frameLayout) as SelectFragment?
 
-        Log.d(TAG, "updateCount $fragment")
-
         fragment?.updateCount(count)
+    }
+
+    override fun showUpdatePlaylist(array: ArrayList<Track>) {
+        UpdatePlaylistDialog.newInstance(array).show(activity?.supportFragmentManager, UpdatePlaylistDialog.TAG)
 
     }
 }

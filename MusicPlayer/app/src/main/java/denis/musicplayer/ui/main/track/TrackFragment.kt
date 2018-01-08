@@ -15,7 +15,7 @@ import javax.inject.Inject
 /**
  * Created by denis on 31/12/2017.
  */
-class TrackFragment : MainBaseFragment(), TrackMvpView, TrackAdapter.Callback {
+class TrackFragment : MainBaseFragment(), TrackMvpView {
     companion object {
         fun newInstance(): TrackFragment {
             val args = Bundle()
@@ -43,35 +43,10 @@ class TrackFragment : MainBaseFragment(), TrackMvpView, TrackAdapter.Callback {
     override fun setUp(view: View?) {
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = adapter
-        adapter.callback = this
+        adapter.presenter = presenter
     }
 
     override fun updateArray(array: ArrayList<Track>) {
         adapter.updateArray(array)
-    }
-
-    override fun startSelecting() {
-        showSelectFragment()
-    }
-
-    override fun stopSelecting() {
-        hideSelectFragment()
-    }
-
-    override fun cancelSelecting() {
-        if(adapter.selectedArray.size > 0) {
-            adapter.cancelSelecting()
-            stopSelecting()
-        }
-    }
-
-    override fun updateSelectedCount(count: Int) {
-        updateCountSelectFragment(count)
-    }
-
-    override fun showUpdatePlaylist() {
-        if(adapter.selectedArray.size > 0) {
-            UpdatePlaylistDialog.newInstance(adapter.selectedArray).show(activity?.supportFragmentManager, UpdatePlaylistDialog.TAG)
-        }
     }
 }

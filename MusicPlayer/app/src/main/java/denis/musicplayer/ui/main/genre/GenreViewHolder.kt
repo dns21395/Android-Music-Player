@@ -7,8 +7,8 @@ import denis.musicplayer.ui.main.base.MainBaseViewHolder
 /**
  * Created by denis on 02/01/2018.
  */
-class GenreViewHolder(itemView: View) : MainBaseViewHolder(itemView) {
-    fun onBind(genre: Genre) = with(itemView) {
-
-    }
-}
+//class GenreViewHolder(itemView: View) : MainBaseViewHolder(itemView) {
+//    fun onBind(genre: Genre) = with(itemView) {
+//
+//    }
+//}

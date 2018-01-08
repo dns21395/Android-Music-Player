@@ -8,12 +8,8 @@ import kotlinx.android.synthetic.main.holder_playlist.view.*
 /**
  * Created by denis on 02/01/2018.
  */
-class MainPlaylistViewHolder(itemView: View) : MainBaseViewHolder(itemView) {
-    private var playlist: Playlist? = null
-
-    fun onBind(playlist: Playlist) = with(itemView) {
-        this@MainPlaylistViewHolder.playlist = playlist
-
-        playlistName.text = playlist.name
+class MainPlaylistViewHolder(itemView: View) : MainBaseViewHolder<Playlist>(itemView) {
+    override fun onBind(item: Playlist) = with(itemView) {
+        playlistName.text = item.name
     }
 }

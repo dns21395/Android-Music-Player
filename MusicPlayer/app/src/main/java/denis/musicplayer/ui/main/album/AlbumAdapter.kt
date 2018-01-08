@@ -12,17 +12,12 @@ import denis.musicplayer.ui.main.base.MainBaseAdapter
 /**
  * Created by denis on 02/01/2018.
  */
-class AlbumAdapter(val context: Context) : MainBaseAdapter<AlbumViewHolder, Album, AlbumAdapter.Callback>() {
+class AlbumAdapter(val context: Context) : MainBaseAdapter<AlbumViewHolder, Album, AlbumMvpView, AlbumMvpPresenter<AlbumMvpView>>() {
+
     override fun onBindViewHolder(holder: AlbumViewHolder, position: Int) {
         super.onBindViewHolder(holder, position)
-        holder.onBind(array[position])
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): AlbumViewHolder =
             AlbumViewHolder(LayoutInflater.from(context).inflate(R.layout.holder_album, parent, false))
-
-
-    interface Callback : MainBaseAdapter.Callback {
-
-    }
 }

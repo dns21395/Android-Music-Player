@@ -2,30 +2,31 @@ package denis.musicplayer.ui.main.base
 
 import android.support.v7.widget.RecyclerView
 import android.util.Log
-import javax.inject.Inject
+import denis.musicplayer.ui.main.MainMvpView
 
 /**
  * Created by denis on 02/01/2018.
  */
-abstract class MainBaseAdapter<A : MainBaseViewHolder,
+abstract class MainBaseAdapter<A : MainBaseViewHolder<B>,
                                B: Any,
-                               C: MainBaseAdapter.Callback> : RecyclerView.Adapter<A>() {
+                               C: MainBaseMvpView,
+                               D: MainBaseMvpPresenter<C, B>>
+    : RecyclerView.Adapter<A>() {
 
     private val TAG = "MainBaseAdapter"
 
-    lateinit var callback: C
-    var array = ArrayList<B>()
-    val selectedArray = ArrayList<B>()
+    lateinit var presenter: D
 
     override fun onBindViewHolder(holder: A, position: Int) {
-        setBackground(holder, position)
+        setViewHolderBackground(holder, position)
+
+        presenter.onBindItemAtPosition(holder, position)
 
         holder.itemView.setOnLongClickListener {
-            when(selectedArray.size) {
+            when(presenter.getSelectedArrayCount()) {
                 0 -> {
-                    callback.startSelecting()
-                    selectedArray.add(array[position])
-                    setBackground(holder, position)
+                    presenter.addSelectedItem(presenter.getItemAtPosition(position))
+                    setViewHolderBackground(holder, position)
                 }
                 else -> {
                     selectItem(holder, position)
@@ -35,16 +36,16 @@ abstract class MainBaseAdapter<A : MainBaseViewHolder,
         }
 
         holder.itemView.setOnClickListener {
-            if(selectedArray.size > 0) selectItem(holder, position)
+            if(presenter.getSelectedArrayCount() > 0) selectItem(holder, position)
         }
 
     }
 
-    fun setBackground(holder: A, position: Int) {
-        when(selectedArray.size) {
+    fun setViewHolderBackground(holder: A, position: Int) {
+        when(presenter.getSelectedArrayCount()) {
             0 -> holder.setBackground(position)
             else -> {
-                when(selectedArray.contains(array[position])) {
+                when(presenter.isItemSelected(presenter.getItemAtPosition(position))) {
                     true -> holder.setSelectedBackground(position)
                     false -> holder.setBackground(position)
                 }
@@ -54,41 +55,28 @@ abstract class MainBaseAdapter<A : MainBaseViewHolder,
     }
 
     private fun selectItem(holder: A, position: Int) {
-        when(selectedArray.contains(array[position])) {
+        val item = presenter.getItemAtPosition(position)
+        when(presenter.isItemSelected(item)) {
             true -> {
-                selectedArray.remove(array[position])
-                if(selectedArray.size == 0) callback.stopSelecting()
+                presenter.removeSelectedItem(item)
             }
             false -> {
-                selectedArray.add(array[position])
-                callback.updateSelectedCount(selectedArray.size)
+                presenter.addSelectedItem(item)
             }
         }
-        setBackground(holder, position)
+        setViewHolderBackground(holder, position)
     }
 
-    override fun getItemCount(): Int = array.size
+    override fun getItemCount(): Int = presenter.getArrayCount()
 
     fun updateArray(array: ArrayList<B>) {
-
-        this.array = array
+        presenter.updateArray(array)
         notifyDataSetChanged()
-
-        for(item in array) {
-            Log.d(TAG, "$item")
-        }
     }
 
     fun cancelSelecting() {
-        if(selectedArray.size > 0) {
-            selectedArray.clear()
-            notifyDataSetChanged()
-        }
-    }
+        presenter.clearSelectedArray()
+        notifyDataSetChanged()
 
-    interface Callback {
-        fun startSelecting()
-        fun stopSelecting()
-        fun updateSelectedCount(count: Int)
     }
 }

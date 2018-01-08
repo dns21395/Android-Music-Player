@@ -18,7 +18,7 @@ import javax.inject.Inject
 /**
  * Created by denis on 01/01/2018.
  */
-class AlbumFragment : MainBaseFragment(), AlbumMvpView, AlbumAdapter.Callback {
+class AlbumFragment : MainBaseFragment(), AlbumMvpView {
     companion object {
         fun newInstance(): AlbumFragment {
             val args = Bundle()
@@ -50,40 +50,12 @@ class AlbumFragment : MainBaseFragment(), AlbumMvpView, AlbumAdapter.Callback {
     private fun setRecyclerView() {
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = adapter
-        adapter.callback = this
-    }
-
-    override fun startSelecting() {
-        showSelectFragment()
-    }
-
-    override fun stopSelecting() {
-        hideSelectFragment()
-    }
-
-    override fun updateSelectedCount(count: Int) {
-        updateCountSelectFragment(count)
+        adapter.presenter = presenter
     }
 
     override fun updateArray(array: ArrayList<Album>) {
         adapter.updateArray(array)
     }
 
-    override fun cancelSelecting() {
-        if(adapter.selectedArray.size > 0) {
-            adapter.cancelSelecting()
-            stopSelecting()
-        }
-    }
 
-    override fun getAlbumTracks() {
-        if(adapter.selectedArray.size > 0 ) {
-            presenter.getAlbumTracks(adapter.selectedArray)
-        }
-    }
-
-    override fun showUpdatePlaylist(array: ArrayList<Track>) {
-        UpdatePlaylistDialog.newInstance(array).show(activity?.supportFragmentManager, UpdatePlaylistDialog.TAG)
-
-    }
 }

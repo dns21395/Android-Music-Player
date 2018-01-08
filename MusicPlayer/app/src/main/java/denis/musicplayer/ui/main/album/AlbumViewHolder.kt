@@ -1,10 +1,8 @@
 package denis.musicplayer.ui.main.album
 
 import android.net.Uri
-import android.support.v4.content.ContextCompat
 import android.view.View
 import com.squareup.picasso.Picasso
-import denis.musicplayer.R
 import denis.musicplayer.data.media.model.Album
 import denis.musicplayer.ui.main.base.MainBaseViewHolder
 import denis.musicplayer.utils.ImageTransformToCircle
@@ -14,12 +12,12 @@ import java.io.File
 /**
  * Created by denis on 02/01/2018.
  */
-class AlbumViewHolder(itemView: View) : MainBaseViewHolder(itemView) {
-    fun onBind(album: Album) = with(itemView) {
-        title.text = album.album
-        artist.text = album.artist
+class AlbumViewHolder(itemView: View) : MainBaseViewHolder<Album>(itemView) {
+    override fun onBind(item: Album) = with(itemView) {
+        title.text = item.album
+        artist.text = item.artist
 
-        when(album.art) {
+        when(item.art) {
             null -> {
                 Picasso.with(context)
                         .load(Uri.parse("android.resource://gabyshev.denis.musicplayer/drawable/no_music"))
@@ -30,7 +28,7 @@ class AlbumViewHolder(itemView: View) : MainBaseViewHolder(itemView) {
             }
             else -> {
                 Picasso.with(context)
-                        .load(Uri.fromFile(File(album.art)))
+                        .load(Uri.fromFile(File(item.art)))
                         .transform(ImageTransformToCircle())
                         .resize(96, 96)
                         .centerCrop()
@@ -38,6 +36,4 @@ class AlbumViewHolder(itemView: View) : MainBaseViewHolder(itemView) {
             }
         }
     }
-
-
 }

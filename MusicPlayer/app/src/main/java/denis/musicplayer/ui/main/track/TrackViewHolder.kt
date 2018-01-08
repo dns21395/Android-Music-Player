@@ -8,10 +8,10 @@ import kotlinx.android.synthetic.main.holder_track.view.*
 /**
  * Created by denis on 02/01/2018.
  */
-class TrackViewHolder(itemView: View) : MainBaseViewHolder(itemView) {
-    fun onBind(track: Track) = with(itemView) {
-        trackName.text = track.title
-        artist.text = track.artist
-        duration.text = track.duration
+class TrackViewHolder(itemView: View) : MainBaseViewHolder<Track>(itemView) {
+    override fun onBind(item: Track) = with(itemView) {
+        trackName.text = item.title
+        artist.text = item.artist
+        duration.text = item.duration
     }
 }

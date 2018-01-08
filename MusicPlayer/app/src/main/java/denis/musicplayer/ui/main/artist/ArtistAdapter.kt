@@ -10,14 +10,11 @@ import denis.musicplayer.ui.main.base.MainBaseAdapter
 /**
  * Created by denis on 02/01/2018.
  */
-class ArtistAdapter(val context: Context) : MainBaseAdapter<ArtistViewHolder, Artist, ArtistAdapter.Callback>() {
-    override fun onBindViewHolder(holder: ArtistViewHolder, position: Int) =
-            holder.onBind(array[position])
-
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ArtistViewHolder =
-            ArtistViewHolder(LayoutInflater.from(context).inflate(R.layout.holder_artist, parent, false))
-
-    interface Callback : MainBaseAdapter.Callback {
-
-    }
-}
+//class ArtistAdapter(val context: Context) :  {
+//    override fun onBindViewHolder(holder: ArtistViewHolder, position: Int) =
+//            holder.onBind(array[position])
+//
+//    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ArtistViewHolder =
+//            ArtistViewHolder(LayoutInflater.from(context).inflate(R.layout.holder_artist, parent, false))
+//
+//}

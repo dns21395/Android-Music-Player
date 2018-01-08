@@ -10,12 +10,4 @@ import denis.musicplayer.ui.main.base.MainBaseMvpView
  */
 interface AlbumMvpView : MainBaseMvpView {
     fun updateArray(array: ArrayList<Album>)
-
-    fun showUpdatePlaylist(array: ArrayList<Track>)
-
-    fun getAlbumTracks()
-
-    fun cancelSelecting()
-
-
 }

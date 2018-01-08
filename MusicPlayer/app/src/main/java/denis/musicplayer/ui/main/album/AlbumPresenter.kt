@@ -22,27 +22,16 @@ class AlbumPresenter<V : AlbumMvpView>
     @Inject constructor(@ActivityContext context: Context,
                         dataManager: DataManager,
                         compositeDisposable: CompositeDisposable,
-                        val rxBus: MainRxBus)
-    : MainBasePresenter<V>(context, dataManager, compositeDisposable), AlbumMvpPresenter<V> {
+                        rxBus: MainRxBus)
+    : MainBasePresenter<V, Album>(context, dataManager, compositeDisposable, rxBus), AlbumMvpPresenter<V> {
 
     private val TAG = "AlbumPresenter"
 
     override fun onAttach(mvpView: V) {
         super.onAttach(mvpView)
-
-        compositeDisposable.addAll(
-                rxBus.toObservable().subscribe {
-                    if(it == MainEnumRxBus.SHOW_UPDATE_PLAYLIST_DIALOG) mvpView.getAlbumTracks()
-                },
-                rxBus.toObservable().subscribe {
-                    if(it == MainEnumRxBus.CANCEL_SELECTING) mvpView.cancelSelecting()
-                }
-        )
-
-        getAlbums()
     }
 
-    override fun getAlbums() {
+    override fun getItems() {
         compositeDisposable.add(
                 Observable.fromCallable {
                     dataManager.scanAlbums()
@@ -53,18 +42,22 @@ class AlbumPresenter<V : AlbumMvpView>
                         })
     }
 
-    override fun getAlbumTracks(array: ArrayList<Album>) {
+
+
+    override fun getItemsForPlaylist() {
         compositeDisposable.add(
                 Observable.fromCallable {
                     val tracks = ArrayList<Track>()
+                    val array = getSelectedArray()
 
                     array
                             .map { dataManager.scanAlbumTracks(it.id) }
-                            .forEach { newTracks ->
-                                newTracks
+                            .forEach { albumTracks ->
+                                albumTracks
                                         .filterNot { tracks.contains(it) }
                                         .forEach { tracks.add(it) }
                             }
+
                     tracks
                 }.subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())

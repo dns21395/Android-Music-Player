@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import dagger.Module
 import dagger.Provides
+import denis.musicplayer.data.media.model.Album
+import denis.musicplayer.data.media.model.Track
 import denis.musicplayer.di.ActivityContext
 import denis.musicplayer.di.PerActivity
 import denis.musicplayer.ui.main.MainAdapter
@@ -18,12 +20,10 @@ import denis.musicplayer.ui.main.album.AlbumAdapter
 import denis.musicplayer.ui.main.album.AlbumMvpPresenter
 import denis.musicplayer.ui.main.album.AlbumMvpView
 import denis.musicplayer.ui.main.album.AlbumPresenter
-import denis.musicplayer.ui.main.artist.ArtistAdapter
 import denis.musicplayer.ui.main.artist.ArtistMvpPresenter
 import denis.musicplayer.ui.main.artist.ArtistMvpView
 import denis.musicplayer.ui.main.artist.ArtistPresenter
 import denis.musicplayer.ui.main.base.MainRxBus
-import denis.musicplayer.ui.main.genre.GenreAdapter
 import denis.musicplayer.ui.main.genre.GenreMvpPresenter
 import denis.musicplayer.ui.main.genre.GenreMvpView
 import denis.musicplayer.ui.main.genre.GenrePresenter
@@ -139,12 +139,6 @@ class ActivityModule(val activity: AppCompatActivity) {
     fun provideAlbumAdapter(@ActivityContext context: Context): AlbumAdapter = AlbumAdapter(context)
 
     @Provides
-    fun provideArtistAdapter(@ActivityContext context: Context): ArtistAdapter = ArtistAdapter(context)
-
-    @Provides
-    fun provideGenreAdapter(@ActivityContext context: Context): GenreAdapter = GenreAdapter(context)
-
-    @Provides
     fun provideTrackAdapter(@ActivityContext context: Context): TrackAdapter = TrackAdapter(context)
 
     @Provides
@@ -152,5 +146,11 @@ class ActivityModule(val activity: AppCompatActivity) {
 
     @Provides
     fun providePlaylistAdapter(@ActivityContext context: Context): PlaylistAdapter = PlaylistAdapter(context)
+
+
+
+
+
+
 
 }
