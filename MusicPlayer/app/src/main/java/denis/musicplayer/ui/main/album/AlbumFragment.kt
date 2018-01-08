@@ -48,10 +48,4 @@ class AlbumFragment : MainBaseFragment<AlbumAdapter, AlbumViewHolder, Album, Alb
         recyclerView.adapter = adapter
         adapter.presenter = presenter
     }
-
-    override fun updateArray(array: ArrayList<Album>) {
-        adapter.updateArray(array)
-    }
-
-
 }
