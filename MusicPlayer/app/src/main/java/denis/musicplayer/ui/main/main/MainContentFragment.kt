@@ -8,6 +8,7 @@ import denis.musicplayer.R
 import denis.musicplayer.ui.base.BaseFragment
 import denis.musicplayer.ui.main.MainAdapter
 import denis.musicplayer.ui.main.base.MainBaseFragment
+import denis.musicplayer.utils.ZoomOutPageTransformer
 import kotlinx.android.synthetic.main.fragment_main_content.*
 import javax.inject.Inject
 
@@ -40,6 +41,7 @@ class MainContentFragment : BaseFragment(), MainContentMvpView {
 
     override fun setUp(view: View?) {
         viewPager.adapter = adapter
+        viewPager.setPageTransformer(true, ZoomOutPageTransformer())
         tabLayout.setupWithViewPager(viewPager)
     }
 
