@@ -8,7 +8,10 @@ import denis.musicplayer.data.playlist.model.Playlist
  */
 interface MediaManager {
     fun scanTracks(): ArrayList<Track>
+
     fun scanAlbums(): ArrayList<Album>
+    fun scanAlbumTracks(albumID: Long): ArrayList<Track>
+
     fun scanArtists(): ArrayList<Artist>
     fun scanGenres(): ArrayList<Genre>
 }

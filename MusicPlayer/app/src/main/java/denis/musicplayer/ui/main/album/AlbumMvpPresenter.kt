@@ -1,5 +1,6 @@
 package denis.musicplayer.ui.main.album
 
+import denis.musicplayer.data.media.model.Album
 import denis.musicplayer.ui.main.base.MainBaseMvpPresenter
 
 /**
@@ -7,4 +8,6 @@ import denis.musicplayer.ui.main.base.MainBaseMvpPresenter
  */
 interface AlbumMvpPresenter<V : AlbumMvpView> : MainBaseMvpPresenter<V> {
     fun getAlbums()
+
+    fun getAlbumTracks(array: ArrayList<Album>)
 }

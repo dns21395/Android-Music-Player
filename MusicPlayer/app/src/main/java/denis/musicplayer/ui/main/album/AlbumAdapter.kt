@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import com.squareup.picasso.Picasso
 import denis.musicplayer.R
 import denis.musicplayer.data.media.model.Album
+import denis.musicplayer.data.media.model.Track
 import denis.musicplayer.ui.main.base.MainBaseAdapter
 
 /**
@@ -19,6 +20,7 @@ class AlbumAdapter(val context: Context) : MainBaseAdapter<AlbumViewHolder, Albu
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): AlbumViewHolder =
             AlbumViewHolder(LayoutInflater.from(context).inflate(R.layout.holder_album, parent, false))
+
 
     interface Callback : MainBaseAdapter.Callback {
 

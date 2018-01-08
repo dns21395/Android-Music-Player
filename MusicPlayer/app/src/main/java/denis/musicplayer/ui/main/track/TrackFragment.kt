@@ -59,8 +59,10 @@ class TrackFragment : MainBaseFragment(), TrackMvpView, TrackAdapter.Callback {
     }
 
     override fun cancelSelecting() {
-        adapter.cancelSelecting()
-        stopSelecting()
+        if(adapter.selectedArray.size > 0) {
+            adapter.cancelSelecting()
+            stopSelecting()
+        }
     }
 
     override fun updateSelectedCount(count: Int) {
@@ -68,6 +70,8 @@ class TrackFragment : MainBaseFragment(), TrackMvpView, TrackAdapter.Callback {
     }
 
     override fun showUpdatePlaylist() {
-        UpdatePlaylistDialog.newInstance(adapter.selectedArray).show(activity?.supportFragmentManager, UpdatePlaylistDialog.TAG)
+        if(adapter.selectedArray.size > 0) {
+            UpdatePlaylistDialog.newInstance(adapter.selectedArray).show(activity?.supportFragmentManager, UpdatePlaylistDialog.TAG)
+        }
     }
 }

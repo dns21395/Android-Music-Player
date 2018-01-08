@@ -7,9 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import denis.musicplayer.R
 import denis.musicplayer.data.media.model.Album
+import denis.musicplayer.data.media.model.Track
 import denis.musicplayer.ui.main.base.MainBaseAdapter
 import denis.musicplayer.ui.main.base.MainBaseFragment
 import denis.musicplayer.ui.main.base.MainBaseViewHolder
+import denis.musicplayer.ui.main.updateplaylist.UpdatePlaylistDialog
 import kotlinx.android.synthetic.main.fragment_main.*
 import javax.inject.Inject
 
@@ -65,5 +67,23 @@ class AlbumFragment : MainBaseFragment(), AlbumMvpView, AlbumAdapter.Callback {
 
     override fun updateArray(array: ArrayList<Album>) {
         adapter.updateArray(array)
+    }
+
+    override fun cancelSelecting() {
+        if(adapter.selectedArray.size > 0) {
+            adapter.cancelSelecting()
+            stopSelecting()
+        }
+    }
+
+    override fun getAlbumTracks() {
+        if(adapter.selectedArray.size > 0 ) {
+            presenter.getAlbumTracks(adapter.selectedArray)
+        }
+    }
+
+    override fun showUpdatePlaylist(array: ArrayList<Track>) {
+        UpdatePlaylistDialog.newInstance(array).show(activity?.supportFragmentManager, UpdatePlaylistDialog.TAG)
+
     }
 }
