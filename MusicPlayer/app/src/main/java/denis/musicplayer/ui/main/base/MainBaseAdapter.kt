@@ -9,7 +9,7 @@ import denis.musicplayer.ui.main.MainMvpView
  */
 abstract class MainBaseAdapter<A : MainBaseViewHolder<B>,
                                B: Any,
-                               C: MainBaseMvpView,
+                               C: MainBaseMvpView<B>,
                                D: MainBaseMvpPresenter<C, B>>
     : RecyclerView.Adapter<A>() {
 
@@ -74,9 +74,4 @@ abstract class MainBaseAdapter<A : MainBaseViewHolder<B>,
         notifyDataSetChanged()
     }
 
-    fun cancelSelecting() {
-        presenter.clearSelectedArray()
-        notifyDataSetChanged()
-
-    }
 }

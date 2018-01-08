@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import denis.musicplayer.R
 import denis.musicplayer.ui.base.BaseActivity
 import denis.musicplayer.ui.main.main.MainContentFragment
@@ -47,7 +48,4 @@ class MainActivity : BaseActivity(), MainMvpView {
     override fun replaceFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction().replace(R.id.frameLayout, fragment).commit()
     }
-
-
-
 }

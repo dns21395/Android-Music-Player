@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import denis.musicplayer.R
 import denis.musicplayer.data.media.model.Genre
+import denis.musicplayer.ui.base.BaseFragment
 import denis.musicplayer.ui.main.base.MainBaseFragment
 import kotlinx.android.synthetic.main.fragment_main.*
 import javax.inject.Inject
@@ -13,7 +14,7 @@ import javax.inject.Inject
 /**
  * Created by denis on 01/01/2018.
  */
-class GenreFragment : MainBaseFragment(), GenreMvpView {
+class GenreFragment : BaseFragment(), GenreMvpView {
 
     companion object {
         fun newInstance(): GenreFragment {

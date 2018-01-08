@@ -6,9 +6,10 @@ import denis.musicplayer.ui.base.MvpView
 /**
  * Created by denis on 31/12/2017.
  */
-interface MainBaseMvpView : MvpView {
+interface MainBaseMvpView<A: Any> : MvpView {
     fun showSelectFragment()
     fun hideSelectFragment()
     fun updateCountSelectFragment(count: Int)
     fun showUpdatePlaylist(array: ArrayList<Track>)
+    fun updateArray(array: ArrayList<A>)
 }

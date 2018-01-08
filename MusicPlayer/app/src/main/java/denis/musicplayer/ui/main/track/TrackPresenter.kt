@@ -38,7 +38,7 @@ class TrackPresenter<V : TrackMvpView>
     }
 
     override fun getItemsForPlaylist() {
-        mvpView?.showUpdatePlaylist(getArray())
+        mvpView?.showUpdatePlaylist(getSelectedArray())
     }
 
 }

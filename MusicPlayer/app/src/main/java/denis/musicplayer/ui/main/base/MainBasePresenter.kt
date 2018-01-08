@@ -9,7 +9,7 @@ import javax.inject.Inject
 /**
  * Created by denis on 31/12/2017.
  */
-open class MainBasePresenter<V: MainBaseMvpView, T: Any>
+open class MainBasePresenter<V: MainBaseMvpView<T>, T: Any>
     @Inject constructor(context: Context,
                         dataManager: DataManager,
                         compositeDisposable: CompositeDisposable,

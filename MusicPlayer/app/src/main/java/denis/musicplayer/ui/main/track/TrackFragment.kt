@@ -15,7 +15,7 @@ import javax.inject.Inject
 /**
  * Created by denis on 31/12/2017.
  */
-class TrackFragment : MainBaseFragment(), TrackMvpView {
+class TrackFragment : MainBaseFragment<TrackAdapter, TrackViewHolder, Track, TrackMvpView, TrackMvpPresenter<TrackMvpView>>(), TrackMvpView {
     companion object {
         fun newInstance(): TrackFragment {
             val args = Bundle()
@@ -26,10 +26,6 @@ class TrackFragment : MainBaseFragment(), TrackMvpView {
     }
 
     @Inject lateinit var presenter: TrackMvpPresenter<TrackMvpView>
-
-    @Inject lateinit var layoutManager: LinearLayoutManager
-
-    @Inject lateinit var adapter: TrackAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_main, container, false)
@@ -44,9 +40,5 @@ class TrackFragment : MainBaseFragment(), TrackMvpView {
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = adapter
         adapter.presenter = presenter
-    }
-
-    override fun updateArray(array: ArrayList<Track>) {
-        adapter.updateArray(array)
     }
 }

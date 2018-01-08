@@ -18,7 +18,7 @@ import javax.inject.Inject
 /**
  * Created by denis on 01/01/2018.
  */
-class AlbumFragment : MainBaseFragment(), AlbumMvpView {
+class AlbumFragment : MainBaseFragment<AlbumAdapter, AlbumViewHolder, Album, AlbumMvpView, AlbumMvpPresenter<AlbumMvpView>>(), AlbumMvpView {
     companion object {
         fun newInstance(): AlbumFragment {
             val args = Bundle()
@@ -29,10 +29,6 @@ class AlbumFragment : MainBaseFragment(), AlbumMvpView {
     }
 
     @Inject lateinit var presenter: AlbumMvpPresenter<AlbumMvpView>
-
-    @Inject lateinit var adapter: AlbumAdapter
-
-    @Inject lateinit var layoutManager: LinearLayoutManager
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_main, container, false)
