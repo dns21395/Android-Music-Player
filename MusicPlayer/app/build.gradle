@@ -57,4 +57,7 @@ dependencies {
 
     // Anko
     compile "org.jetbrains.anko:anko:$anko_version"
+
+    // PIcasso
+    compile 'com.squareup.picasso:picasso:2.5.2'
 }

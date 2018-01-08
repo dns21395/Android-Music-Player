@@ -3,6 +3,7 @@ package denis.musicplayer.ui.main.album
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import com.squareup.picasso.Picasso
 import denis.musicplayer.R
 import denis.musicplayer.data.media.model.Album
 import denis.musicplayer.ui.main.base.MainBaseAdapter
@@ -12,6 +13,7 @@ import denis.musicplayer.ui.main.base.MainBaseAdapter
  */
 class AlbumAdapter(val context: Context) : MainBaseAdapter<AlbumViewHolder, Album, AlbumAdapter.Callback>() {
     override fun onBindViewHolder(holder: AlbumViewHolder, position: Int) {
+        super.onBindViewHolder(holder, position)
         holder.onBind(array[position])
     }
 

@@ -35,9 +35,7 @@ class AlbumPresenter<V : AlbumMvpView>
                 }.subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe {
-                            for(item in it) {
-                                Log.d(TAG, "$item")
-                            }
+                            mvpView?.updateArray(it)
                         })
     }
 }
