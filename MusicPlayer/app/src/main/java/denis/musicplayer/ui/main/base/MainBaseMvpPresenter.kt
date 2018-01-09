@@ -5,7 +5,7 @@ import denis.musicplayer.ui.base.MvpPresenter
 /**
  * Created by denis on 31/12/2017.
  */
-interface MainBaseMvpPresenter<V : MainBaseMvpView<T>, T: Any> : MvpPresenter<V> {
+interface MainBaseMvpPresenter<V : MainBaseFragmentMvpView<T>, T: Any> : MvpPresenter<V> {
     fun getItems()
 
     fun getItemsForPlaylist()

@@ -4,12 +4,11 @@ import denis.musicplayer.data.media.model.Track
 import denis.musicplayer.ui.base.MvpView
 
 /**
- * Created by denis on 31/12/2017.
+ * Created by denis on 09/01/2018.
  */
-interface MainBaseMvpView<A: Any> : MvpView {
+interface MainBaseActivityMvpView : MvpView {
     fun showSelectFragment()
     fun hideSelectFragment()
     fun updateCountSelectFragment(count: Int)
     fun showUpdatePlaylist(array: ArrayList<Track>)
-    fun updateArray(array: ArrayList<A>)
 }

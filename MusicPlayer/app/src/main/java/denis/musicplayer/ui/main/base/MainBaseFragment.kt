@@ -1,5 +1,6 @@
 package denis.musicplayer.ui.main.base
 
+import android.content.Context
 import android.support.v7.widget.LinearLayoutManager
 import denis.musicplayer.R
 import denis.musicplayer.data.media.model.Track
@@ -16,9 +17,9 @@ import javax.inject.Inject
 abstract class MainBaseFragment<A : MainBaseAdapter<B, C, D, E>,
                                 B: MainBaseViewHolder<C>,
                                 C: Any,
-                                D: MainBaseMvpView<C>,
+                                D: MainBaseFragmentMvpView<C>,
                                 E: MainBaseMvpPresenter<D, C>>
-    : BaseFragment(), MainBaseMvpView<C> {
+    : BaseFragment(), MainBaseFragmentMvpView<C> {
 
     private val TAG = "MainBaseFragment"
 
@@ -26,23 +27,28 @@ abstract class MainBaseFragment<A : MainBaseAdapter<B, C, D, E>,
 
     @Inject lateinit var layoutManager: LinearLayoutManager
 
+    private var baseActivity: MainBaseActivity? = null
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        baseActivity = activity as MainBaseActivity
+    }
+    
     override fun showSelectFragment() {
-        (activity as MainActivity).replaceFragment(SelectFragment.newInstance())
+        baseActivity?.showSelectFragment()
     }
 
     override fun hideSelectFragment() {
         adapter.notifyDataSetChanged()
-        (activity as MainActivity).replaceFragment(PlayerFragment.newInstance())
+        baseActivity?.hideSelectFragment()
     }
 
     override fun updateCountSelectFragment(count: Int) {
-        val fragment = activity?.supportFragmentManager?.findFragmentById(R.id.frameLayout) as SelectFragment?
-
-        fragment?.updateCount(count)
+        baseActivity?.updateCountSelectFragment(count)
     }
 
     override fun showUpdatePlaylist(array: ArrayList<Track>) {
-        UpdatePlaylistDialog.newInstance(array).show(activity?.supportFragmentManager, UpdatePlaylistDialog.TAG)
+        baseActivity?.showUpdatePlaylist(array)
     }
 
     override fun updateArray(array: ArrayList<C>) {

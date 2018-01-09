@@ -27,6 +27,8 @@
             android:screenOrientation="portrait" />
         <activity android:name=".ui.playlist.PlaylistActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".ui.main.category.CategoryActivity"
+            android:screenOrientation="portrait" />
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

@@ -1,15 +1,13 @@
 package denis.musicplayer.ui.main.base
 
 import android.support.v7.widget.RecyclerView
-import android.util.Log
-import denis.musicplayer.ui.main.MainMvpView
 
 /**
  * Created by denis on 02/01/2018.
  */
 abstract class MainBaseAdapter<A : MainBaseViewHolder<B>,
                                B: Any,
-                               C: MainBaseMvpView<B>,
+                               C: MainBaseFragmentMvpView<B>,
                                D: MainBaseMvpPresenter<C, B>>
     : RecyclerView.Adapter<A>() {
 
