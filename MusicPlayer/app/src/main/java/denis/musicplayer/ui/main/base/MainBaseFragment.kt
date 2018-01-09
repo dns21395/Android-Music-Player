@@ -1,16 +1,13 @@
 package denis.musicplayer.ui.main.base
 
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import denis.musicplayer.R
 import denis.musicplayer.data.media.model.Track
 import denis.musicplayer.ui.base.BaseFragment
 import denis.musicplayer.ui.main.MainActivity
-import denis.musicplayer.ui.main.MainMvpPresenter
-import denis.musicplayer.ui.main.MainMvpView
 import denis.musicplayer.ui.main.select.SelectFragment
 import denis.musicplayer.ui.main.updateplaylist.UpdatePlaylistDialog
-import kotlinx.android.synthetic.main.activity_main.view.*
+import denis.musicplayer.ui.player.fragment.PlayerFragment
 import javax.inject.Inject
 
 /**
@@ -30,12 +27,12 @@ abstract class MainBaseFragment<A : MainBaseAdapter<B, C, D, E>,
     @Inject lateinit var layoutManager: LinearLayoutManager
 
     override fun showSelectFragment() {
-        (activity as MainActivity).replaceFragment((activity as MainActivity).selectFragment)
+        (activity as MainActivity).replaceFragment(SelectFragment.newInstance())
     }
 
     override fun hideSelectFragment() {
         adapter.notifyDataSetChanged()
-        (activity as MainActivity).replaceFragment((activity as MainActivity).playerFragment)
+        (activity as MainActivity).replaceFragment(PlayerFragment.newInstance())
     }
 
     override fun updateCountSelectFragment(count: Int) {

@@ -1,17 +1,12 @@
 package denis.musicplayer.ui.main.album
 
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import denis.musicplayer.R
 import denis.musicplayer.data.media.model.Album
-import denis.musicplayer.data.media.model.Track
-import denis.musicplayer.ui.main.base.MainBaseAdapter
 import denis.musicplayer.ui.main.base.MainBaseFragment
-import denis.musicplayer.ui.main.base.MainBaseViewHolder
-import denis.musicplayer.ui.main.updateplaylist.UpdatePlaylistDialog
 import kotlinx.android.synthetic.main.fragment_main.*
 import javax.inject.Inject
 

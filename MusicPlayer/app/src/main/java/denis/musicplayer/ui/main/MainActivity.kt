@@ -25,9 +25,7 @@ class MainActivity : BaseActivity(), MainMvpView {
 
     @Inject lateinit var presenter: MainMvpPresenter<MainMvpView>
 
-    var selectFragment: Fragment = SelectFragment.newInstance()
-    var playerFragment: Fragment = PlayerFragment.newInstance()
-    
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -36,7 +34,8 @@ class MainActivity : BaseActivity(), MainMvpView {
         presenter.onAttach(this)
 
         supportFragmentManager.beginTransaction().replace(R.id.mainContentFragment, MainContentFragment.newInstance()).commit()
-        replaceFragment(playerFragment)
+        
+        replaceFragment(PlayerFragment.newInstance())
 
         setUp()
     }
