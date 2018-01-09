@@ -42,6 +42,11 @@ class AlbumPresenter<V : AlbumMvpView>
                         })
     }
 
+    override fun onItemClick(position: Int) {
+        val album = getItemAtPosition(position)
+        getAlbumTracks(album.id, album.album)
+    }
+
 
 
     override fun getItemsForPlaylist() {
@@ -75,7 +80,7 @@ class AlbumPresenter<V : AlbumMvpView>
                 }.subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe {
-                            mvpView?.openAlbumTracksActivity(it, title)
+                            mvpView?.openCategoryTracksActivity(it, title)
                         }
         )
     }

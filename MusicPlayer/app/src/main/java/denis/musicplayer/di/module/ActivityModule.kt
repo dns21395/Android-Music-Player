@@ -20,6 +20,7 @@ import denis.musicplayer.ui.main.album.AlbumAdapter
 import denis.musicplayer.ui.main.album.AlbumMvpPresenter
 import denis.musicplayer.ui.main.album.AlbumMvpView
 import denis.musicplayer.ui.main.album.AlbumPresenter
+import denis.musicplayer.ui.main.artist.ArtistAdapter
 import denis.musicplayer.ui.main.artist.ArtistMvpPresenter
 import denis.musicplayer.ui.main.artist.ArtistMvpView
 import denis.musicplayer.ui.main.artist.ArtistPresenter
@@ -154,6 +155,9 @@ class ActivityModule(val activity: AppCompatActivity) {
 
     @Provides
     fun provideTrackAdapter(@ActivityContext context: Context): TrackAdapter = TrackAdapter(context)
+
+    @Provides
+    fun provideArtistAdapter(@ActivityContext context: Context): ArtistAdapter = ArtistAdapter(context)
 
     @Provides
     fun provideUpdatePlaylistAdapter(@ActivityContext context: Context): UpdatePlaylistAdapter = UpdatePlaylistAdapter(context)

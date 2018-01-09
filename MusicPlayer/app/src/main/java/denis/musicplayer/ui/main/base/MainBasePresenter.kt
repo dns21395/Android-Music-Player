@@ -15,11 +15,17 @@ open class MainBasePresenter<V: MainBaseFragmentMvpView<T>, T: Any>
                         compositeDisposable: CompositeDisposable,
                         val rxBus: MainRxBus)
     : BasePresenter<V>(context, dataManager, compositeDisposable), MainBaseMvpPresenter<V, T> {
+
+
     override fun getItems() {
 
     }
 
     override fun getItemsForPlaylist() {
+
+    }
+
+    override fun onItemClick(position: Int) {
 
     }
 

@@ -14,6 +14,14 @@
     <string name="select_playlist">Select Playlist</string>
     <string name="playlist_updated">Playlist Updated</string>
     <string name="unknown_error">Unknown Error</string>
+    <plurals name="album_count">
+        <item quantity="one">%s Album</item>
+        <item quantity="other">%s Albums</item>
+    </plurals>
+    <plurals name="track_count">
+        <item quantity="one">%s Track</item>
+        <item quantity="other">%s Tracks</item>
+    </plurals>
 
     <string-array name="main_fragments">
         <item>Tracks</item>

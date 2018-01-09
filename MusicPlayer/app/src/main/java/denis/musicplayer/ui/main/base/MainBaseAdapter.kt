@@ -34,7 +34,10 @@ abstract class MainBaseAdapter<A : MainBaseViewHolder<B>,
         }
 
         holder.itemView.setOnClickListener {
-            if(presenter.getSelectedArrayCount() > 0) selectItem(holder, position)
+            when(presenter.getSelectedArrayCount()) {
+                0 -> presenter.onItemClick(position)
+                else -> selectItem(holder, position)
+            }
         }
 
     }

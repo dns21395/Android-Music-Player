@@ -13,5 +13,7 @@ interface MediaManager {
     fun scanAlbumTracks(albumID: Long): ArrayList<Track>
 
     fun scanArtists(): ArrayList<Artist>
+    fun scanArtistTracks(artistID: Long): ArrayList<Track>
+
     fun scanGenres(): ArrayList<Genre>
 }

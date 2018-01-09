@@ -14,7 +14,11 @@ import javax.inject.Inject
 /**
  * Created by denis on 01/01/2018.
  */
-class ArtistFragment : BaseFragment(), ArtistMvpView {
+class ArtistFragment : MainBaseFragment<ArtistAdapter,
+                                        ArtistViewHolder,
+                                        Artist,
+                                        ArtistMvpView,
+                                        ArtistMvpPresenter<ArtistMvpView>>(), ArtistMvpView {
 
     companion object {
         fun newInstance(): ArtistFragment {
@@ -37,5 +41,8 @@ class ArtistFragment : BaseFragment(), ArtistMvpView {
     }
 
     override fun setUp(view: View?) {
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = layoutManager
+        adapter.presenter = presenter
     }
 }

@@ -6,6 +6,7 @@ import denis.musicplayer.R
 import denis.musicplayer.data.media.model.Track
 import denis.musicplayer.ui.base.BaseFragment
 import denis.musicplayer.ui.main.MainActivity
+import denis.musicplayer.ui.main.category.CategoryActivity
 import denis.musicplayer.ui.main.select.SelectFragment
 import denis.musicplayer.ui.main.updateplaylist.UpdatePlaylistDialog
 import denis.musicplayer.ui.player.fragment.PlayerFragment
@@ -53,5 +54,9 @@ abstract class MainBaseFragment<A : MainBaseAdapter<B, C, D, E>,
 
     override fun updateArray(array: ArrayList<C>) {
         adapter.updateArray(array)
+    }
+
+    override fun openCategoryTracksActivity(tracks: ArrayList<Track>, title: String) {
+        startActivity(CategoryActivity.getStartIntent(context!!, tracks, title))
     }
 }

@@ -1,5 +1,6 @@
 package denis.musicplayer.ui.main.base
 
+import denis.musicplayer.data.media.model.Track
 
 
 /**
@@ -7,4 +8,6 @@ package denis.musicplayer.ui.main.base
  */
 interface MainBaseFragmentMvpView<A: Any> : MainBaseActivityMvpView {
     fun updateArray(array: ArrayList<A>)
+
+    fun openCategoryTracksActivity(tracks: ArrayList<Track>, title: String)
 }

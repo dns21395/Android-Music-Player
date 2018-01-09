@@ -46,7 +46,5 @@ class AlbumFragment : MainBaseFragment<AlbumAdapter, AlbumViewHolder, Album, Alb
         adapter.presenter = presenter
     }
 
-    override fun openAlbumTracksActivity(tracks: ArrayList<Track>, title: String) {
-        startActivity(CategoryActivity.getStartIntent(context!!, tracks, title))
-    }
+
 }
