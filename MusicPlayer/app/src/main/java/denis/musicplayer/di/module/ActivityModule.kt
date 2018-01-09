@@ -24,6 +24,13 @@ import denis.musicplayer.ui.main.artist.ArtistMvpPresenter
 import denis.musicplayer.ui.main.artist.ArtistMvpView
 import denis.musicplayer.ui.main.artist.ArtistPresenter
 import denis.musicplayer.ui.main.base.MainRxBus
+import denis.musicplayer.ui.main.category.CategoryMvpPresenter
+import denis.musicplayer.ui.main.category.CategoryMvpView
+import denis.musicplayer.ui.main.category.CategoryPresenter
+import denis.musicplayer.ui.main.category.categoryfragment.CategoryFragmentAdapter
+import denis.musicplayer.ui.main.category.categoryfragment.CategoryFragmentMvpPresenter
+import denis.musicplayer.ui.main.category.categoryfragment.CategoryFragmentMvpView
+import denis.musicplayer.ui.main.category.categoryfragment.CategoryFragmentPresenter
 import denis.musicplayer.ui.main.genre.GenreMvpPresenter
 import denis.musicplayer.ui.main.genre.GenreMvpView
 import denis.musicplayer.ui.main.genre.GenrePresenter
@@ -93,6 +100,10 @@ class ActivityModule(val activity: AppCompatActivity) {
     @PerActivity
     fun providePlaylistPresenter(presenter: PlaylistPresenter<PlaylistMvpView>): PlaylistMvpPresenter<PlaylistMvpView> = presenter
 
+   @Provides
+   @PerActivity
+   fun provideCategoryPresenter(presenter: CategoryPresenter<CategoryMvpView>): CategoryMvpPresenter<CategoryMvpView> = presenter
+
     // Fragment
 
     @Provides
@@ -119,6 +130,8 @@ class ActivityModule(val activity: AppCompatActivity) {
     @Provides
     fun provideFragmentPlayerPresenter(presenter: PlayerFragmentPresenter<PlayerFragmentMvpView>): PlayerFragmentMvpPresenter<PlayerFragmentMvpView> = presenter
 
+    @Provides
+    fun provideCategoryFragmentPresenter(presenter: CategoryFragmentPresenter<CategoryFragmentMvpView>): CategoryFragmentMvpPresenter<CategoryFragmentMvpView> = presenter
     // Dialog
 
     @Provides
@@ -146,6 +159,9 @@ class ActivityModule(val activity: AppCompatActivity) {
 
     @Provides
     fun providePlaylistAdapter(@ActivityContext context: Context): PlaylistAdapter = PlaylistAdapter(context)
+
+    @Provides
+    fun provideCategoryFragmentAdapter(@ActivityContext context: Context): CategoryFragmentAdapter = CategoryFragmentAdapter(context)
 
 
 

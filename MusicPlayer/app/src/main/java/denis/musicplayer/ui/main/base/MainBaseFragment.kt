@@ -33,7 +33,7 @@ abstract class MainBaseFragment<A : MainBaseAdapter<B, C, D, E>,
         super.onAttach(context)
         baseActivity = activity as MainBaseActivity
     }
-    
+
     override fun showSelectFragment() {
         baseActivity?.showSelectFragment()
     }

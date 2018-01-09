@@ -1,7 +1,11 @@
 package denis.musicplayer.ui.main.category
 
+import android.support.v4.app.Fragment
+import denis.musicplayer.ui.main.base.MainBaseActivityMvpView
+
 /**
  * Created by denis on 09/01/2018.
  */
-interface CategoryMvpView  {
+interface CategoryMvpView : MainBaseActivityMvpView  {
+    fun replaceFragment(fragment: Fragment)
 }
