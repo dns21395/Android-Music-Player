@@ -16,6 +16,13 @@ class AlbumAdapter(val context: Context) : MainBaseAdapter<AlbumViewHolder, Albu
 
     override fun onBindViewHolder(holder: AlbumViewHolder, position: Int) {
         super.onBindViewHolder(holder, position)
+
+        holder.itemView.setOnClickListener {
+            if(presenter.getSelectedArrayCount() == 0) {
+                val album = presenter.getItemAtPosition(position)
+                presenter.getAlbumTracks(album.id, album.album)
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): AlbumViewHolder =

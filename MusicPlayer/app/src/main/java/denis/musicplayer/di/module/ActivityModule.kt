@@ -132,7 +132,8 @@ class ActivityModule(val activity: AppCompatActivity) {
 
     @Provides
     fun provideCategoryFragmentPresenter(presenter: CategoryFragmentPresenter<CategoryFragmentMvpView>): CategoryFragmentMvpPresenter<CategoryFragmentMvpView> = presenter
-    // Dialog
+
+    // / Dialog
 
     @Provides
     fun provideAddDialogPresenter(presenter: AddPlaylistPresenter<AddPlaylistMvpView>): AddPlaylistMvpPresenter<AddPlaylistMvpView> = presenter

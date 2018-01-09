@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import denis.musicplayer.R
 import denis.musicplayer.data.media.model.Album
+import denis.musicplayer.data.media.model.Track
 import denis.musicplayer.ui.main.base.MainBaseFragment
+import denis.musicplayer.ui.main.category.CategoryActivity
 import kotlinx.android.synthetic.main.fragment_main.*
 import javax.inject.Inject
 
@@ -42,5 +44,9 @@ class AlbumFragment : MainBaseFragment<AlbumAdapter, AlbumViewHolder, Album, Alb
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = adapter
         adapter.presenter = presenter
+    }
+
+    override fun openAlbumTracksActivity(tracks: ArrayList<Track>, title: String) {
+        startActivity(CategoryActivity.getStartIntent(context!!, tracks, title))
     }
 }

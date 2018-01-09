@@ -35,13 +35,11 @@ class CategoryFragment : MainBaseFragment<CategoryFragmentAdapter,
 
     @Inject lateinit var presenter: CategoryFragmentMvpPresenter<CategoryFragmentMvpView>
 
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_main, container, false)
 
         activityComponent?.inject(this)
-
-        getTracks()
-
         presenter.onAttach(this)
 
         return view
@@ -51,6 +49,8 @@ class CategoryFragment : MainBaseFragment<CategoryFragmentAdapter,
         recyclerView.adapter = adapter
         recyclerView.layoutManager = layoutManager
         adapter.presenter = presenter
+
+        getTracks()
     }
 
     private fun getTracks() {
@@ -58,6 +58,8 @@ class CategoryFragment : MainBaseFragment<CategoryFragmentAdapter,
         if(objects != null) {
             val tracks = BytesUtil.toObject<Track>(objects)
             presenter.updateArray(tracks)
+            presenter.getItems()
+
         }
     }
 }

@@ -67,4 +67,16 @@ class AlbumPresenter<V : AlbumMvpView>
 
         )
     }
+
+    override fun getAlbumTracks(albumId: Long, title: String) {
+        compositeDisposable.add(
+                Observable.fromCallable {
+                    dataManager.scanAlbumTracks(albumId)
+                }.subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe {
+                            mvpView?.openAlbumTracksActivity(it, title)
+                        }
+        )
+    }
 }

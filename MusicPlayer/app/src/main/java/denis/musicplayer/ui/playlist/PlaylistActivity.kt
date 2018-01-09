@@ -65,7 +65,7 @@ class PlaylistActivity : BaseActivity(), PlaylistMvpView, PlaylistAdapter.Callba
         id = intent.extras?.getLong(KEY_ID) ?: 0
         title = intent.extras?.getString(KEY_TITLE) ?: ""
 
-        playlistTitle.text = title
+        categoryTitle.text = title
 
         presenter.getTracks(id)
     }

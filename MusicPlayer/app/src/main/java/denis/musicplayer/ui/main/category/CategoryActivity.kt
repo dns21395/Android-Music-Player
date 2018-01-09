@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import denis.musicplayer.R
 import denis.musicplayer.data.media.model.Track
 import denis.musicplayer.ui.main.base.MainBaseActivity
@@ -16,6 +17,7 @@ import denis.musicplayer.ui.main.track.TrackMvpView
 import denis.musicplayer.ui.main.updateplaylist.UpdatePlaylistDialog
 import denis.musicplayer.ui.player.fragment.PlayerFragment
 import denis.musicplayer.utils.BytesUtil
+import kotlinx.android.synthetic.main.activity_category.*
 import javax.inject.Inject
 
 /**
@@ -23,13 +25,18 @@ import javax.inject.Inject
  */
 class CategoryActivity : MainBaseActivity(), CategoryMvpView {
 
+    private val TAG = "CategoryActivity"
+
     companion object {
-        fun getStartIntent(context: Context, tracks: ArrayList<Track>): Intent {
+        val KEY_TITLE = "key_title"
+
+        fun getStartIntent(context: Context, tracks: ArrayList<Track>, title: String): Intent {
 
             val intent = Intent(context, CategoryActivity::class.java)
 
             val args = Bundle()
             args.putByteArray(CategoryFragment.KEY_TRACKS, BytesUtil.toByteArray(tracks))
+            args.putString(KEY_TITLE, title)
 
             intent.putExtras(args)
 
@@ -39,8 +46,8 @@ class CategoryActivity : MainBaseActivity(), CategoryMvpView {
 
     @Inject lateinit var presenter: CategoryMvpPresenter<CategoryMvpView>
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_category)
 
         activityComponent.inject(this)
@@ -50,7 +57,8 @@ class CategoryActivity : MainBaseActivity(), CategoryMvpView {
     }
 
     override fun setUp() {
-        supportFragmentManager.beginTransaction().replace(R.id.bottomFrame, CategoryFragment.newInstance(getTracks())).commit()
+        categoryTitle.text = intent.getStringExtra(KEY_TITLE)
+        supportFragmentManager.beginTransaction().replace(R.id.mainFrame, CategoryFragment.newInstance(getTracks())).commit()
         replaceFragment(PlayerFragment.newInstance())
     }
 
@@ -78,6 +86,7 @@ class CategoryActivity : MainBaseActivity(), CategoryMvpView {
 
     private fun getTracks(): ArrayList<Track> {
         val objects = intent.getByteArrayExtra(CategoryFragment.KEY_TRACKS)
+
         return when(objects) {
             null -> ArrayList()
             else -> BytesUtil.toObject(objects)

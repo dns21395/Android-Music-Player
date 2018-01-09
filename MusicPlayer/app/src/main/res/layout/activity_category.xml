@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/colorPrimary"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -18,7 +19,7 @@
         />
 
     <TextView
-        android:id="@+id/playlistTitle"
+        android:id="@+id/categoryTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
@@ -45,9 +46,10 @@
 
     <FrameLayout
         android:id="@+id/mainFrame"
+        android:layout_marginTop="16dp"
         app:layout_constraintWidth_default="spread"
         app:layout_constraintHeight_default="spread"
-        app:layout_constraintTop_toBottomOf="@id/playlistTitle"
+        app:layout_constraintTop_toBottomOf="@id/categoryTitle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/bottomFrame"

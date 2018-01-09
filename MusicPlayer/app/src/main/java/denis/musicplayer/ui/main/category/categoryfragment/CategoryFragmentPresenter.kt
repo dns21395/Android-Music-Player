@@ -1,6 +1,7 @@
 package denis.musicplayer.ui.main.category.categoryfragment
 
 import android.content.Context
+import android.util.Log
 import denis.musicplayer.data.DataManager
 import denis.musicplayer.data.media.model.Album
 import denis.musicplayer.data.media.model.Track
@@ -21,9 +22,10 @@ class CategoryFragmentPresenter<V: CategoryFragmentMvpView>
                         rxBus: MainRxBus)
     : MainBasePresenter<V, Track>(context, dataManager, compositeDisposable, rxBus), CategoryFragmentMvpPresenter<V> {
 
+    private val TAG = "CategoryFragmePresenter"
 
     override fun getItems() {
-        mvpView?.updateArray(getArray())
+        if(getArrayCount() > 0) mvpView?.updateArray(getArray())
     }
 
     override fun getItemsForPlaylist() {
