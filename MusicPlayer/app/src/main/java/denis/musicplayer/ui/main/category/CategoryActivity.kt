@@ -60,6 +60,10 @@ class CategoryActivity : MainBaseActivity(), CategoryMvpView {
         categoryTitle.text = intent.getStringExtra(KEY_TITLE)
         supportFragmentManager.beginTransaction().replace(R.id.mainFrame, CategoryFragment.newInstance(getTracks())).commit()
         replaceFragment(PlayerFragment.newInstance())
+
+        back.setOnClickListener {
+            finish()
+        }
     }
 
     override fun replaceFragment(fragment: Fragment) {
