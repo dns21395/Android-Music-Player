@@ -11,6 +11,8 @@ import denis.musicplayer.data.media.MediaManager
 import denis.musicplayer.data.playlist.AppPlaylistManager
 import denis.musicplayer.data.playlist.PlaylistManager
 import denis.musicplayer.di.ApplicationContext
+import denis.musicplayer.service.music.AppMusicManager
+import denis.musicplayer.service.music.MusicManager
 import denis.musicplayer.ui.main.base.MainRxBus
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Singleton
@@ -41,6 +43,10 @@ class ApplicationModule(val application: Application) {
     @Provides
     @Singleton
     fun provideMediaManager(appMediaManager: AppMediaManager): MediaManager = appMediaManager
+
+    @Provides
+    @Singleton
+    fun provideMusicManager(appMusicManager: AppMusicManager): MusicManager = appMusicManager
 
 
 }

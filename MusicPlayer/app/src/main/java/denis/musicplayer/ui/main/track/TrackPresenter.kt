@@ -4,6 +4,7 @@ import android.content.Context
 import denis.musicplayer.data.DataManager
 import denis.musicplayer.data.media.model.Track
 import denis.musicplayer.di.ActivityContext
+import denis.musicplayer.service.music.MusicManager
 import denis.musicplayer.ui.main.base.MainBasePresenter
 import denis.musicplayer.ui.main.base.MainRxBus
 import io.reactivex.Observable
@@ -20,12 +21,15 @@ class TrackPresenter<V : TrackMvpView>
     @Inject constructor(@ActivityContext context: Context,
                         dataManager: DataManager,
                         compositeDisposable: CompositeDisposable,
-                        rxBus: MainRxBus)
+                        rxBus: MainRxBus,
+                        val musicManager: MusicManager)
     : MainBasePresenter<V, Track>(context, dataManager, compositeDisposable, rxBus), TrackMvpPresenter<V> {
 
     private val TAG = "TrackPresenter"
 
-
+    override fun onItemClick(position: Int) {
+        musicManager.updateTracks(getArray(), position)
+    }
 
     override fun getItems() {
         compositeDisposable.add(Observable.fromCallable {
