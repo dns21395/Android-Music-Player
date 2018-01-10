@@ -119,7 +119,7 @@
       <file leaf-file-name="ActivityModule.kt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/denis/musicplayer/di/module/ActivityModule.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="717">
+            <state relative-caret-position="458">
               <caret line="157" column="100" lean-forward="false" selection-start-line="157" selection-start-column="100" selection-end-line="157" selection-end-column="100" />
               <folding />
             </state>
@@ -129,18 +129,20 @@
       <file leaf-file-name="AppDataManager.kt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/denis/musicplayer/data/AppDataManager.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="26" />
-              <folding />
+            <state relative-caret-position="-133">
+              <caret line="15" column="6" lean-forward="false" selection-start-line="15" selection-start-column="6" selection-end-line="15" selection-end-column="6" />
+              <folding>
+                <element signature="e#32#368#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ApplicationComponent.kt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/denis/musicplayer/di/component/ApplicationComponent.kt">
+      <file leaf-file-name="AppPlaylistManager.kt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/denis/musicplayer/data/playlist/AppPlaylistManager.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="29" column="43" lean-forward="false" selection-start-line="29" selection-start-column="43" selection-end-line="29" selection-end-column="43" />
+            <state relative-caret-position="120">
+              <caret line="20" column="6" lean-forward="false" selection-start-line="20" selection-start-column="6" selection-end-line="20" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -151,30 +153,33 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="332">
               <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MusicService.kt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/denis/musicplayer/service/MusicService.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="219">
-              <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
               <folding>
-                <element signature="e#35#421#0" expanded="true" />
+                <marker date="1515593973066" expanded="true" signature="41:910" ph="@{...}" />
+                <marker date="1515593973066" expanded="true" signature="1664:1747" ph="@{...}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AppMusicManager.kt" pinned="false" current-in-tab="true">
+      <file leaf-file-name="AppMusicService.kt" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/denis/musicplayer/service/AppMusicService.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="16" column="44" lean-forward="false" selection-start-line="16" selection-start-column="44" selection-end-line="16" selection-end-column="44" />
+              <folding>
+                <element signature="e#35#281#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AppMusicManager.kt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/denis/musicplayer/service/music/AppMusicManager.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="22" column="10" lean-forward="false" selection-start-line="22" selection-start-column="10" selection-end-line="22" selection-end-column="10" />
+            <state relative-caret-position="159">
+              <caret line="17" column="6" lean-forward="false" selection-start-line="17" selection-start-column="6" selection-end-line="17" selection-end-column="6" />
               <folding>
-                <element signature="e#41#215#0" expanded="true" />
+                <element signature="e#41#339#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -183,11 +188,12 @@
       <file leaf-file-name="AppMusicManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/build/tmp/kapt3/stubs/debug/denis/musicplayer/service/music/AppMusicManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="368">
-              <caret line="37" column="0" lean-forward="false" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+            <state relative-caret-position="608">
+              <caret line="51" column="0" lean-forward="false" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
               <folding>
-                <marker date="1515590656796" expanded="false" signature="2908:2919" ph=" { " />
-                <marker date="1515590656796" expanded="false" signature="2927:2933" ph=" }" />
+                <marker date="1515593927252" expanded="true" signature="42:111" ph="@{...}" />
+                <marker date="1515593927252" expanded="false" signature="4226:4237" ph=" { " />
+                <marker date="1515593927252" expanded="false" signature="4245:4251" ph=" }" />
               </folding>
             </state>
           </provider>
@@ -206,18 +212,18 @@
       <file leaf-file-name="ApplicationModule.kt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/denis/musicplayer/di/module/ApplicationModule.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="495">
-              <caret line="48" column="27" lean-forward="false" selection-start-line="48" selection-start-column="8" selection-end-line="48" selection-end-column="27" />
+            <state relative-caret-position="555">
+              <caret line="53" column="93" lean-forward="false" selection-start-line="53" selection-start-column="93" selection-end-line="53" selection-end-column="93" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TrackPresenter.kt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/denis/musicplayer/ui/main/track/TrackPresenter.kt">
+      <file leaf-file-name="MusicService.kt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/denis/musicplayer/service/MusicService.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="30" column="28" lean-forward="false" selection-start-line="30" selection-start-column="28" selection-end-line="30" selection-end-column="28" />
+            <state relative-caret-position="75">
+              <caret line="5" column="22" lean-forward="false" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -2151,8 +2157,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/denis/musicplayer/ui/main/category/CategoryPresenter.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/denis/musicplayer/ui/main/category/categoryfragment/CategoryFragmentMvpView.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/denis/musicplayer/ui/main/category/categoryfragment/CategoryFragmentMvpPresenter.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/denis/musicplayer/ui/main/category/categoryfragment/CategoryFragmentAdapter.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/denis/musicplayer/di/component/ActivityComponent.kt" />
@@ -2195,13 +2199,15 @@
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/denis/musicplayer/di/component/ServiceComponent.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/denis/musicplayer/service/AppMusicManager.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/denis/musicplayer/di/module/ApplicationModule.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/denis/musicplayer/service/music/MusicManager.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/denis/musicplayer/di/module/ServiceModule.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/denis/musicplayer/di/component/ApplicationComponent.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/denis/musicplayer/service/MusicService.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/denis/musicplayer/ui/main/track/TrackPresenter.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/denis/musicplayer/service/MusicService.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/denis/musicplayer/di/module/ApplicationModule.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/denis/musicplayer/service/music/AppMusicManager.kt" />
+        <option value="$PROJECT_DIR$/app/build/tmp/kapt3/stubs/debug/denis/musicplayer/di/component/ApplicationComponent.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/denis/musicplayer/service/AppMusicService.kt" />
       </list>
     </option>
   </component>
@@ -2737,7 +2743,7 @@
       <option name="DEEP_LINK" value="" />
       <option name="ACTIVITY_CLASS" value="" />
       <method>
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1515592290890" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1515593994741" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -2784,7 +2790,7 @@
         <option name="ADVANCED_PROFILING_ENABLED" value="false" />
       </Profilers>
       <method>
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1515592290890" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1515593994741" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -2816,6 +2822,27 @@
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
+      <method />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
       <method />
     </configuration>
     <configuration default="true" type="JarApplication" factoryName="JAR Application">
@@ -2945,7 +2972,7 @@
       <option name="DEEP_LINK" value="" />
       <option name="ACTIVITY_CLASS" value="" />
       <method>
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1515592290891" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1515593994742" />
       </method>
     </configuration>
     <list size="2">
@@ -3009,7 +3036,7 @@
     <layout>
       <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32951653" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32951653" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32951653" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -3024,6 +3051,7 @@
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3036377" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32951653" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2494432" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
@@ -3037,7 +3065,6 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32951653" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -3048,13 +3075,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/denis/musicplayer/ui/main/album/AlbumFragment.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="570">
-          <caret line="48" column="0" lean-forward="false" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/denis/musicplayer/ui/main/category/categoryfragment/CategoryFragment.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="570">
@@ -3349,14 +3369,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/denis/musicplayer/data/playlist/AppPlaylistManager.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="20" column="6" lean-forward="false" selection-start-line="20" selection-start-column="6" selection-end-line="20" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/denis/musicplayer/di/component/ServiceComponent.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -3373,36 +3385,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/denis/musicplayer/di/module/ActivityModule.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="717">
-          <caret line="157" column="100" lean-forward="false" selection-start-line="157" selection-start-column="100" selection-end-line="157" selection-end-column="100" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/denis/musicplayer/di/component/ApplicationComponent.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="29" column="43" lean-forward="false" selection-start-line="29" selection-start-column="43" selection-end-line="29" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/denis/musicplayer/service/MusicService.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="219">
-          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding>
-            <element signature="e#35#421#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/denis/musicplayer/di/module/ApplicationModule.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="48" column="27" lean-forward="false" selection-start-line="48" selection-start-column="8" selection-end-line="48" selection-end-column="27" />
           <folding />
         </state>
       </provider>
@@ -3423,39 +3409,87 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/build/tmp/kapt3/stubs/debug/denis/musicplayer/di/component/ApplicationComponent.java">
+    <entry file="file://$PROJECT_DIR$/app/build/tmp/kapt3/stubs/debug/denis/musicplayer/service/music/AppMusicManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="332">
-          <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+        <state relative-caret-position="608">
+          <caret line="51" column="0" lean-forward="false" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
+          <folding>
+            <marker date="1515593927252" expanded="true" signature="42:111" ph="@{...}" />
+            <marker date="1515593927252" expanded="false" signature="4226:4237" ph=" { " />
+            <marker date="1515593927252" expanded="false" signature="4245:4251" ph=" }" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/denis/musicplayer/data/playlist/AppPlaylistManager.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="20" column="6" lean-forward="false" selection-start-line="20" selection-start-column="6" selection-end-line="20" selection-end-column="6" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/denis/musicplayer/data/AppDataManager.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="26" />
+        <state relative-caret-position="-133">
+          <caret line="15" column="6" lean-forward="false" selection-start-line="15" selection-start-column="6" selection-end-line="15" selection-end-column="6" />
+          <folding>
+            <element signature="e#32#368#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/denis/musicplayer/di/module/ActivityModule.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="458">
+          <caret line="157" column="100" lean-forward="false" selection-start-line="157" selection-start-column="100" selection-end-line="157" selection-end-column="100" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/build/tmp/kapt3/stubs/debug/denis/musicplayer/service/music/AppMusicManager.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/denis/musicplayer/service/MusicService.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="37" column="0" lean-forward="false" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
-          <folding>
-            <marker date="1515590656796" expanded="false" signature="2908:2919" ph=" { " />
-            <marker date="1515590656796" expanded="false" signature="2927:2933" ph=" }" />
-          </folding>
+        <state relative-caret-position="75">
+          <caret line="5" column="22" lean-forward="false" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/denis/musicplayer/di/module/ApplicationModule.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="555">
+          <caret line="53" column="93" lean-forward="false" selection-start-line="53" selection-start-column="93" selection-end-line="53" selection-end-column="93" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/denis/musicplayer/service/music/AppMusicManager.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" column="10" lean-forward="false" selection-start-line="22" selection-start-column="10" selection-end-line="22" selection-end-column="10" />
+        <state relative-caret-position="159">
+          <caret line="17" column="6" lean-forward="false" selection-start-line="17" selection-start-column="6" selection-end-line="17" selection-end-column="6" />
           <folding>
-            <element signature="e#41#215#0" expanded="true" />
+            <element signature="e#41#339#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build/tmp/kapt3/stubs/debug/denis/musicplayer/di/component/ApplicationComponent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="332">
+          <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+          <folding>
+            <marker date="1515593973066" expanded="true" signature="41:910" ph="@{...}" />
+            <marker date="1515593973066" expanded="true" signature="1664:1747" ph="@{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/denis/musicplayer/service/AppMusicService.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="16" column="44" lean-forward="false" selection-start-line="16" selection-start-column="44" selection-end-line="16" selection-end-column="44" />
+          <folding>
+            <element signature="e#35#281#0" expanded="true" />
           </folding>
         </state>
       </provider>
