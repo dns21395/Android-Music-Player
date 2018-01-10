@@ -39,6 +39,10 @@ class AppDataManager
     override fun scanArtistTracks(artistID: Long): ArrayList<Track> =
             mediaManager.scanArtistTracks(artistID)
 
+    override fun scanGenreTracks(genreID: Long): ArrayList<Track> =
+            mediaManager.scanGenreTracks(genreID)
+
+
     // Playlist
 
     override fun scanPlaylist(): ArrayList<Playlist> =

@@ -14,7 +14,12 @@ import javax.inject.Inject
 /**
  * Created by denis on 01/01/2018.
  */
-class GenreFragment : BaseFragment(), GenreMvpView {
+class GenreFragment : MainBaseFragment<GenreAdapter,
+                                       GenreViewHolder,
+                                       Genre,
+                                       GenreMvpView,
+                                       GenreMvpPresenter<GenreMvpView>>(),
+        GenreMvpView {
 
     companion object {
         fun newInstance(): GenreFragment {
@@ -37,5 +42,8 @@ class GenreFragment : BaseFragment(), GenreMvpView {
     }
 
     override fun setUp(view: View?) {
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = layoutManager
+        adapter.presenter = presenter
     }
 }

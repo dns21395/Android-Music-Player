@@ -32,6 +32,7 @@ import denis.musicplayer.ui.main.category.categoryfragment.CategoryFragmentAdapt
 import denis.musicplayer.ui.main.category.categoryfragment.CategoryFragmentMvpPresenter
 import denis.musicplayer.ui.main.category.categoryfragment.CategoryFragmentMvpView
 import denis.musicplayer.ui.main.category.categoryfragment.CategoryFragmentPresenter
+import denis.musicplayer.ui.main.genre.GenreAdapter
 import denis.musicplayer.ui.main.genre.GenreMvpPresenter
 import denis.musicplayer.ui.main.genre.GenreMvpView
 import denis.musicplayer.ui.main.genre.GenrePresenter
@@ -154,6 +155,9 @@ class ActivityModule(val activity: AppCompatActivity) {
     fun provideAlbumAdapter(@ActivityContext context: Context): AlbumAdapter = AlbumAdapter(context)
 
     @Provides
+    fun provideGenreAdapter(@ActivityContext context: Context): GenreAdapter = GenreAdapter(context)
+
+    @Provides
     fun provideTrackAdapter(@ActivityContext context: Context): TrackAdapter = TrackAdapter(context)
 
     @Provides
@@ -167,6 +171,8 @@ class ActivityModule(val activity: AppCompatActivity) {
 
     @Provides
     fun provideCategoryFragmentAdapter(@ActivityContext context: Context): CategoryFragmentAdapter = CategoryFragmentAdapter(context)
+
+
 
 
 
