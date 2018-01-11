@@ -30,7 +30,7 @@ class TrackPresenter<V : TrackMvpView>
     private val TAG = "TrackPresenter"
 
     override fun onItemClick(position: Int) {
-        Log.d(TAG, "is Running : ${AppMusicService.isRunning(context)}")
+        AppMusicService.start(context)
         musicManager.updateTracks(getArray(), position)
     }
 
