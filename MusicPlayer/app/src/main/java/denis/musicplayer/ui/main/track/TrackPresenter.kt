@@ -30,8 +30,16 @@ class TrackPresenter<V : TrackMvpView>
     private val TAG = "TrackPresenter"
 
     override fun onItemClick(position: Int) {
-        AppMusicService.start(context)
-        musicManager.updateTracks(getArray(), position)
+        compositeDisposable.add(Observable.fromCallable {
+            AppMusicService.start(context)
+        }.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnComplete {
+                    musicManager.updateTracks(getArray(), position)
+                }
+                .subscribe ())
+
+
     }
 
     override fun getItems() {

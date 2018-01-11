@@ -42,6 +42,8 @@ class AppDataManager
     override fun scanGenreTracks(genreID: Long): ArrayList<Track> =
             mediaManager.scanGenreTracks(genreID)
 
+    override fun getAlbumImagePath(albumID: Long): String? =
+            mediaManager.getAlbumImagePath(albumID)
 
     // Playlist
 
@@ -65,4 +67,6 @@ class AppDataManager
 
     override fun playlistItemReorder(playlistId: Long, oldPos: Int, newPos: Int) =
             playlistManager.playlistItemReorder(playlistId, oldPos, newPos)
+
+
 }

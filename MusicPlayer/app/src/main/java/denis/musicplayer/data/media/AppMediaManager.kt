@@ -275,4 +275,23 @@ class AppMediaManager
 
         return array
     }
+
+    override fun getAlbumImagePath(albumID: Long): String? {
+        val uri = android.provider.MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI
+        val projection = arrayOf(MediaStore.Audio.Albums.ALBUM_ART)
+        val selection = MediaStore.Audio.Albums._ID + "=?"
+        val args = arrayOf(albumID.toString())
+
+        val cursor = context.contentResolver.query(uri, projection, selection, args, null)
+
+        var albumPath: String? = null
+
+        if(cursor != null) {
+            if(cursor.moveToFirst()) albumPath = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Albums.ALBUM_ART))
+        }
+
+        cursor.close()
+
+        return albumPath
+    }
 }

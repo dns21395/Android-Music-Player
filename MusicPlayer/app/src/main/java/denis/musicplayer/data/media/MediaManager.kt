@@ -11,6 +11,7 @@ interface MediaManager {
 
     fun scanAlbums(): ArrayList<Album>
     fun scanAlbumTracks(albumID: Long): ArrayList<Track>
+    fun getAlbumImagePath(albumID: Long): String?
 
     fun scanArtists(): ArrayList<Artist>
     fun scanArtistTracks(artistID: Long): ArrayList<Track>

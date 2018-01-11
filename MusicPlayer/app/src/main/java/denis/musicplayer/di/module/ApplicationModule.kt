@@ -48,8 +48,4 @@ class ApplicationModule(val application: Application) {
     @Provides
     @Singleton
     fun provideMusicManager(appMusicManager: AppMusicManager): MusicManager = appMusicManager
-
-    @Provides
-    @Singleton
-    fun provideMusicService(appMusicService: AppMusicService): MusicService = appMusicService
 }
