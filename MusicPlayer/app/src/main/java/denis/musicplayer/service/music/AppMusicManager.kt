@@ -3,6 +3,8 @@ package denis.musicplayer.service.music
 import android.content.Context
 import android.media.AudioAttributes
 import android.media.MediaPlayer
+import android.widget.RemoteViews
+import denis.musicplayer.R
 import denis.musicplayer.data.DataManager
 import denis.musicplayer.data.media.model.Track
 import denis.musicplayer.di.ApplicationContext
@@ -17,7 +19,8 @@ import javax.inject.Inject
 
 @Singleton
 class AppMusicManager
-    @Inject constructor(@ApplicationContext val context: Context) : MusicManager, MediaPlayer.OnCompletionListener {
+    @Inject constructor(@ApplicationContext val context: Context,
+                        val musicService: MusicService) : MusicManager, MediaPlayer.OnCompletionListener {
 
     private val mediaPlayer: MediaPlayer = MediaPlayer()
     private var tracks = ArrayList<Track>()
@@ -58,6 +61,12 @@ class AppMusicManager
             else -> currentTrackPosition++
         }
         playTrack()
+    }
+
+    override fun buildNotification() {
+        val views = RemoteViews(context.packageName, R.layout.notification_music_player)
+
+
     }
 
     override fun getCurrentTrack(): Track = tracks[currentTrackPosition]

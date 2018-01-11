@@ -63,4 +63,8 @@ class AppMusicService : Service(), MusicService {
         return null
     }
 
+    override fun buildNotification() {
+
+    }
+
 }

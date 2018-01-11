@@ -13,4 +13,6 @@ interface MusicManager {
     fun getCurrentTrack(): Track
 
     fun nextTrack()
+
+    fun buildNotification()
 }
