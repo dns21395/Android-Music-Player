@@ -1,9 +1,11 @@
 package denis.musicplayer.ui.main.track
 
 import android.content.Context
+import android.util.Log
 import denis.musicplayer.data.DataManager
 import denis.musicplayer.data.media.model.Track
 import denis.musicplayer.di.ActivityContext
+import denis.musicplayer.service.AppMusicService
 import denis.musicplayer.service.music.MusicManager
 import denis.musicplayer.ui.main.base.MainBasePresenter
 import denis.musicplayer.ui.main.base.MainRxBus
@@ -28,6 +30,7 @@ class TrackPresenter<V : TrackMvpView>
     private val TAG = "TrackPresenter"
 
     override fun onItemClick(position: Int) {
+        Log.d(TAG, "is Running : ${AppMusicService.isRunning(context)}")
         musicManager.updateTracks(getArray(), position)
     }
 

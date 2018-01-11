@@ -3,6 +3,7 @@ package denis.musicplayer.service.music
 import android.content.Context
 import android.media.AudioAttributes
 import android.media.MediaPlayer
+import denis.musicplayer.data.DataManager
 import denis.musicplayer.data.media.model.Track
 import denis.musicplayer.di.ApplicationContext
 import denis.musicplayer.service.MusicService
@@ -16,8 +17,7 @@ import javax.inject.Inject
 
 @Singleton
 class AppMusicManager
-    @Inject constructor(@ApplicationContext val context: Context,
-                        val musicService: MusicService) : MusicManager, MediaPlayer.OnCompletionListener {
+    @Inject constructor(@ApplicationContext val context: Context) : MusicManager, MediaPlayer.OnCompletionListener {
 
     private val mediaPlayer: MediaPlayer = MediaPlayer()
     private var tracks = ArrayList<Track>()
