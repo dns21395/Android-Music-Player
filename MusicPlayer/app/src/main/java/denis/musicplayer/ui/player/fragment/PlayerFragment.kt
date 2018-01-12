@@ -1,14 +1,20 @@
 package denis.musicplayer.ui.player.fragment
 
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.squareup.picasso.Picasso
 import denis.musicplayer.R
 import denis.musicplayer.data.media.model.Track
 import denis.musicplayer.ui.base.BaseFragment
 import denis.musicplayer.utils.BytesUtil
+import denis.musicplayer.utils.ImageTransformToCircle
+import kotlinx.android.synthetic.main.fragment_player.*
+import kotlinx.android.synthetic.main.holder_album.view.*
+import java.io.File
 import javax.inject.Inject
 
 /**
@@ -30,18 +36,45 @@ class PlayerFragment : BaseFragment(), PlayerFragmentMvpView {
 
     @Inject lateinit var presenter: PlayerFragmentMvpPresenter<PlayerFragmentMvpView>
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_player, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         activityComponent?.inject(this)
         presenter.onAttach(this)
-
-        return view
-
     }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
+            inflater.inflate(R.layout.fragment_player, container, false)
 
     override fun setUp(view: View?) {
 
+    }
 
+    override fun updateFragment(track: Track) {
+        if(title != null) {
+            title.text = track.title
+            artist.text = track.artist
+        }
+    }
+
+    override fun updateCover(coverPath: String?) {
+        when(coverPath) {
+            null -> {
+                Picasso.with(context)
+                        .load(Uri.parse("android.resource://gabyshev.denis.musicplayer/drawable/no_music"))
+                        .transform(ImageTransformToCircle())
+                        .resize(96, 96)
+                        .centerCrop()
+                        .into(cover)
+            }
+            else -> {
+                Picasso.with(context)
+                        .load(Uri.fromFile(File(coverPath)))
+                        .transform(ImageTransformToCircle())
+                        .resize(96, 96)
+                        .centerCrop()
+                        .into(cover)
+            }
+        }
     }
 }

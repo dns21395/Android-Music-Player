@@ -2,6 +2,7 @@ package denis.musicplayer.service.music
 
 import denis.musicplayer.data.media.model.Track
 import denis.musicplayer.service.AppMusicService
+import io.reactivex.subjects.BehaviorSubject
 
 /**
  * Created by denis on 10/01/2018.
@@ -26,6 +27,8 @@ interface MusicManager {
     fun closeMusicPlayer()
 
     fun makeAction(action: MusicManagerAction)
+
+    fun getCurrentTrackBehaviour(): BehaviorSubject<Track>
 
 
 }

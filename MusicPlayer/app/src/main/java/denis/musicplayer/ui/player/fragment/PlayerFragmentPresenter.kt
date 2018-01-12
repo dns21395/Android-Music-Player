@@ -1,11 +1,18 @@
 package denis.musicplayer.ui.player.fragment
 
 import android.content.Context
+import android.media.MediaPlayer
+import android.util.Log
 import denis.musicplayer.data.DataManager
+import denis.musicplayer.data.media.model.Track
 import denis.musicplayer.di.ActivityContext
+import denis.musicplayer.service.music.MusicManager
 import denis.musicplayer.ui.base.BasePresenter
 import denis.musicplayer.ui.base.MvpView
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 /**
@@ -14,7 +21,42 @@ import javax.inject.Inject
 class PlayerFragmentPresenter<V : PlayerFragmentMvpView>
     @Inject constructor(@ActivityContext context: Context,
                         dataManager: DataManager,
-                        compositeDisposable: CompositeDisposable)
+                        compositeDisposable: CompositeDisposable,
+                        val musicManager: MusicManager)
     : BasePresenter<V>(context, dataManager, compositeDisposable), PlayerFragmentMvpPresenter<V> {
+
+    private val TAG = "PlayerFragmentPresenter"
+
+    override fun onAttach(mvpView: V) {
+        super.onAttach(mvpView)
+        updateFragment()
+    }
+
+    override fun onDetach() {
+        Log.d(TAG, "onDetach")
+        super.onDetach()
+    }
+
+    override fun updateFragment() {
+        compositeDisposable.add(
+                musicManager.getCurrentTrackBehaviour()
+                        .subscribe {
+                            getTrackImage(it.albumId)
+                            mvpView?.updateFragment(it)
+                        }
+        )
+    }
+
+    private fun getTrackImage(albumID: Long) {
+        compositeDisposable.add(
+                Observable.fromCallable {
+                        dataManager.getAlbumImagePath(albumID)
+                }.subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe( {
+                            mvpView?.updateCover(it)
+                        }, {mvpView?.updateCover(null)})
+        )
+    }
 
 }

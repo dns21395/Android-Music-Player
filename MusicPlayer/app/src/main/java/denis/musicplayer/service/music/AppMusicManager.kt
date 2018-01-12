@@ -22,6 +22,7 @@ import denis.musicplayer.di.ApplicationContext
 import denis.musicplayer.service.AppMusicService
 import denis.musicplayer.ui.main.MainActivity
 import denis.musicplayer.utils.BytesUtil
+import io.reactivex.subjects.BehaviorSubject
 import javax.inject.Singleton
 import javax.inject.Inject
 
@@ -49,6 +50,8 @@ class AppMusicManager
     private var resumePosition = 0
     private var action: Unit? = null
 
+    private val currentTrackBehaviour: BehaviorSubject<Track> = BehaviorSubject.create()
+
     private var musicService: AppMusicService? = null
     override fun setService(service: AppMusicService) {
         this.musicService = service
@@ -68,6 +71,8 @@ class AppMusicManager
         mediaPlayer.setAudioAttributes(audioAttributes)
     }
 
+    override fun getCurrentTrackBehaviour(): BehaviorSubject<Track> = currentTrackBehaviour
+
     override fun playTrack() {
         Log.d(TAG, "playTrack")
         mediaPlayer.stop()
@@ -75,6 +80,7 @@ class AppMusicManager
         mediaPlayer.setDataSource(tracks[currentTrackPosition].data)
         mediaPlayer.prepare()
         mediaPlayer.start()
+        currentTrackBehaviour.onNext(tracks[currentTrackPosition])
         buildNotification()
     }
 
