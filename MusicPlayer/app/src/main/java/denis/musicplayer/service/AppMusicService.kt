@@ -12,7 +12,10 @@ import denis.musicplayer.di.ApplicationContext
 import denis.musicplayer.di.component.DaggerServiceComponent
 import denis.musicplayer.di.component.ServiceComponent
 import denis.musicplayer.di.module.ServiceModule
+import denis.musicplayer.service.music.AppMusicManager
 import denis.musicplayer.service.music.MusicManager
+import denis.musicplayer.service.music.MusicManagerAction
+import denis.musicplayer.utils.BytesUtil
 import denis.musicplayer.utils.CommonUtils
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -62,6 +65,9 @@ class AppMusicService : Service(), MusicService {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+
+        handleIncomingActions(intent)
+
         return START_NOT_STICKY
     }
 
@@ -71,6 +77,18 @@ class AppMusicService : Service(), MusicService {
 
     override fun onBind(p0: Intent?): IBinder? {
         return null
+    }
+
+    private fun handleIncomingActions(intent: Intent?) {
+        if(intent != null) {
+            val extra = intent.getByteArrayExtra(AppMusicManager.KEY_ACTION)
+            Log.d(TAG, "extra : $extra")
+            if(extra != null) {
+                val action = BytesUtil.toObject<MusicManagerAction>(extra)
+                Log.d(TAG, "action : $action")
+                musicManager.makeAction(action)
+            }
+        }
     }
 
     override fun stopService() {

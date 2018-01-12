@@ -11,6 +11,7 @@ interface MusicManager {
 
     fun playTrack()
     fun pauseTrack()
+    fun resumeTrack()
 
     fun updateTracks(tracks: ArrayList<Track>, currentTrackPosition: Int)
 
@@ -23,6 +24,8 @@ interface MusicManager {
 
     fun buildNotification()
     fun closeMusicPlayer()
+
+    fun makeAction(action: MusicManagerAction)
 
 
 }

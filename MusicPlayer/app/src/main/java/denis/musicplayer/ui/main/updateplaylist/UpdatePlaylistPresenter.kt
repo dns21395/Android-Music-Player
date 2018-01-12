@@ -2,7 +2,6 @@ package denis.musicplayer.ui.main.updateplaylist
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import denis.musicplayer.R
 import denis.musicplayer.data.DataManager
 import denis.musicplayer.data.media.model.Track
@@ -11,7 +10,6 @@ import denis.musicplayer.ui.base.BasePresenter
 import denis.musicplayer.ui.main.base.MainEnumRxBus
 import denis.musicplayer.ui.main.base.MainRxBus
 import denis.musicplayer.utils.BytesUtil
-import io.reactivex.Flowable
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -53,7 +51,7 @@ class UpdatePlaylistPresenter<V: UpdatePlaylistMvpView>
                 Observable.fromCallable {
                     val objects = bundle.getByteArray(UpdatePlaylistDialog.KEY_TRACKS)
                     if(objects != null) {
-                        val tracks = BytesUtil.toObject<Track>(objects)
+                        val tracks = BytesUtil.toObjectArray<Track>(objects)
                         dataManager.addTracksToPlaylist(playlistId, tracks)
                     }
                 }.subscribeOn(Schedulers.io())

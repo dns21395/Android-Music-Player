@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import denis.musicplayer.R
 import denis.musicplayer.data.media.model.Track
 import denis.musicplayer.ui.main.base.MainBaseFragment
-import denis.musicplayer.ui.main.base.MainBaseFragmentMvpView
 import denis.musicplayer.utils.BytesUtil
 import kotlinx.android.synthetic.main.fragment_main.*
 import javax.inject.Inject
@@ -56,7 +55,7 @@ class CategoryFragment : MainBaseFragment<CategoryFragmentAdapter,
     private fun getTracks() {
         val objects = arguments?.getByteArray(CategoryFragment.KEY_TRACKS)
         if(objects != null) {
-            val tracks = BytesUtil.toObject<Track>(objects)
+            val tracks = BytesUtil.toObjectArray<Track>(objects)
             presenter.updateArray(tracks)
             presenter.getItems()
 

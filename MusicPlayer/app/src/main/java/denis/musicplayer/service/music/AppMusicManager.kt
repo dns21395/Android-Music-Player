@@ -20,8 +20,8 @@ import denis.musicplayer.data.DataManager
 import denis.musicplayer.data.media.model.Track
 import denis.musicplayer.di.ApplicationContext
 import denis.musicplayer.service.AppMusicService
-import denis.musicplayer.service.MusicService
 import denis.musicplayer.ui.main.MainActivity
+import denis.musicplayer.utils.BytesUtil
 import javax.inject.Singleton
 import javax.inject.Inject
 
@@ -37,12 +37,17 @@ class AppMusicManager
 
     private val TAG = "AppMusicManager"
 
+    companion object {
+        val KEY_ACTION = "key_action"
+    }
+
     private var channelId = "music_channel_id"
 
     private val mediaPlayer: MediaPlayer = MediaPlayer()
     private var tracks = ArrayList<Track>()
     private var currentTrackPosition = 0
     private var resumePosition = 0
+    private var action: Unit? = null
 
     private var musicService: AppMusicService? = null
     override fun setService(service: AppMusicService) {
@@ -64,20 +69,26 @@ class AppMusicManager
     }
 
     override fun playTrack() {
+        Log.d(TAG, "playTrack")
         mediaPlayer.stop()
         mediaPlayer.reset()
         mediaPlayer.setDataSource(tracks[currentTrackPosition].data)
         mediaPlayer.prepare()
         mediaPlayer.start()
-
-        Log.d(TAG, "$musicService")
-
         buildNotification()
     }
 
     override fun pauseTrack() {
+        Log.d(TAG, "pauseTrack")
         resumePosition = mediaPlayer.currentPosition
         mediaPlayer.pause()
+        buildNotification()
+    }
+
+    override fun resumeTrack() {
+        Log.d(TAG, "resumeTrack")
+        mediaPlayer.seekTo(resumePosition)
+        mediaPlayer.start()
         buildNotification()
     }
 
@@ -88,13 +99,16 @@ class AppMusicManager
     }
 
     override fun previousTrack() {
+        Log.d(TAG, "previousTrack")
         when(currentTrackPosition - 1) {
             -1 -> currentTrackPosition = tracks.size - 1
             else -> currentTrackPosition--
         }
+        playTrack()
     }
 
     override fun nextTrack() {
+        Log.d(TAG, "nextTrack")
         when(currentTrackPosition + 1) {
             tracks.size -> currentTrackPosition = 0
             else -> currentTrackPosition++
@@ -111,25 +125,26 @@ class AppMusicManager
         view.setTextViewText(R.id.trackTitle, currentTrack.title)
         view.setTextViewText(R.id.trackArtist, currentTrack.artist)
 
-//        val bitmap = BitmapFactory.decodeFile(dataManager.getAlbumImagePath(currentTrack.albumId))
-//
-//        when(bitmap) {
-//            null -> view.setImageViewBitmap(R.id.cover, bitmap)
-//            else -> view.setImageViewResource(R.id.cover, R.drawable.no_music)
-//        }
+        val bitmap = BitmapFactory.decodeFile(dataManager.getAlbumImagePath(currentTrack.albumId))
 
-//        view.setOnClickPendingIntent(R.id.previous, handleActions { previousTrack() })
-//        view.setOnClickPendingIntent(R.id.next, handleActions { previousTrack() })
-//        view.setOnClickPendingIntent(R.id.close, handleActions {  })
+        when(bitmap) {
+            null -> view.setImageViewBitmap(R.id.cover, bitmap)
+            else -> view.setImageViewResource(R.id.cover, R.drawable.no_music)
+        }
+
+
+        view.setOnClickPendingIntent(R.id.next, handleActions(MusicManagerAction.NEXT))
+        view.setOnClickPendingIntent(R.id.previous, handleActions(MusicManagerAction.PREVIOUS))
+        view.setOnClickPendingIntent(R.id.close, handleActions(MusicManagerAction.CLOSE))
 
         when(isPlaying()) {
             true -> {
                 view.setImageViewResource(R.id.playPause, R.drawable.pause)
-                //view.setOnClickPendingIntent(R.id.playPause, handleActions { pauseTrack() })
+                view.setOnClickPendingIntent(R.id.playPause, handleActions(MusicManagerAction.PAUSE))
             }
             false -> {
                 view.setImageViewResource(R.id.playPause, R.drawable.play)
-               // view.setOnClickPendingIntent(R.id.playPause, handleActions { playTrack() })
+                view.setOnClickPendingIntent(R.id.playPause, handleActions(MusicManagerAction.RESUME))
             }
         }
 
@@ -137,7 +152,7 @@ class AppMusicManager
         intent.action = Intent.ACTION_MAIN
         intent.addCategory(Intent.CATEGORY_LAUNCHER)
 
-        val pIntent = PendingIntent.getActivity(context, 0, intent, 0)
+        val pIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
 
         channelId = if(Build.VERSION.SDK_INT >=  Build.VERSION_CODES.O) createNotificationChannel() else ""
 
@@ -156,9 +171,12 @@ class AppMusicManager
 
     override fun isPlaying(): Boolean = mediaPlayer.isPlaying
 
-    private fun handleActions(action: () -> Unit): PendingIntent? {
-        action.invoke()
-        return null
+    private fun handleActions(action: MusicManagerAction): PendingIntent? {
+        Log.d(TAG, "PUT ACTION : $action")
+        val intent = Intent(context, AppMusicService::class.java)
+        val bundle = BytesUtil.toByteArray(action)
+        intent.putExtra(KEY_ACTION, bundle)
+        return PendingIntent.getService(context, action.value, intent, 0)
     }
 
     override fun getCurrentTrack(): Track = tracks[currentTrackPosition]
@@ -169,8 +187,8 @@ class AppMusicManager
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun createNotificationChannel(): String {
-        val channelId = "my_service"
-        val channelName = "My Background Service"
+        val channelId = "android_music_service"
+        val channelName = "Android Music Service"
         val chan = NotificationChannel(channelId,
                 channelName, NotificationManager.IMPORTANCE_HIGH)
         chan.lightColor = Color.BLUE
@@ -181,4 +199,24 @@ class AppMusicManager
         return channelId
     }
 
+    override fun makeAction(action: MusicManagerAction) {
+        Log.d(TAG, "makeAction : $action")
+        when(action) {
+            MusicManagerAction.PLAY -> playTrack()
+            MusicManagerAction.PAUSE -> pauseTrack()
+            MusicManagerAction.PREVIOUS -> previousTrack()
+            MusicManagerAction.NEXT -> nextTrack()
+            MusicManagerAction.RESUME -> resumeTrack()
+            else -> closeMusicPlayer()
+        }
+    }
+}
+
+enum class MusicManagerAction(val value: Int) {
+    PLAY(0),
+    PAUSE(1),
+    RESUME(2),
+    PREVIOUS(3),
+    NEXT(4),
+    CLOSE(5)
 }

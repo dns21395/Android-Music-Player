@@ -3,17 +3,12 @@ package denis.musicplayer.ui.main.category
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.support.v4.app.Fragment
-import android.util.Log
 import denis.musicplayer.R
 import denis.musicplayer.data.media.model.Track
 import denis.musicplayer.ui.main.base.MainBaseActivity
 import denis.musicplayer.ui.main.category.categoryfragment.CategoryFragment
 import denis.musicplayer.ui.main.select.SelectFragment
-import denis.musicplayer.ui.main.track.TrackFragment
-import denis.musicplayer.ui.main.track.TrackMvpPresenter
-import denis.musicplayer.ui.main.track.TrackMvpView
 import denis.musicplayer.ui.main.updateplaylist.UpdatePlaylistDialog
 import denis.musicplayer.ui.player.fragment.PlayerFragment
 import denis.musicplayer.utils.BytesUtil
@@ -93,7 +88,7 @@ class CategoryActivity : MainBaseActivity(), CategoryMvpView {
 
         return when(objects) {
             null -> ArrayList()
-            else -> BytesUtil.toObject(objects)
+            else -> BytesUtil.toObjectArray(objects)
         }
     }
 }
