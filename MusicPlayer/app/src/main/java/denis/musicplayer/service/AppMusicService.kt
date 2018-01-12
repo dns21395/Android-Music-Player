@@ -92,6 +92,7 @@ class AppMusicService : Service(), MusicService {
     }
 
     override fun stopService() {
+        AppMusicService.stop(context)
         stopForeground(true)
         onDestroy()
     }
