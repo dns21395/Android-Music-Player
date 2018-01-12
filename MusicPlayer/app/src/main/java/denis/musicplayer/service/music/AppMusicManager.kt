@@ -51,6 +51,7 @@ class AppMusicManager
     private var action: Unit? = null
 
     private val currentTrackBehaviour: BehaviorSubject<Track> = BehaviorSubject.create()
+    private val actionBehaviour: BehaviorSubject<MusicManagerAction> = BehaviorSubject.create()
 
     private var musicService: AppMusicService? = null
     override fun setService(service: AppMusicService) {
@@ -73,6 +74,8 @@ class AppMusicManager
 
     override fun getCurrentTrackBehaviour(): BehaviorSubject<Track> = currentTrackBehaviour
 
+    override fun actionBehaviour(): BehaviorSubject<MusicManagerAction> = actionBehaviour
+
     override fun playTrack() {
         Log.d(TAG, "playTrack")
         mediaPlayer.stop()
@@ -81,6 +84,7 @@ class AppMusicManager
         mediaPlayer.prepare()
         mediaPlayer.start()
         currentTrackBehaviour.onNext(tracks[currentTrackPosition])
+        actionBehaviour.onNext(MusicManagerAction.PLAY)
         buildNotification()
     }
 
@@ -88,6 +92,7 @@ class AppMusicManager
         Log.d(TAG, "pauseTrack")
         resumePosition = mediaPlayer.currentPosition
         mediaPlayer.pause()
+        actionBehaviour.onNext(MusicManagerAction.PAUSE)
         buildNotification()
     }
 
@@ -95,6 +100,7 @@ class AppMusicManager
         Log.d(TAG, "resumeTrack")
         mediaPlayer.seekTo(resumePosition)
         mediaPlayer.start()
+        actionBehaviour.onNext(MusicManagerAction.PLAY)
         buildNotification()
     }
 
@@ -121,8 +127,6 @@ class AppMusicManager
         }
         playTrack()
     }
-
-
 
     override fun buildNotification() {
         val view = RemoteViews(context.packageName, R.layout.notification_music_player)
@@ -204,6 +208,15 @@ class AppMusicManager
         val service = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         service.createNotificationChannel(chan)
         return channelId
+    }
+
+    override fun callAction() {
+        if(tracks.size > 0) {
+            when (isPlaying()) {
+                true -> pauseTrack()
+                false -> resumeTrack()
+            }
+        }
     }
 
     override fun makeAction(action: MusicManagerAction) {

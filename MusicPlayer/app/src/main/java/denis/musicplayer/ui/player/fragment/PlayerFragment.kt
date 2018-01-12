@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import com.squareup.picasso.Picasso
 import denis.musicplayer.R
 import denis.musicplayer.data.media.model.Track
+import denis.musicplayer.service.music.MusicManagerAction
 import denis.musicplayer.ui.base.BaseFragment
 import denis.musicplayer.utils.BytesUtil
 import denis.musicplayer.utils.ImageTransformToCircle
@@ -37,17 +38,18 @@ class PlayerFragment : BaseFragment(), PlayerFragmentMvpView {
     @Inject lateinit var presenter: PlayerFragmentMvpPresenter<PlayerFragmentMvpView>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
         activityComponent?.inject(this)
         presenter.onAttach(this)
+        super.onViewCreated(view, savedInstanceState)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
             inflater.inflate(R.layout.fragment_player, container, false)
 
     override fun setUp(view: View?) {
-
+        playPause.setOnClickListener {
+            presenter.callAction()
+        }
     }
 
     override fun updateFragment(track: Track) {
@@ -58,23 +60,36 @@ class PlayerFragment : BaseFragment(), PlayerFragmentMvpView {
     }
 
     override fun updateCover(coverPath: String?) {
-        when(coverPath) {
-            null -> {
-                Picasso.with(context)
-                        .load(Uri.parse("android.resource://gabyshev.denis.musicplayer/drawable/no_music"))
-                        .transform(ImageTransformToCircle())
-                        .resize(96, 96)
-                        .centerCrop()
-                        .into(cover)
+        if(cover != null) {
+            when (coverPath) {
+                null -> {
+                    Picasso.with(context)
+                            .load(Uri.parse("android.resource://gabyshev.denis.musicplayer/drawable/no_music"))
+                            .transform(ImageTransformToCircle())
+                            .resize(96, 96)
+                            .centerCrop()
+                            .into(cover)
+                }
+                else -> {
+                    Picasso.with(context)
+                            .load(Uri.fromFile(File(coverPath)))
+                            .transform(ImageTransformToCircle())
+                            .resize(96, 96)
+                            .centerCrop()
+                            .into(cover)
+                }
             }
-            else -> {
-                Picasso.with(context)
-                        .load(Uri.fromFile(File(coverPath)))
-                        .transform(ImageTransformToCircle())
-                        .resize(96, 96)
-                        .centerCrop()
-                        .into(cover)
+        }
+    }
+
+    override fun updateAction(action: MusicManagerAction) {
+        if(playPause != null) {
+            when(action) {
+                MusicManagerAction.PLAY -> playPause.setImageResource(R.drawable.pause)
+                else -> playPause.setImageResource(R.drawable.play)
+
             }
+
         }
     }
 }

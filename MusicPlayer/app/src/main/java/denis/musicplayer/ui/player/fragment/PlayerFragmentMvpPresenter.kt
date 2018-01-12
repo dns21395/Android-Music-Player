@@ -7,4 +7,8 @@ import denis.musicplayer.ui.base.MvpPresenter
  */
 interface PlayerFragmentMvpPresenter<V : PlayerFragmentMvpView> : MvpPresenter<V> {
     fun updateFragment()
+
+    fun actionCondition()
+
+    fun callAction()
 }

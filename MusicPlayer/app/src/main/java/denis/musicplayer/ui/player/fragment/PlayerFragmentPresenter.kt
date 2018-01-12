@@ -30,6 +30,7 @@ class PlayerFragmentPresenter<V : PlayerFragmentMvpView>
     override fun onAttach(mvpView: V) {
         super.onAttach(mvpView)
         updateFragment()
+        actionCondition()
     }
 
     override fun onDetach() {
@@ -47,6 +48,19 @@ class PlayerFragmentPresenter<V : PlayerFragmentMvpView>
         )
     }
 
+    override fun actionCondition() {
+        compositeDisposable.add(
+                musicManager.actionBehaviour()
+                        .subscribe {
+                            mvpView?.updateAction(it)
+                        }
+        )
+    }
+
+    override fun callAction() {
+        musicManager.callAction()
+    }
+
     private fun getTrackImage(albumID: Long) {
         compositeDisposable.add(
                 Observable.fromCallable {
@@ -58,5 +72,7 @@ class PlayerFragmentPresenter<V : PlayerFragmentMvpView>
                         }, {mvpView?.updateCover(null)})
         )
     }
+
+
 
 }
