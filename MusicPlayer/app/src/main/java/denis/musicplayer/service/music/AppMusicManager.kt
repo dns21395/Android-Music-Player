@@ -107,7 +107,6 @@ class AppMusicManager
     override fun updateTracks(tracks: ArrayList<Track>, currentTrackPosition: Int) {
         this.tracks = tracks
         this.currentTrackPosition = currentTrackPosition
-        playTrack()
     }
 
     override fun previousTrack() {
@@ -138,8 +137,8 @@ class AppMusicManager
         val bitmap = BitmapFactory.decodeFile(dataManager.getAlbumImagePath(currentTrack.albumId))
 
         when(bitmap) {
-            null -> view.setImageViewBitmap(R.id.cover, bitmap)
-            else -> view.setImageViewResource(R.id.cover, R.drawable.no_music)
+            null -> view.setImageViewResource(R.id.cover, R.drawable.no_music)
+            else -> view.setImageViewBitmap(R.id.cover, bitmap)
         }
 
 

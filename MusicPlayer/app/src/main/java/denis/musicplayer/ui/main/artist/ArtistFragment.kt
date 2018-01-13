@@ -31,14 +31,15 @@ class ArtistFragment : MainBaseFragment<ArtistAdapter,
 
     @Inject lateinit var presenter: ArtistMvpPresenter<ArtistMvpView>
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_main, container, false)
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         activityComponent?.inject(this)
         presenter.onAttach(this)
-
-        return view
+        super.onViewCreated(view, savedInstanceState)
     }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
+            = inflater.inflate(R.layout.fragment_main, container, false)
+
 
     override fun setUp(view: View?) {
         recyclerView.adapter = adapter

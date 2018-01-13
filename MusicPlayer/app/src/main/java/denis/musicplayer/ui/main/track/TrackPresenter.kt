@@ -12,6 +12,7 @@ import denis.musicplayer.ui.main.base.MainRxBus
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import denis.musicplayer.ui.main.base.MainEnumRxBus.*
+import denis.musicplayer.utils.CommonUtils
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
@@ -31,15 +32,15 @@ class TrackPresenter<V : TrackMvpView>
 
     override fun onItemClick(position: Int) {
         compositeDisposable.add(Observable.fromCallable {
-            AppMusicService.start(context)
+            musicManager.updateTracks(getArray(), position)
         }.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnComplete {
-                    musicManager.updateTracks(getArray(), position)
-                }
-                .subscribe ())
-
-
+                .subscribe {
+                    when(CommonUtils.isRunning(context, AppMusicService::class.java)) {
+                        true -> musicManager.playTrack()
+                        false -> AppMusicService.start(context)
+                    }
+                })
     }
 
     override fun getItems() {

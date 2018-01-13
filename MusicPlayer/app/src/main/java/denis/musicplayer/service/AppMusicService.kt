@@ -62,6 +62,7 @@ class AppMusicService : Service(), MusicService {
 
         applicationComponent.inject(this)
         musicManager.setService(this)
+        musicManager.playTrack()
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {

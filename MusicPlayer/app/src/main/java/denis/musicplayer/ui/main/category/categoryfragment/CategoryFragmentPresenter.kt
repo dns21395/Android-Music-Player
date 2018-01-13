@@ -11,6 +11,7 @@ import denis.musicplayer.service.music.MusicManager
 import denis.musicplayer.ui.main.base.MainBasePresenter
 import denis.musicplayer.ui.main.base.MainRxBus
 import denis.musicplayer.ui.main.category.CategoryMvpPresenter
+import denis.musicplayer.utils.CommonUtils
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -32,15 +33,15 @@ class CategoryFragmentPresenter<V: CategoryFragmentMvpView>
 
     override fun onItemClick(position: Int) {
         compositeDisposable.add(Observable.fromCallable {
-            AppMusicService.start(context)
+            musicManager.updateTracks(getArray(), position)
         }.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnComplete {
-                    musicManager.updateTracks(getArray(), position)
-                }
-                .subscribe ())
-
-
+                .subscribe {
+                    when(CommonUtils.isRunning(context, AppMusicService::class.java)) {
+                        true -> musicManager.playTrack()
+                        false -> AppMusicService.start(context)
+                    }
+                })
     }
 
     override fun getItems() {
