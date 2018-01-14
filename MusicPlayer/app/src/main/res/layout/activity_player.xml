@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ImageView
+        android:id="@+id/background"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <ImageView
+        android:alpha="0.4"
+        android:background="@android:color/black"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <ImageView
+        android:id="@+id/cover"
+        tools:background="@drawable/no_music"
+        android:layout_width="192dp"
+        android:layout_height="192dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/title"/>
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="American Idiot"
+        style="@style/track_title"
+        android:layout_marginTop="16dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintTop_toBottomOf="@id/cover"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/artist"/>
+
+    <TextView
+        android:id="@+id/artist"
+        tools:text="Green Day"
+        style="@style/track_artist"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:layout_marginTop="4dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/playPause"/>
+
+    <ImageView
+        android:id="@+id/playPause"
+        android:foreground="@drawable/ripple"
+        android:tint="@android:color/white"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/play"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/artist"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <ImageView
+        android:id="@+id/previous"
+        android:foreground="@drawable/ripple"
+        android:tint="@android:color/white"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/skip_previous"
+        android:layout_marginEnd="6dp"
+        app:layout_constraintTop_toTopOf="@id/playPause"
+        app:layout_constraintEnd_toStartOf="@id/playPause"
+        app:layout_constraintBottom_toBottomOf="@id/playPause"/>
+
+    <ImageView
+        android:id="@+id/next"
+        android:foreground="@drawable/ripple"
+        android:tint="@android:color/white"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/skip_next"
+        android:layout_marginStart="6dp"
+        app:layout_constraintTop_toTopOf="@+id/playPause"
+        app:layout_constraintStart_toEndOf="@id/playPause"
+        app:layout_constraintBottom_toBottomOf="@id/playPause"/>
+
+
+
+
+
+</android.support.constraint.ConstraintLayout>

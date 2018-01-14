@@ -16,6 +16,7 @@ import denis.musicplayer.ui.main.select.SelectFragment
 import denis.musicplayer.ui.main.track.TrackFragment
 import denis.musicplayer.ui.main.updateplaylist.UpdatePlaylistDialog
 import denis.musicplayer.ui.permission.PermissionActivity
+import denis.musicplayer.ui.player.PlayerActivity
 import denis.musicplayer.ui.player.fragment.PlayerFragment
 import denis.musicplayer.ui.playlist.PlaylistActivity
 import denis.musicplayer.ui.splash.SplashActivity
@@ -32,6 +33,7 @@ interface ActivityComponent {
     fun inject(permissionActivity: PermissionActivity)
     fun inject(playlistActivity: PlaylistActivity)
     fun inject(categoryActivity: CategoryActivity)
+    fun inject(playerActivity: PlayerActivity)
 
     // Fragment
     fun inject(mainContentFragment: MainContentFragment)

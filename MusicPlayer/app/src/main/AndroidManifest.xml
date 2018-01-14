@@ -29,6 +29,8 @@
             android:screenOrientation="portrait" />
         <activity android:name=".ui.main.category.CategoryActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".ui.player.PlayerActivity"
+            android:screenOrientation="portrait" />
         <service android:name=".service.AppMusicService" />
         <meta-data
             android:name="preloaded_fonts"

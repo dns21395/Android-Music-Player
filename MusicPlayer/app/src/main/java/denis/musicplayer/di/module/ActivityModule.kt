@@ -54,6 +54,9 @@ import denis.musicplayer.ui.main.updateplaylist.UpdatePlaylistPresenter
 import denis.musicplayer.ui.permission.PermissionMvpPresenter
 import denis.musicplayer.ui.permission.PermissionMvpView
 import denis.musicplayer.ui.permission.PermissionPresenter
+import denis.musicplayer.ui.player.PlayerActivityMvpPresenter
+import denis.musicplayer.ui.player.PlayerActivityMvpView
+import denis.musicplayer.ui.player.PlayerActivityPresenter
 import denis.musicplayer.ui.player.fragment.PlayerFragmentMvpPresenter
 import denis.musicplayer.ui.player.fragment.PlayerFragmentMvpView
 import denis.musicplayer.ui.player.fragment.PlayerFragmentPresenter
@@ -105,6 +108,10 @@ class ActivityModule(val activity: AppCompatActivity) {
    @Provides
    @PerActivity
    fun provideCategoryPresenter(presenter: CategoryPresenter<CategoryMvpView>): CategoryMvpPresenter<CategoryMvpView> = presenter
+
+    @Provides
+    @PerActivity
+    fun providePlayerActivityPresenter(presenter: PlayerActivityPresenter<PlayerActivityMvpView>): PlayerActivityMvpPresenter<PlayerActivityMvpView> = presenter
 
     // Fragment
 
