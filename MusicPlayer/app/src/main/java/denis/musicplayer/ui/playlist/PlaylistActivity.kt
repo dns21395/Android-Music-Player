@@ -75,6 +75,7 @@ class PlaylistActivity : BaseActivity(), PlaylistMvpView, PlaylistAdapter.Callba
         recyclerView.adapter = adapter
         adapter.callback = this
         adapter.setItemTouchHelper(recyclerView)
+        adapter.presenter = presenter
     }
 
     override fun onPlaylistDeleted() {

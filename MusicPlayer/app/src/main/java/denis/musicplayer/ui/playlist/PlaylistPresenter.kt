@@ -3,6 +3,8 @@ package denis.musicplayer.ui.playlist
 import android.content.Context
 import android.util.Log
 import denis.musicplayer.data.DataManager
+import denis.musicplayer.data.media.model.Track
+import denis.musicplayer.data.playlist.model.Playlist
 import denis.musicplayer.di.ActivityContext
 import denis.musicplayer.ui.base.BasePresenter
 import io.reactivex.Observable
@@ -10,6 +12,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.toast
+import java.util.*
 import javax.inject.Inject
 
 /**
@@ -23,9 +26,15 @@ class PlaylistPresenter<V: PlaylistMvpView>
 
     private val TAG = "PlaylistPresenter"
 
-    override fun onAttach(mvpView: V) {
-        super.onAttach(mvpView)
+    private var array = ArrayList<Track>()
+
+    override fun updateArray(array: ArrayList<Track>) {
+        this.array = array
     }
+
+    override fun getTrackByPosition(position: Int): Track = array[position]
+
+    override fun getArraySize(): Int = array.size
 
     override fun getTracks(id: Long) {
         compositeDisposable.add(
@@ -37,6 +46,14 @@ class PlaylistPresenter<V: PlaylistMvpView>
                             mvpView?.updateArray(it)
                         }
         )
+    }
+
+    override fun swapArrayItems(oldPos: Int, newPos: Int) {
+        Collections.swap(array, oldPos, newPos)
+    }
+
+    override fun removeItemAt(position: Int) {
+        array.removeAt(position)
     }
 
     override fun deletePlaylist(id: Long) {

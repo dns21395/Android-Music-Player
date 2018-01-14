@@ -15,12 +15,12 @@ import java.util.*
  * Created by denis on 07/01/2018.
  */
 class PlaylistAdapter(val context: Context) : DragableAdapter<PlaylistViewHolder>() {
-    var array = ArrayList<Track>()
+    lateinit var presenter: PlaylistMvpPresenter<PlaylistMvpView>
 
     lateinit var callback: Callback
 
     override fun onBindViewHolder(holder: PlaylistViewHolder, position: Int) {
-        holder.onBind(array[position])
+        holder.onBind(presenter.getTrackByPosition(position))
 
         holder.itemView.reorder.setOnTouchListener { view, motionEvent ->
             if(motionEvent.action == MotionEvent.ACTION_DOWN) onStartDragListener.onStartDrag(holder)
@@ -28,26 +28,26 @@ class PlaylistAdapter(val context: Context) : DragableAdapter<PlaylistViewHolder
         }
     }
 
-    override fun getItemCount(): Int = array.size
+    override fun getItemCount(): Int = presenter.getArraySize()
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): PlaylistViewHolder =
             PlaylistViewHolder(LayoutInflater.from(context).inflate(R.layout.holder_moveable_playlist, parent, false))
 
     fun updateArray(tracks: ArrayList<Track>) {
-        array = tracks
+        presenter.updateArray(tracks)
         notifyDataSetChanged()
     }
 
     override fun onItemMove(oldPos: Int, newPos: Int): Boolean {
         callback.onItemMove(oldPos, newPos)
-        Collections.swap(array, oldPos, newPos)
+        presenter.swapArrayItems(oldPos, newPos)
         notifyItemMoved(oldPos, newPos)
         return true
     }
 
     override fun onItemSwipe(pos: Int) {
-        callback.onItemSwipe(array[pos].id)
-        array.removeAt(pos)
+        callback.onItemSwipe(presenter.getTrackByPosition(pos).id)
+        presenter.removeItemAt(pos)
         notifyItemRemoved(pos)
     }
 
