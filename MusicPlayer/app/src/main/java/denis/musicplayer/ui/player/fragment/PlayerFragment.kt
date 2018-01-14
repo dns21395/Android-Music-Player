@@ -82,14 +82,13 @@ class PlayerFragment : BaseFragment(), PlayerFragmentMvpView {
         }
     }
 
-    override fun updateAction(action: MusicManagerAction) {
+
+    override fun updateAction(isMusicPlaying: Boolean) {
         if(playPause != null) {
-            when(action) {
-                MusicManagerAction.PLAY -> playPause.setImageResource(R.drawable.pause)
-                else -> playPause.setImageResource(R.drawable.play)
-
+            when(isMusicPlaying) {
+                true -> playPause.setImageResource(R.drawable.pause)
+                false -> playPause.setImageResource(R.drawable.play)
             }
-
         }
     }
 }

@@ -8,6 +8,7 @@ import denis.musicplayer.data.media.model.Track
 import denis.musicplayer.di.ActivityContext
 import denis.musicplayer.service.AppMusicService
 import denis.musicplayer.service.music.MusicManager
+import denis.musicplayer.service.music.MusicManagerAction
 import denis.musicplayer.ui.base.BasePresenter
 import denis.musicplayer.ui.base.MvpView
 import denis.musicplayer.utils.CommonUtils
@@ -61,7 +62,7 @@ class PlayerFragmentPresenter<V : PlayerFragmentMvpView>
 
     override fun callAction() {
         when (CommonUtils.isRunning(context, AppMusicService::class.java)) {
-            true -> musicManager.callAction()
+            true -> musicManager.resumePause()
             false -> AppMusicService.start(context)
         }
     }

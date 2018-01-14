@@ -11,6 +11,7 @@ import denis.musicplayer.service.music.MusicManager
 import denis.musicplayer.ui.main.base.MainBasePresenter
 import denis.musicplayer.ui.main.base.MainRxBus
 import denis.musicplayer.ui.main.category.CategoryMvpPresenter
+import denis.musicplayer.ui.player.PlayerActivity
 import denis.musicplayer.utils.CommonUtils
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -37,6 +38,7 @@ class CategoryFragmentPresenter<V: CategoryFragmentMvpView>
         }.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
+                    context.startActivity(PlayerActivity.getStartIntent(context))
                     when(CommonUtils.isRunning(context, AppMusicService::class.java)) {
                         true -> musicManager.playTrack()
                         false -> AppMusicService.start(context)

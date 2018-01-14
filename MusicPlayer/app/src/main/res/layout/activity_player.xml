@@ -38,7 +38,7 @@
         app:layout_constraintBottom_toTopOf="@id/title"/>
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/trackTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="American Idiot"
@@ -51,7 +51,7 @@
         app:layout_constraintBottom_toTopOf="@id/artist"/>
 
     <TextView
-        android:id="@+id/artist"
+        android:id="@+id/trackArtist"
         tools:text="Green Day"
         style="@style/track_artist"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -99,9 +99,5 @@
         app:layout_constraintTop_toTopOf="@+id/playPause"
         app:layout_constraintStart_toEndOf="@id/playPause"
         app:layout_constraintBottom_toBottomOf="@id/playPause"/>
-
-
-
-
 
 </android.support.constraint.ConstraintLayout>

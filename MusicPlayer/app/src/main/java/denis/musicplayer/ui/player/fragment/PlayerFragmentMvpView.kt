@@ -12,5 +12,5 @@ interface PlayerFragmentMvpView : MvpView {
 
     fun updateCover(coverPath: String?)
 
-    fun updateAction(action: MusicManagerAction)
+    fun updateAction(isMusicPlaying: Boolean)
 }

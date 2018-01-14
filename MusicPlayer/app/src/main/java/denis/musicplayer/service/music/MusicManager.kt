@@ -14,6 +14,8 @@ interface MusicManager {
     fun pauseTrack()
     fun resumeTrack()
 
+    fun resumePause()
+
     fun updateTracks(tracks: ArrayList<Track>, currentTrackPosition: Int)
 
     fun getCurrentTrack(): Track
@@ -29,8 +31,5 @@ interface MusicManager {
     fun makeAction(action: MusicManagerAction)
 
     fun getCurrentTrackBehaviour(): BehaviorSubject<Track>
-    fun actionBehaviour(): BehaviorSubject<MusicManagerAction>
-
-    fun callAction()
-
+    fun actionBehaviour(): BehaviorSubject<Boolean>
 }

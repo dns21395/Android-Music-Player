@@ -12,6 +12,7 @@ import denis.musicplayer.ui.main.base.MainRxBus
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import denis.musicplayer.ui.main.base.MainEnumRxBus.*
+import denis.musicplayer.ui.player.PlayerActivity
 import denis.musicplayer.utils.CommonUtils
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -36,6 +37,7 @@ class TrackPresenter<V : TrackMvpView>
         }.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
+                    context.startActivity(PlayerActivity.getStartIntent(context))
                     when(CommonUtils.isRunning(context, AppMusicService::class.java)) {
                         true -> musicManager.playTrack()
                         false -> AppMusicService.start(context)
