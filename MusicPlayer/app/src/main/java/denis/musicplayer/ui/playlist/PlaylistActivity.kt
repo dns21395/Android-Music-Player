@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager
 import denis.musicplayer.R
 import denis.musicplayer.data.media.model.Track
 import denis.musicplayer.ui.base.BaseActivity
+import denis.musicplayer.ui.player.fragment.PlayerFragment
 import kotlinx.android.synthetic.main.activity_playlist.*
 import org.jetbrains.anko.toast
 import javax.inject.Inject
@@ -49,6 +50,7 @@ class PlaylistActivity : BaseActivity(), PlaylistMvpView {
         getArguments()
         setButtons()
         setRecyclerView()
+        supportFragmentManager.beginTransaction().replace(R.id.bottomFrame, PlayerFragment.newInstance()).commit()
     }
 
     private fun setButtons() {
