@@ -175,6 +175,7 @@ class AppMusicManager
     }
 
     override fun closeMusicPlayer() {
+        actionBehaviour.onNext(MusicManagerAction.PAUSE)
         mediaPlayer.stop()
         musicService?.stopService()
     }
