@@ -2,6 +2,7 @@ package denis.musicplayer.ui.player
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import com.squareup.picasso.Picasso
@@ -10,6 +11,8 @@ import denis.musicplayer.data.media.model.Track
 import denis.musicplayer.service.music.MusicManagerAction
 import denis.musicplayer.ui.base.BaseActivity
 import denis.musicplayer.utils.ImageTransformToCircle
+import jp.wasabeef.blurry.Blurry
+import kotlinx.android.synthetic.main.activity_category.*
 import kotlinx.android.synthetic.main.activity_player.*
 import java.io.File
 import javax.inject.Inject
@@ -52,18 +55,14 @@ class PlayerActivity : BaseActivity(), PlayerActivityMvpView {
                 null -> {
                     Picasso.with(applicationContext)
                             .load(Uri.parse("android.resource://gabyshev.denis.musicplayer/drawable/no_music"))
-                            .transform(ImageTransformToCircle())
-                            .resize(96, 96)
-                            .centerCrop()
                             .into(cover)
                 }
                 else -> {
                     Picasso.with(applicationContext)
                             .load(Uri.fromFile(File(coverPath)))
-                            .transform(ImageTransformToCircle())
-                            .resize(96, 96)
-                            .centerCrop()
                             .into(cover)
+                    val coverImage = BitmapFactory.decodeFile(coverPath)
+                    Blurry.with(applicationContext).from(coverImage).into(background)
                 }
             }
         }
