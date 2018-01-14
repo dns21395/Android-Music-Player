@@ -80,7 +80,10 @@ open class MainBasePresenter<V: MainBaseFragmentMvpView<T>, T: Any>
     override fun removeSelectedItem(item : T) {
         selectedArray.remove(item)
 
-        if(getSelectedArrayCount() == 0) mvpView?.hideSelectFragment()
+        when(getSelectedArrayCount()) {
+            0 -> mvpView?.hideSelectFragment()
+            else -> mvpView?.updateCountSelectFragment(getSelectedArrayCount())
+        }
     }
 
     override fun clearSelectedArray() {

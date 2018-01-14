@@ -14,7 +14,6 @@ import denis.musicplayer.ui.base.BaseFragment
 import denis.musicplayer.utils.BytesUtil
 import denis.musicplayer.utils.ImageTransformToCircle
 import kotlinx.android.synthetic.main.fragment_player.*
-import kotlinx.android.synthetic.main.holder_album.view.*
 import java.io.File
 import javax.inject.Inject
 
@@ -50,6 +49,9 @@ class PlayerFragment : BaseFragment(), PlayerFragmentMvpView {
         playPause.setOnClickListener {
             presenter.callAction()
         }
+        Picasso.with(context)
+                .load(Uri.parse("android.resource://gabyshev.denis.musicplayer/drawable/no_music"))
+                .into(cover)
     }
 
     override fun updateFragment(track: Track) {
