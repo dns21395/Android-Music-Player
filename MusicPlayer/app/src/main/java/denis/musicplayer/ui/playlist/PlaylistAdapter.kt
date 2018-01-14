@@ -17,14 +17,16 @@ import java.util.*
 class PlaylistAdapter(val context: Context) : DragableAdapter<PlaylistViewHolder>() {
     lateinit var presenter: PlaylistMvpPresenter<PlaylistMvpView>
 
-    lateinit var callback: Callback
-
     override fun onBindViewHolder(holder: PlaylistViewHolder, position: Int) {
         holder.onBind(presenter.getTrackByPosition(position))
 
         holder.itemView.reorder.setOnTouchListener { view, motionEvent ->
             if(motionEvent.action == MotionEvent.ACTION_DOWN) onStartDragListener.onStartDrag(holder)
             false
+        }
+
+        holder.itemView.setOnClickListener {
+            presenter.onItemClick(position)
         }
     }
 
@@ -39,22 +41,15 @@ class PlaylistAdapter(val context: Context) : DragableAdapter<PlaylistViewHolder
     }
 
     override fun onItemMove(oldPos: Int, newPos: Int): Boolean {
-        callback.onItemMove(oldPos, newPos)
+        presenter.onItemMove(oldPos, newPos)
         presenter.swapArrayItems(oldPos, newPos)
         notifyItemMoved(oldPos, newPos)
         return true
     }
 
     override fun onItemSwipe(pos: Int) {
-        callback.onItemSwipe(presenter.getTrackByPosition(pos).id)
+        presenter.onItemSwipe(presenter.getTrackByPosition(pos).id)
         presenter.removeItemAt(pos)
         notifyItemRemoved(pos)
     }
-
-    interface Callback {
-        fun onItemMove(oldPos: Int, newPos: Int)
-        fun onItemSwipe(trackId: Long)
-    }
-
-
 }

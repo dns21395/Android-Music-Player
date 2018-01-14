@@ -14,7 +14,7 @@ import javax.inject.Inject
 /**
  * Created by denis on 04/01/2018.
  */
-class PlaylistActivity : BaseActivity(), PlaylistMvpView, PlaylistAdapter.Callback {
+class PlaylistActivity : BaseActivity(), PlaylistMvpView {
     companion object {
         val CODE_PLAYLIST_DELETED = 48
         val KEY_DELETED = "key_deleted"
@@ -73,7 +73,6 @@ class PlaylistActivity : BaseActivity(), PlaylistMvpView, PlaylistAdapter.Callba
     private fun setRecyclerView() {
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = adapter
-        adapter.callback = this
         adapter.setItemTouchHelper(recyclerView)
         adapter.presenter = presenter
     }
@@ -92,12 +91,5 @@ class PlaylistActivity : BaseActivity(), PlaylistMvpView, PlaylistAdapter.Callba
         adapter.updateArray(array)
     }
 
-    override fun onItemMove(oldPos: Int, newPos: Int) {
-        presenter.onItemMove(id, oldPos, newPos)
-    }
-
-    override fun onItemSwipe(trackId: Long) {
-        presenter.onItemSwipe(id, trackId)
-    }
 }
 

@@ -1,20 +1,21 @@
 package denis.musicplayer.ui.playlist
 
 import denis.musicplayer.data.media.model.Track
-import denis.musicplayer.data.playlist.model.Playlist
 import denis.musicplayer.ui.base.MvpPresenter
 
 /**
  * Created by denis on 04/01/2018.
  */
 interface PlaylistMvpPresenter<V: PlaylistMvpView> : MvpPresenter<V> {
+    fun setPlaylistId(id: Long)
+
     fun deletePlaylist(id: Long)
 
     fun getTracks(id: Long)
 
-    fun onItemMove(playlistId: Long, oldPos: Int, newPos: Int)
+    fun onItemMove(oldPos: Int, newPos: Int)
 
-    fun onItemSwipe(playlistId: Long, trackId: Long)
+    fun onItemSwipe(trackId: Long)
 
     // Array
 
@@ -27,6 +28,8 @@ interface PlaylistMvpPresenter<V: PlaylistMvpView> : MvpPresenter<V> {
     fun swapArrayItems(oldPos: Int, newPos: Int)
 
     fun removeItemAt(position: Int)
+
+    fun onItemClick(position: Int)
 
 
 }
