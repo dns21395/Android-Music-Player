@@ -30,12 +30,12 @@ class TrackPresenter<V : TrackMvpView>
     private val TAG = "TrackPresenter"
 
     override fun onItemClick(position: Int) {
-        context.startActivity(PlayerActivity.getStartIntent(context))
         compositeDisposable.add(Observable.fromCallable {
             musicManager.updateTracks(getArray(), position)
         }.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
+                    mvpView?.openPlayerActivity()
                     when(CommonUtils.isRunning(context, AppMusicService::class.java)) {
                         true -> musicManager.playTrack()
                         false -> AppMusicService.start(context)

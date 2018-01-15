@@ -35,7 +35,7 @@ class CategoryFragmentPresenter<V: CategoryFragmentMvpView>
         }.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
-                    context.startActivity(PlayerActivity.getStartIntent(context))
+                    mvpView?.openPlayerActivity()
                     when(CommonUtils.isRunning(context, AppMusicService::class.java)) {
                         true -> musicManager.playTrack()
                         false -> AppMusicService.start(context)

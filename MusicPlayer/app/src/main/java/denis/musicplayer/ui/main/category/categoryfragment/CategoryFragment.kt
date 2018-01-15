@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import denis.musicplayer.R
 import denis.musicplayer.data.media.model.Track
 import denis.musicplayer.ui.main.base.MainBaseFragment
+import denis.musicplayer.ui.player.PlayerActivity
 import denis.musicplayer.utils.BytesUtil
 import kotlinx.android.synthetic.main.fragment_main.*
 import javax.inject.Inject
@@ -59,6 +60,13 @@ class CategoryFragment : MainBaseFragment<CategoryFragmentAdapter,
             presenter.updateArray(tracks)
             presenter.getItems()
 
+        }
+    }
+
+    override fun openPlayerActivity() {
+        if(context != null) {
+            startActivity(PlayerActivity.getStartIntent(context!!))
+            activity?.overridePendingTransition(R.anim.enter, R.anim.exit)
         }
     }
 }

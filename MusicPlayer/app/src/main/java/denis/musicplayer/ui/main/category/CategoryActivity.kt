@@ -10,6 +10,7 @@ import denis.musicplayer.ui.main.base.MainBaseActivity
 import denis.musicplayer.ui.main.category.categoryfragment.CategoryFragment
 import denis.musicplayer.ui.main.select.SelectFragment
 import denis.musicplayer.ui.main.updateplaylist.UpdatePlaylistDialog
+import denis.musicplayer.ui.player.PlayerActivity
 import denis.musicplayer.ui.player.fragment.PlayerFragment
 import denis.musicplayer.utils.BytesUtil
 import kotlinx.android.synthetic.main.activity_category.*
@@ -87,4 +88,6 @@ class CategoryActivity : MainBaseActivity(), CategoryMvpView {
     }
 
     private fun getBottomFrameLayout(): Fragment = supportFragmentManager.findFragmentById(R.id.bottomFrame)
+
+
 }

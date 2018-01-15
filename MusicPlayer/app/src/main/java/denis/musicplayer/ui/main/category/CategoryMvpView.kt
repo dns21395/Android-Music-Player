@@ -10,4 +10,5 @@ interface CategoryMvpView : MainBaseActivityMvpView  {
     fun showSelectFragment()
     fun hideSelectFragment()
     fun replaceFragment(fragment: Fragment)
+
 }

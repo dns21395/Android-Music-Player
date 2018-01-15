@@ -7,4 +7,5 @@ import denis.musicplayer.ui.main.base.MainBaseFragmentMvpView
  * Created by denis on 09/01/2018.
  */
 interface CategoryFragmentMvpView : MainBaseFragmentMvpView<Track> {
+    fun openPlayerActivity()
 }
