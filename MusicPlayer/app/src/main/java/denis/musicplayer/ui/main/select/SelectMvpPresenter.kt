@@ -7,4 +7,6 @@ import denis.musicplayer.ui.base.MvpPresenter
  */
 interface SelectMvpPresenter<V: SelectMvpView> : MvpPresenter<V> {
     fun sendMessageToUpdatePlaylist()
+
+    fun cancelSelecting()
 }

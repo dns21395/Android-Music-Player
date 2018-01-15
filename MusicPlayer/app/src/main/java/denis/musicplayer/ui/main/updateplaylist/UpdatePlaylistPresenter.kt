@@ -5,6 +5,8 @@ import android.os.Bundle
 import denis.musicplayer.R
 import denis.musicplayer.data.DataManager
 import denis.musicplayer.data.media.model.Track
+import denis.musicplayer.data.select.EnumSelectManager
+import denis.musicplayer.data.select.SelectManager
 import denis.musicplayer.di.ActivityContext
 import denis.musicplayer.ui.base.BasePresenter
 import denis.musicplayer.ui.main.base.MainEnumRxBus
@@ -23,7 +25,7 @@ class UpdatePlaylistPresenter<V: UpdatePlaylistMvpView>
     @Inject constructor(@ActivityContext context: Context,
                         dataManager: DataManager,
                         compositeDisposable: CompositeDisposable,
-                        val rxBus: MainRxBus)
+                        val selectManager: SelectManager)
     : BasePresenter<V>(context, dataManager, compositeDisposable), UpdatePlaylistMvpPresenter<V> {
 
     private val TAG = "UpdatePlaylistPresenter"
@@ -55,10 +57,10 @@ class UpdatePlaylistPresenter<V: UpdatePlaylistMvpView>
                         dataManager.addTracksToPlaylist(playlistId, tracks)
                     }
                 }.subscribeOn(Schedulers.io())
-                            .observeOn(AndroidSchedulers.mainThread())
+                        .observeOn(AndroidSchedulers.mainThread())
                         .subscribe {
-                            rxBus.send(MainEnumRxBus.CANCEL_SELECTING)
                             mvpView?.finishDialog(R.string.playlist_updated)
+                            selectManager.callAction(EnumSelectManager.CLEAR_ITEMS)
                         })
 
     }

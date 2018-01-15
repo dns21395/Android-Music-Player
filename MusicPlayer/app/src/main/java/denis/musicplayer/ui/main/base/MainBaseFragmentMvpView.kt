@@ -9,5 +9,7 @@ import denis.musicplayer.data.media.model.Track
 interface MainBaseFragmentMvpView<A: Any> : MainBaseActivityMvpView {
     fun updateArray(array: ArrayList<A>)
 
+    fun notifyDataSetChanged()
+
     fun openCategoryTracksActivity(tracks: ArrayList<Track>, title: String)
 }

@@ -1,16 +1,13 @@
 package denis.musicplayer.ui.main.category.categoryfragment
 
 import android.content.Context
-import android.util.Log
 import denis.musicplayer.data.DataManager
-import denis.musicplayer.data.media.model.Album
+import denis.musicplayer.data.select.SelectManager
 import denis.musicplayer.data.media.model.Track
 import denis.musicplayer.di.ActivityContext
 import denis.musicplayer.service.AppMusicService
 import denis.musicplayer.service.music.MusicManager
 import denis.musicplayer.ui.main.base.MainBasePresenter
-import denis.musicplayer.ui.main.base.MainRxBus
-import denis.musicplayer.ui.main.category.CategoryMvpPresenter
 import denis.musicplayer.ui.player.PlayerActivity
 import denis.musicplayer.utils.CommonUtils
 import io.reactivex.Observable
@@ -26,9 +23,9 @@ class CategoryFragmentPresenter<V: CategoryFragmentMvpView>
     @Inject constructor(@ActivityContext context: Context,
                         dataManager: DataManager,
                         compositeDisposable: CompositeDisposable,
-                        rxBus: MainRxBus,
+                        mainManager: SelectManager,
                         val musicManager: MusicManager)
-    : MainBasePresenter<V, Track>(context, dataManager, compositeDisposable, rxBus), CategoryFragmentMvpPresenter<V> {
+    : MainBasePresenter<V, Track>(context, dataManager, compositeDisposable, mainManager), CategoryFragmentMvpPresenter<V> {
 
     private val TAG = "CategoryFragmePresenter"
 

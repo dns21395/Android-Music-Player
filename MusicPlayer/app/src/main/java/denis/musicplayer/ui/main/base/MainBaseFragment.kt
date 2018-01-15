@@ -35,19 +35,6 @@ abstract class MainBaseFragment<A : MainBaseAdapter<B, C, D, E>,
         baseActivity = activity as MainBaseActivity
     }
 
-    override fun showSelectFragment() {
-        baseActivity?.showSelectFragment()
-    }
-
-    override fun hideSelectFragment() {
-        adapter.notifyDataSetChanged()
-        baseActivity?.hideSelectFragment()
-    }
-
-    override fun updateCountSelectFragment(count: Int) {
-        baseActivity?.updateCountSelectFragment(count)
-    }
-
     override fun showUpdatePlaylist(array: ArrayList<Track>) {
         baseActivity?.showUpdatePlaylist(array)
     }
@@ -58,5 +45,9 @@ abstract class MainBaseFragment<A : MainBaseAdapter<B, C, D, E>,
 
     override fun openCategoryTracksActivity(tracks: ArrayList<Track>, title: String) {
         startActivity(CategoryActivity.getStartIntent(context!!, tracks, title))
+    }
+
+    override fun notifyDataSetChanged() {
+        adapter.notifyDataSetChanged()
     }
 }

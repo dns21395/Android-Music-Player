@@ -9,4 +9,6 @@ import denis.musicplayer.ui.main.base.MainBaseActivityMvpView
  */
 interface MainMvpView : MainBaseActivityMvpView {
     fun replaceFragment(fragment: Fragment)
+    fun showSelectFragment()
+    fun hideSelectFragment()
 }

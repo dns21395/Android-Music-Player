@@ -7,8 +7,5 @@ import denis.musicplayer.ui.base.MvpView
  * Created by denis on 09/01/2018.
  */
 interface MainBaseActivityMvpView : MvpView {
-    fun showSelectFragment()
-    fun hideSelectFragment()
-    fun updateCountSelectFragment(count: Int)
     fun showUpdatePlaylist(array: ArrayList<Track>)
 }

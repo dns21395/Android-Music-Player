@@ -1,14 +1,12 @@
 package denis.musicplayer.ui.main.artist
 
 import android.content.Context
-import android.util.Log
 import denis.musicplayer.data.DataManager
+import denis.musicplayer.data.select.SelectManager
 import denis.musicplayer.data.media.model.Artist
 import denis.musicplayer.data.media.model.Track
 import denis.musicplayer.di.ActivityContext
-import denis.musicplayer.ui.base.BasePresenter
 import denis.musicplayer.ui.main.base.MainBasePresenter
-import denis.musicplayer.ui.main.base.MainRxBus
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -22,8 +20,8 @@ class ArtistPresenter<V : ArtistMvpView>
     @Inject constructor(@ActivityContext context: Context,
                         dataManager: DataManager,
                         compositeDisposable: CompositeDisposable,
-                        rxBus: MainRxBus)
-    : MainBasePresenter<V, Artist>(context, dataManager, compositeDisposable, rxBus), ArtistMvpPresenter<V> {
+                        selectManager: SelectManager)
+    : MainBasePresenter<V, Artist>(context, dataManager, compositeDisposable, selectManager), ArtistMvpPresenter<V> {
 
     private val TAG = "ArtistPresenter"
 

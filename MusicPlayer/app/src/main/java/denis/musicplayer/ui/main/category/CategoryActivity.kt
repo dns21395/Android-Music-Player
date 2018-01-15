@@ -73,12 +73,6 @@ class CategoryActivity : MainBaseActivity(), CategoryMvpView {
         replaceFragment(PlayerFragment.newInstance())
     }
 
-    override fun updateCountSelectFragment(count: Int) {
-        val fragment = supportFragmentManager?.findFragmentById(R.id.bottomFrame) as SelectFragment?
-
-        fragment?.updateCount(count)
-    }
-
     override fun showUpdatePlaylist(array: ArrayList<Track>) {
         UpdatePlaylistDialog.newInstance(array).show(supportFragmentManager, UpdatePlaylistDialog.TAG)
     }

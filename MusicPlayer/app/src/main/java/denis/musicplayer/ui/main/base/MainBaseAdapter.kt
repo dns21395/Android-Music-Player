@@ -1,6 +1,7 @@
 package denis.musicplayer.ui.main.base
 
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 
 /**
  * Created by denis on 02/01/2018.
@@ -21,6 +22,7 @@ abstract class MainBaseAdapter<A : MainBaseViewHolder<B>,
         presenter.onBindItemAtPosition(holder, position)
 
         holder.itemView.setOnLongClickListener {
+            Log.d(TAG, "onLongClick")
             when(presenter.getSelectedArrayCount()) {
                 0 -> {
                     presenter.addSelectedItem(presenter.getItemAtPosition(position))
@@ -34,6 +36,7 @@ abstract class MainBaseAdapter<A : MainBaseViewHolder<B>,
         }
 
         holder.itemView.setOnClickListener {
+            Log.d(TAG, "onClick")
             when(presenter.getSelectedArrayCount()) {
                 0 -> presenter.onItemClick(position)
                 else -> selectItem(holder, position)

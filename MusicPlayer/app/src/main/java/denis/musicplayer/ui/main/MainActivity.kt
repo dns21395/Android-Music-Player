@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import denis.musicplayer.R
 import denis.musicplayer.data.media.model.Track
 import denis.musicplayer.ui.base.BaseActivity
@@ -52,21 +53,16 @@ class MainActivity : MainBaseActivity(), MainMvpView {
     }
 
     override fun showSelectFragment() {
-        replaceFragment(SelectFragment.newInstance())
+        if(getBottomFrameLayout() !is SelectFragment) replaceFragment(SelectFragment.newInstance())
     }
 
     override fun hideSelectFragment() {
-        replaceFragment(PlayerFragment.newInstance())
-    }
-
-    override fun updateCountSelectFragment(count: Int) {
-        val fragment = supportFragmentManager?.findFragmentById(R.id.frameLayout) as SelectFragment?
-
-        fragment?.updateCount(count)
+        if(getBottomFrameLayout() !is PlayerFragment) replaceFragment(PlayerFragment.newInstance())
     }
 
     override fun showUpdatePlaylist(array: ArrayList<Track>) {
         UpdatePlaylistDialog.newInstance(array).show(supportFragmentManager, UpdatePlaylistDialog.TAG)
-
     }
+
+    private fun getBottomFrameLayout(): Fragment = supportFragmentManager.findFragmentById(R.id.frameLayout)
 }

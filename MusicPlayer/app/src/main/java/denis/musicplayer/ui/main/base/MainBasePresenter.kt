@@ -2,6 +2,8 @@ package denis.musicplayer.ui.main.base
 
 import android.content.Context
 import denis.musicplayer.data.DataManager
+import denis.musicplayer.data.select.EnumSelectManager
+import denis.musicplayer.data.select.SelectManager
 import denis.musicplayer.ui.base.BasePresenter
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
@@ -9,11 +11,12 @@ import javax.inject.Inject
 /**
  * Created by denis on 31/12/2017.
  */
+@Suppress("WHEN_ENUM_CAN_BE_NULL_IN_JAVA")
 open class MainBasePresenter<V: MainBaseFragmentMvpView<T>, T: Any>
     @Inject constructor(context: Context,
                         dataManager: DataManager,
                         compositeDisposable: CompositeDisposable,
-                        val rxBus: MainRxBus)
+                        private val selectManager: SelectManager)
     : BasePresenter<V>(context, dataManager, compositeDisposable), MainBaseMvpPresenter<V, T> {
 
 
@@ -33,11 +36,13 @@ open class MainBasePresenter<V: MainBaseFragmentMvpView<T>, T: Any>
         super.onAttach(mvpView)
 
         compositeDisposable.addAll(
-                rxBus.toObservable().subscribe {
-                    if(getSelectedArrayCount() > 0 && it == MainEnumRxBus.SHOW_UPDATE_PLAYLIST_DIALOG) getItemsForPlaylist()
-                },
-                rxBus.toObservable().subscribe {
-                    if(getSelectedArrayCount() > 0 && it == MainEnumRxBus.CANCEL_SELECTING) clearSelectedArray()
+                selectManager.getActions().subscribe {
+                    if(getSelectedArrayCount() > 0) {
+                        when (it) {
+                            EnumSelectManager.CLEAR_ITEMS -> clearSelectedArray()
+                            EnumSelectManager.INSERT_ITEMS -> getItemsForPlaylist()
+                        }
+                    }
                 }
         )
 
@@ -65,30 +70,20 @@ open class MainBasePresenter<V: MainBaseFragmentMvpView<T>, T: Any>
     // Selected Items
 
     override fun addSelectedItem(item : T) {
-        when(getSelectedArrayCount()) {
-            0 -> {
-                mvpView?.showSelectFragment()
-                selectedArray.add(item)
-            }
-            else -> {
-                selectedArray.add(item)
-                mvpView?.updateCountSelectFragment(getSelectedArrayCount())
-            }
-        }
+        selectedArray.add(item)
+        selectManager.updateSelectedItemsSize(getSelectedArrayCount())
+
     }
 
     override fun removeSelectedItem(item : T) {
         selectedArray.remove(item)
-
-        when(getSelectedArrayCount()) {
-            0 -> mvpView?.hideSelectFragment()
-            else -> mvpView?.updateCountSelectFragment(getSelectedArrayCount())
-        }
+        selectManager.updateSelectedItemsSize(getSelectedArrayCount())
     }
 
     override fun clearSelectedArray() {
         selectedArray.clear()
-        mvpView?.hideSelectFragment()
+        selectManager.updateSelectedItemsSize(getSelectedArrayCount())
+        mvpView?.notifyDataSetChanged()
     }
 
     override fun getSelectedArray(): ArrayList<T> = selectedArray

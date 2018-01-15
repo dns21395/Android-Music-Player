@@ -5,8 +5,8 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import dagger.Module
 import dagger.Provides
-import denis.musicplayer.data.media.model.Album
-import denis.musicplayer.data.media.model.Track
+import denis.musicplayer.data.select.AppSelectManager
+import denis.musicplayer.data.select.SelectManager
 import denis.musicplayer.di.ActivityContext
 import denis.musicplayer.di.PerActivity
 import denis.musicplayer.ui.main.MainAdapter
@@ -86,6 +86,10 @@ class ActivityModule(val activity: AppCompatActivity) {
     @Provides
     @PerActivity
     fun provideRxBus(): MainRxBus = MainRxBus()
+
+    @Provides
+    @PerActivity
+    fun provideSelectManager(appSelectManager: AppSelectManager): SelectManager = appSelectManager
 
     // Activity
 
