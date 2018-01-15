@@ -50,7 +50,8 @@ class PlayerFragment : BaseFragment(), PlayerFragmentMvpView {
             presenter.callAction()
         }
         Picasso.with(context)
-                .load(Uri.parse("android.resource://gabyshev.denis.musicplayer/drawable/no_music"))
+                .load(R.drawable.no_music)
+                .transform(ImageTransformToCircle())
                 .into(cover)
     }
 

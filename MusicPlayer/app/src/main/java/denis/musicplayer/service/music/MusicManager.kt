@@ -32,4 +32,6 @@ interface MusicManager {
 
     fun getCurrentTrackBehaviour(): BehaviorSubject<Track>
     fun actionBehaviour(): BehaviorSubject<Boolean>
+
+    fun getTracksSize(): Int
 }

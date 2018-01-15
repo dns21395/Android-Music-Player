@@ -48,7 +48,6 @@ class AppMusicManager
     private var tracks = ArrayList<Track>()
     private var currentTrackPosition = 0
     private var resumePosition = 0
-    private var action: Unit? = null
 
     private val currentTrackBehaviour: BehaviorSubject<Track> = BehaviorSubject.create()
     private val actionIsPlaying: BehaviorSubject<Boolean> = BehaviorSubject.create()
@@ -77,7 +76,6 @@ class AppMusicManager
     override fun actionBehaviour(): BehaviorSubject<Boolean> = actionIsPlaying
 
     override fun playTrack() {
-        Log.d(TAG, "playTrack")
         mediaPlayer.stop()
         mediaPlayer.reset()
         mediaPlayer.setDataSource(tracks[currentTrackPosition].data)
@@ -96,7 +94,6 @@ class AppMusicManager
     }
 
     override fun pauseTrack() {
-        Log.d(TAG, "pauseTrack")
         resumePosition = mediaPlayer.currentPosition
         mediaPlayer.pause()
         actionIsPlaying.onNext(false)
@@ -104,7 +101,6 @@ class AppMusicManager
     }
 
     override fun resumeTrack() {
-        Log.d(TAG, "resumeTrack")
         mediaPlayer.seekTo(resumePosition)
         mediaPlayer.start()
         actionIsPlaying.onNext(true)
@@ -117,7 +113,6 @@ class AppMusicManager
     }
 
     override fun previousTrack() {
-        Log.d(TAG, "previousTrack")
         when(currentTrackPosition - 1) {
             -1 -> currentTrackPosition = tracks.size - 1
             else -> currentTrackPosition--
@@ -126,7 +121,6 @@ class AppMusicManager
     }
 
     override fun nextTrack() {
-        Log.d(TAG, "nextTrack")
         when(currentTrackPosition + 1) {
             tracks.size -> currentTrackPosition = 0
             else -> currentTrackPosition++
@@ -177,6 +171,8 @@ class AppMusicManager
         musicService?.showNotificationForeground(notification)
     }
 
+    override fun getTracksSize(): Int = tracks.size
+
     override fun closeMusicPlayer() {
         actionIsPlaying.onNext(false)
         mediaPlayer.stop()
@@ -186,7 +182,6 @@ class AppMusicManager
     override fun isPlaying(): Boolean = mediaPlayer.isPlaying
 
     private fun handleActions(action: MusicManagerAction): PendingIntent? {
-        Log.d(TAG, "PUT ACTION : $action")
         val intent = Intent(context, AppMusicService::class.java)
         val bundle = BytesUtil.toByteArray(action)
         intent.putExtra(KEY_ACTION, bundle)
@@ -214,7 +209,6 @@ class AppMusicManager
     }
 
     override fun makeAction(action: MusicManagerAction) {
-        Log.d(TAG, "makeAction : $action")
         if(tracks.size > 0) {
             when (action) {
                 MusicManagerAction.PLAY -> playTrack()

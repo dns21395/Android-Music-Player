@@ -83,10 +83,8 @@ class AppMusicService : Service(), MusicService {
     private fun handleIncomingActions(intent: Intent?) {
         if(intent != null) {
             val extra = intent.getByteArrayExtra(AppMusicManager.KEY_ACTION)
-            Log.d(TAG, "extra : $extra")
             if(extra != null) {
                 val action = BytesUtil.toObject<MusicManagerAction>(extra)
-                Log.d(TAG, "action : $action")
                 musicManager.makeAction(action)
             }
         }

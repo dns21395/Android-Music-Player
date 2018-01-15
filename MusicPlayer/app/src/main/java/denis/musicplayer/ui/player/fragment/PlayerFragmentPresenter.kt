@@ -36,11 +36,6 @@ class PlayerFragmentPresenter<V : PlayerFragmentMvpView>
         actionCondition()
     }
 
-    override fun onDetach() {
-        Log.d(TAG, "onDetach")
-        super.onDetach()
-    }
-
     override fun updateFragment() {
         compositeDisposable.add(
                 musicManager.getCurrentTrackBehaviour()
@@ -61,9 +56,11 @@ class PlayerFragmentPresenter<V : PlayerFragmentMvpView>
     }
 
     override fun callAction() {
-        when (CommonUtils.isRunning(context, AppMusicService::class.java)) {
-            true -> musicManager.resumePause()
-            false -> AppMusicService.start(context)
+        if(musicManager.getTracksSize() > 0) {
+            when (CommonUtils.isRunning(context, AppMusicService::class.java)) {
+                true -> musicManager.resumePause()
+                false -> AppMusicService.start(context)
+            }
         }
     }
 
