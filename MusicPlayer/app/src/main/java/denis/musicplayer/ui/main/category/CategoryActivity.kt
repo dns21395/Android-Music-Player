@@ -66,11 +66,11 @@ class CategoryActivity : MainBaseActivity(), CategoryMvpView {
     }
 
     override fun showSelectFragment() {
-        replaceFragment(SelectFragment.newInstance())
+        if(getBottomFrameLayout() !is SelectFragment) replaceFragment(SelectFragment.newInstance())
     }
 
     override fun hideSelectFragment() {
-        replaceFragment(PlayerFragment.newInstance())
+        if(getBottomFrameLayout() !is PlayerFragment) replaceFragment(PlayerFragment.newInstance())
     }
 
     override fun showUpdatePlaylist(array: ArrayList<Track>) {
@@ -85,4 +85,6 @@ class CategoryActivity : MainBaseActivity(), CategoryMvpView {
             else -> BytesUtil.toObjectArray(objects)
         }
     }
+
+    private fun getBottomFrameLayout(): Fragment = supportFragmentManager.findFragmentById(R.id.bottomFrame)
 }

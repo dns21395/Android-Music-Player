@@ -26,7 +26,6 @@ class MainPresenter<V: MainMvpView>
 
         compositeDisposable.addAll(
                 selectManager.getSelectedItemsSize().subscribe {
-                    Log.d(TAG, "size : $it")
                     when(it) {
                         0 -> mvpView.hideSelectFragment()
                         else -> mvpView.showSelectFragment()

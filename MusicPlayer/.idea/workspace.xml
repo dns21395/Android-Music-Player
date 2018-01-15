@@ -177,106 +177,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="PlayerActivity.kt" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/denis/musicplayer/ui/player/PlayerActivity.kt">
+      <file leaf-file-name="CategoryActivity.kt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/denis/musicplayer/ui/main/category/CategoryActivity.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="500">
-              <caret line="39" column="30" lean-forward="false" selection-start-line="39" selection-start-column="30" selection-end-line="39" selection-end-column="30" />
-              <folding>
-                <element signature="e#37#675#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/build.gradle">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="621">
-              <caret line="63" column="17" lean-forward="false" selection-start-line="63" selection-start-column="17" selection-end-line="63" selection-end-column="17" />
+            <state relative-caret-position="470">
+              <caret line="68" column="31" lean-forward="false" selection-start-line="68" selection-start-column="31" selection-end-line="68" selection-end-column="31" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ApplicationModule.kt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/denis/musicplayer/di/module/ApplicationModule.kt">
+      <file leaf-file-name="CategoryPresenter.kt" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/denis/musicplayer/ui/main/category/CategoryPresenter.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="24" column="6" lean-forward="false" selection-start-line="24" selection-start-column="6" selection-end-line="24" selection-end-column="6" />
+            <state relative-caret-position="270">
+              <caret line="24" column="63" lean-forward="false" selection-start-line="24" selection-start-column="63" selection-end-line="24" selection-end-column="63" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AppMusicService.kt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/denis/musicplayer/service/AppMusicService.kt">
+      <file leaf-file-name="MainPresenter.kt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/denis/musicplayer/ui/main/MainPresenter.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-523">
-              <caret line="26" column="6" lean-forward="false" selection-start-line="26" selection-start-column="6" selection-end-line="26" selection-end-column="6" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AppMusicManager.kt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/denis/musicplayer/service/music/AppMusicManager.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1684">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PlayerActivityPresenter.kt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/denis/musicplayer/ui/player/PlayerActivityPresenter.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="65">
-              <caret line="22" column="65" lean-forward="false" selection-start-line="22" selection-start-column="65" selection-end-line="22" selection-end-column="65" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="activity_player.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_player.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="46" column="8" lean-forward="false" selection-start-line="46" selection-start-column="8" selection-end-line="47" selection-end-column="33" />
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer2">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MainContentFragment.kt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/denis/musicplayer/ui/main/main/MainContentFragment.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="587">
-              <caret line="57" column="106" lean-forward="false" selection-start-line="57" selection-start-column="106" selection-end-line="57" selection-end-column="106" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TrackPresenter.kt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/denis/musicplayer/ui/main/track/TrackPresenter.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
-              <caret line="32" column="37" lean-forward="false" selection-start-line="32" selection-start-column="37" selection-end-line="32" selection-end-column="37" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MainContentPresenter.kt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/denis/musicplayer/ui/main/main/MainContentPresenter.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="23" column="33" lean-forward="false" selection-start-line="23" selection-start-column="33" selection-end-line="23" selection-end-column="33" />
+            <state relative-caret-position="315">
+              <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -2218,7 +2143,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/denis/musicplayer/ui/playlist/PlaylistAdapter.kt" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_playlist.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/denis/musicplayer/ui/playlist/PlaylistActivity.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/denis/musicplayer/ui/player/fragment/PlayerActivity.kt" />
@@ -2250,8 +2174,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/denis/musicplayer/ui/main/select/SelectPresenter.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/denis/musicplayer/data/select/SelectManager.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/denis/musicplayer/ui/main/select/SelectFragment.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/denis/musicplayer/ui/main/MainPresenter.kt" />
-        <option value="$PROJECT_DIR$/app/src/main/java/denis/musicplayer/ui/main/category/CategoryActivity.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/denis/musicplayer/ui/main/base/MainBaseActivityMvpView.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/denis/musicplayer/ui/main/MainMvpView.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/denis/musicplayer/ui/main/category/CategoryMvpView.kt" />
@@ -2269,6 +2191,9 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_player.xml" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/java/denis/musicplayer/ui/player/PlayerActivity.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/denis/musicplayer/ui/main/category/CategoryActivity.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/denis/musicplayer/ui/main/category/CategoryPresenter.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/denis/musicplayer/ui/main/MainPresenter.kt" />
       </list>
     </option>
   </component>
@@ -2491,6 +2416,88 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MusicPlayer" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="musicplayer" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="permission" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MusicPlayer" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="musicplayer" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MusicPlayer" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="musicplayer" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="category" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -2644,7 +2651,7 @@
       <option name="DEEP_LINK" value="" />
       <option name="ACTIVITY_CLASS" value="" />
       <method>
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1516027202333" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1516027595686" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -2691,7 +2698,7 @@
         <option name="ADVANCED_PROFILING_ENABLED" value="false" />
       </Profilers>
       <method>
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1516027202334" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1516027595686" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -2873,7 +2880,7 @@
       <option name="DEEP_LINK" value="" />
       <option name="ACTIVITY_CLASS" value="" />
       <method>
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1516027202336" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1516027595687" />
       </method>
     </configuration>
     <list size="3">
@@ -2987,14 +2994,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/denis/musicplayer/di/component/ActivityComponent.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="28" column="10" lean-forward="false" selection-start-line="28" selection-start-column="10" selection-end-line="28" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/denis/musicplayer/ui/main/genre/GenreFragment.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -3079,22 +3078,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="9" column="35" lean-forward="false" selection-start-line="9" selection-start-column="35" selection-end-line="9" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/denis/musicplayer/ui/main/category/CategoryActivity.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="219">
-          <caret line="71" column="37" lean-forward="false" selection-start-line="71" selection-start-column="13" selection-end-line="71" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/denis/musicplayer/ui/main/category/CategoryMvpView.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="8" column="38" lean-forward="false" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
           <folding />
         </state>
       </provider>
@@ -3247,14 +3230,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/denis/musicplayer/ui/main/MainPresenter.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="30" column="29" lean-forward="false" selection-start-line="30" selection-start-column="29" selection-end-line="30" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/denis/musicplayer/ui/main/updateplaylist/UpdatePlaylistPresenter.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="467">
@@ -3291,14 +3266,6 @@
             <element signature="e#2260#2373#0" expanded="false" />
             <element signature="e#2413#2561#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/denis/musicplayer/ui/main/MainActivity.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="34" column="38" lean-forward="false" selection-start-line="34" selection-start-column="38" selection-end-line="34" selection-end-column="38" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3371,21 +3338,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_player.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/denis/musicplayer/ui/main/category/CategoryMvpView.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="46" column="8" lean-forward="false" selection-start-line="46" selection-start-column="8" selection-end-line="47" selection-end-column="33" />
+        <state relative-caret-position="105">
+          <caret line="8" column="38" lean-forward="false" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
           <folding />
         </state>
       </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/denis/musicplayer/ui/player/PlayerActivity.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="500">
+          <caret line="39" column="30" lean-forward="false" selection-start-line="39" selection-start-column="30" selection-end-line="39" selection-end-column="30" />
+          <folding>
+            <element signature="e#37#675#0" expanded="true" />
+          </folding>
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/denis/musicplayer/ui/player/PlayerActivityPresenter.kt">
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="65">
-          <caret line="22" column="65" lean-forward="false" selection-start-line="22" selection-start-column="65" selection-end-line="22" selection-end-column="65" />
+        <state relative-caret-position="621">
+          <caret line="63" column="17" lean-forward="false" selection-start-line="63" selection-start-column="17" selection-end-line="63" selection-end-column="17" />
           <folding />
         </state>
       </provider>
@@ -3414,21 +3388,54 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/denis/musicplayer/ui/player/PlayerActivityPresenter.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="621">
-          <caret line="63" column="17" lean-forward="false" selection-start-line="63" selection-start-column="17" selection-end-line="63" selection-end-column="17" />
+        <state relative-caret-position="65">
+          <caret line="22" column="65" lean-forward="false" selection-start-line="22" selection-start-column="65" selection-end-line="22" selection-end-column="65" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/denis/musicplayer/ui/player/PlayerActivity.kt">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_player.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="500">
-          <caret line="39" column="30" lean-forward="false" selection-start-line="39" selection-start-column="30" selection-end-line="39" selection-end-column="30" />
-          <folding>
-            <element signature="e#37#675#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="209">
+          <caret line="46" column="8" lean-forward="false" selection-start-line="46" selection-start-column="8" selection-end-line="47" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/denis/musicplayer/ui/main/MainActivity.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="34" column="38" lean-forward="false" selection-start-line="34" selection-start-column="38" selection-end-line="34" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/denis/musicplayer/ui/main/category/CategoryActivity.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="470">
+          <caret line="68" column="31" lean-forward="false" selection-start-line="68" selection-start-column="31" selection-end-line="68" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/denis/musicplayer/ui/main/MainPresenter.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/denis/musicplayer/ui/main/category/CategoryPresenter.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="24" column="63" lean-forward="false" selection-start-line="24" selection-start-column="63" selection-end-line="24" selection-end-column="63" />
+          <folding />
         </state>
       </provider>
     </entry>
