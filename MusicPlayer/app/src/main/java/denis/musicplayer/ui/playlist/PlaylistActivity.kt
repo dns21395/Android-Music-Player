@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager
 import denis.musicplayer.R
 import denis.musicplayer.data.media.model.Track
 import denis.musicplayer.ui.base.BaseActivity
+import denis.musicplayer.ui.player.PlayerActivity
 import denis.musicplayer.ui.player.fragment.PlayerFragment
 import kotlinx.android.synthetic.main.activity_playlist.*
 import org.jetbrains.anko.toast
@@ -91,6 +92,11 @@ class PlaylistActivity : BaseActivity(), PlaylistMvpView {
 
     override fun updateArray(array: ArrayList<Track>) {
         adapter.updateArray(array)
+    }
+
+    override fun openPlayerActivity() {
+        startActivity(PlayerActivity.getStartIntent(this))
+        overridePendingTransition(R.anim.enter, R.anim.exit)
     }
 
 }

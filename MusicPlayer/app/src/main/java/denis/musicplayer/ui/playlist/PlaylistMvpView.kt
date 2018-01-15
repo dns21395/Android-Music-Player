@@ -10,4 +10,6 @@ interface PlaylistMvpView : MvpView {
     fun onPlaylistDeleted()
 
     fun updateArray(array: ArrayList<Track>)
+
+    fun openPlayerActivity()
 }

@@ -69,6 +69,7 @@ class PlaylistPresenter<V: PlaylistMvpView>
         }.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
+                    mvpView?.openPlayerActivity()
                     when(CommonUtils.isRunning(context, AppMusicService::class.java)) {
                         true -> musicManager.playTrack()
                         false -> AppMusicService.start(context)
