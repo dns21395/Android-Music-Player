@@ -11,7 +11,7 @@ import denis.musicplayer.data.media.model.Track
 import denis.musicplayer.service.music.MusicManagerAction
 import denis.musicplayer.ui.base.BaseActivity
 import denis.musicplayer.utils.ImageTransformToCircle
-import jp.wasabeef.blurry.Blurry
+import jp.wasabeef.picasso.transformations.BlurTransformation
 import kotlinx.android.synthetic.main.activity_category.*
 import kotlinx.android.synthetic.main.activity_player.*
 import java.io.File
@@ -37,6 +37,7 @@ class PlayerActivity : BaseActivity(), PlayerActivityMvpView {
     }
 
     override fun setUp() {
+        transparentStatusBar()
         playPause.setOnClickListener { presenter.callActions(MusicManagerAction.RESUMEPAUSE) }
         previous.setOnClickListener { presenter.callActions(MusicManagerAction.PREVIOUS) }
         next.setOnClickListener { presenter.callActions(MusicManagerAction.NEXT) }
@@ -54,15 +55,20 @@ class PlayerActivity : BaseActivity(), PlayerActivityMvpView {
             when (coverPath) {
                 null -> {
                     Picasso.with(applicationContext)
-                            .load(Uri.parse("android.resource://gabyshev.denis.musicplayer/drawable/no_music"))
+                            .load(android.R.color.transparent)
+                            .into(background)
+                    Picasso.with(applicationContext)
+                            .load(R.drawable.no_music)
                             .into(cover)
                 }
                 else -> {
                     Picasso.with(applicationContext)
                             .load(Uri.fromFile(File(coverPath)))
+                            .transform(BlurTransformation(applicationContext))
+                            .into(background)
+                    Picasso.with(applicationContext)
+                            .load(Uri.fromFile(File(coverPath)))
                             .into(cover)
-                    val coverImage = BitmapFactory.decodeFile(coverPath)
-                    Blurry.with(applicationContext).from(coverImage).into(background)
                 }
             }
         }
