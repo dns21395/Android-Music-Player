@@ -1,6 +1,7 @@
 package denis.musicplayer.ui.main.main
 
 import android.os.Bundle
+import android.support.v4.view.ViewPager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import denis.musicplayer.ui.main.MainAdapter
 import denis.musicplayer.ui.main.base.MainBaseFragment
 import denis.musicplayer.utils.ZoomOutPageTransformer
 import kotlinx.android.synthetic.main.fragment_main_content.*
+import org.jetbrains.anko.support.v4.onPageChangeListener
 import javax.inject.Inject
 
 /**
@@ -43,6 +45,21 @@ class MainContentFragment : BaseFragment(), MainContentMvpView {
         viewPager.adapter = adapter
         viewPager.setPageTransformer(true, ZoomOutPageTransformer())
         tabLayout.setupWithViewPager(viewPager)
+        viewPager.addOnPageChangeListener(object: ViewPager.OnPageChangeListener {
+            var currentPage = 0
+
+            override fun onPageScrollStateChanged(state: Int) {
+                if(state == ViewPager.SCROLL_STATE_IDLE && currentPage != viewPager.currentItem) {
+                    currentPage = viewPager.currentItem
+                    presenter.callActionClear()
+                }
+            }
+
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
+
+            override fun onPageSelected(position: Int) {}
+        })
+
     }
 
 }

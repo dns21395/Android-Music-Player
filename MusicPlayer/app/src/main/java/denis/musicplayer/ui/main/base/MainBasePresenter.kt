@@ -20,17 +20,9 @@ open class MainBasePresenter<V: MainBaseFragmentMvpView<T>, T: Any>
     : BasePresenter<V>(context, dataManager, compositeDisposable), MainBaseMvpPresenter<V, T> {
 
 
-    override fun getItems() {
+    private var array = ArrayList<T>()
 
-    }
-
-    override fun getItemsForPlaylist() {
-
-    }
-
-    override fun onItemClick(position: Int) {
-
-    }
+    private var selectedArray = ArrayList<T>()
 
     override fun onAttach(mvpView: V) {
         super.onAttach(mvpView)
@@ -49,9 +41,21 @@ open class MainBasePresenter<V: MainBaseFragmentMvpView<T>, T: Any>
         getItems()
     }
 
-    private var array = ArrayList<T>()
+    // Important functions that has to be overridden
 
-    private var selectedArray = ArrayList<T>()
+    override fun getItems() {
+
+    }
+
+    override fun getItemsForPlaylist() {
+
+    }
+
+    override fun onItemClick(position: Int) {
+
+    }
+
+    // Items
 
     override fun getArray(): ArrayList<T> = array
 
