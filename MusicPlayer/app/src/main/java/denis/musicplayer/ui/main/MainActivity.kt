@@ -32,7 +32,6 @@ class MainActivity : MainBaseActivity(), MainMvpView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        overridePendingTransition(R.anim.enter, R.anim.exit)
         setContentView(R.layout.activity_main)
 
         activityComponent.inject(this)

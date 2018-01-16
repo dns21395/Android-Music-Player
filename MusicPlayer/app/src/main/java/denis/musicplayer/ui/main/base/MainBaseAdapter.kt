@@ -22,7 +22,6 @@ abstract class MainBaseAdapter<A : MainBaseViewHolder<B>,
         presenter.onBindItemAtPosition(holder, position)
 
         holder.itemView.setOnLongClickListener {
-            Log.d(TAG, "onLongClick")
             when(presenter.getSelectedArrayCount()) {
                 0 -> {
                     presenter.addSelectedItem(presenter.getItemAtPosition(position))
@@ -36,7 +35,6 @@ abstract class MainBaseAdapter<A : MainBaseViewHolder<B>,
         }
 
         holder.itemView.setOnClickListener {
-            Log.d(TAG, "onClick")
             when(presenter.getSelectedArrayCount()) {
                 0 -> presenter.onItemClick(position)
                 else -> selectItem(holder, position)
@@ -45,7 +43,7 @@ abstract class MainBaseAdapter<A : MainBaseViewHolder<B>,
 
     }
 
-    fun setViewHolderBackground(holder: A, position: Int) {
+    private fun setViewHolderBackground(holder: A, position: Int) {
         when(presenter.getSelectedArrayCount()) {
             0 -> holder.setBackground(position)
             else -> {

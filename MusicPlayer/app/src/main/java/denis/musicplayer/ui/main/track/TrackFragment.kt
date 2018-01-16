@@ -40,6 +40,7 @@ class TrackFragment : MainBaseFragment<TrackAdapter, TrackViewHolder, Track, Tra
             = inflater.inflate(R.layout.fragment_main, container, false)
 
     override fun setUp(view: View?) {
+        recyclerView.isMotionEventSplittingEnabled = false
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = adapter
         adapter.presenter = presenter
