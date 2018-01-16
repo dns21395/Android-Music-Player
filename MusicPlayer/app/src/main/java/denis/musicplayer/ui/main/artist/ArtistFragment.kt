@@ -42,6 +42,7 @@ class ArtistFragment : MainBaseFragment<ArtistAdapter,
 
 
     override fun setUp(view: View?) {
+        recyclerView.isMotionEventSplittingEnabled = false
         recyclerView.adapter = adapter
         recyclerView.layoutManager = layoutManager
         adapter.presenter = presenter

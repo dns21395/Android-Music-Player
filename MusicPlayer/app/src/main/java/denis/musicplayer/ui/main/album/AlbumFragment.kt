@@ -41,6 +41,7 @@ class AlbumFragment : MainBaseFragment<AlbumAdapter, AlbumViewHolder, Album, Alb
     }
 
     private fun setRecyclerView() {
+        recyclerView.isMotionEventSplittingEnabled = false
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = adapter
         adapter.presenter = presenter

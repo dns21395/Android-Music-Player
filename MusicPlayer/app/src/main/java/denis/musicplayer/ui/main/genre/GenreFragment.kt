@@ -42,6 +42,7 @@ class GenreFragment : MainBaseFragment<GenreAdapter,
             = inflater.inflate(R.layout.fragment_main, container, false)
 
     override fun setUp(view: View?) {
+        recyclerView.isMotionEventSplittingEnabled = false
         recyclerView.adapter = adapter
         recyclerView.layoutManager = layoutManager
         adapter.presenter = presenter

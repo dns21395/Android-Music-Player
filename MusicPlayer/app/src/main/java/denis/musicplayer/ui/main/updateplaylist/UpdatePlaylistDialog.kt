@@ -60,6 +60,7 @@ class UpdatePlaylistDialog : BaseDialog(), UpdatePlaylistMvpView, UpdatePlaylist
     }
 
     override fun setUp(view: View?) {
+        recyclerView.isMotionEventSplittingEnabled = false
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = adapter
         adapter.callback = this

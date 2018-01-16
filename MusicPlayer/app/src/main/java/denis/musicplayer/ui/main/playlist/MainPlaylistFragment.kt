@@ -45,6 +45,7 @@ class MainPlaylistFragment : BaseFragment(), MainPlaylistMvpView, MainPlaylistAd
             = inflater.inflate(R.layout.fragment_playlist, container, false)
 
     override fun setUp(view: View?) {
+        recyclerView.isMotionEventSplittingEnabled = false
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = adapter
 

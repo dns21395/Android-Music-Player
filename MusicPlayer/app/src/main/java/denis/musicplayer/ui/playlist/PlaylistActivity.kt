@@ -74,6 +74,7 @@ class PlaylistActivity : BaseActivity(), PlaylistMvpView {
     }
 
     private fun setRecyclerView() {
+        recyclerView.isMotionEventSplittingEnabled = false
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = adapter
         adapter.setItemTouchHelper(recyclerView)
