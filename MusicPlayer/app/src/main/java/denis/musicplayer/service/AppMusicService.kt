@@ -5,6 +5,7 @@ import android.app.Notification
 import android.app.Service
 import android.content.Context
 import android.content.Intent
+import android.media.AudioManager
 import android.os.IBinder
 import android.util.Log
 import denis.musicplayer.App
@@ -24,7 +25,8 @@ import javax.inject.Singleton
  * Created by denis on 10/01/2018.
  */
 @Singleton
-class AppMusicService : Service(), MusicService {
+class AppMusicService : Service(), MusicService, AudioManager.OnAudioFocusChangeListener  {
+
 
     val applicationComponent: ServiceComponent by lazy {
         DaggerServiceComponent
@@ -54,6 +56,15 @@ class AppMusicService : Service(), MusicService {
 
         fun stop(context: Context) {
             context.stopService(Intent(context, AppMusicService::class.java))
+        }
+    }
+
+    override fun onAudioFocusChange(focusState: Int) {
+        when(focusState) {
+            AudioManager.AUDIOFOCUS_GAIN -> Log.d(TAG, "GAIN")
+            AudioManager.AUDIOFOCUS_LOSS -> Log.d(TAG, "LOSS")
+            AudioManager.AUDIOFOCUS_LOSS_TRANSIENT -> Log.d(TAG, "LOSS_TRANSIENT")
+            AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK -> Log.d(TAG, "LOSS_TRANSIENT_CAN_DUCK")
         }
     }
 

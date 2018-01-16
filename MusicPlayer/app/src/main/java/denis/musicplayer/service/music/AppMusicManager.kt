@@ -1,5 +1,6 @@
 package denis.musicplayer.service.music
 
+import android.annotation.TargetApi
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -9,6 +10,7 @@ import android.content.Intent
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.media.AudioAttributes
+import android.media.AudioManager
 import android.media.MediaPlayer
 import android.os.Build
 import android.support.annotation.RequiresApi
@@ -25,6 +27,9 @@ import denis.musicplayer.utils.BytesUtil
 import io.reactivex.subjects.BehaviorSubject
 import javax.inject.Singleton
 import javax.inject.Inject
+import android.media.AudioFocusRequest
+
+
 
 
 /**
@@ -34,7 +39,9 @@ import javax.inject.Inject
 @Singleton
 class AppMusicManager
     @Inject constructor(@ApplicationContext val context: Context,
-                        val dataManager: DataManager) : MusicManager, MediaPlayer.OnCompletionListener {
+                        val dataManager: DataManager)
+    : MusicManager, MediaPlayer.OnCompletionListener, AudioManager.OnAudioFocusChangeListener {
+
 
     private val TAG = "AppMusicManager"
 
@@ -52,6 +59,8 @@ class AppMusicManager
     private val currentTrackBehaviour: BehaviorSubject<Track> = BehaviorSubject.create()
     private val actionIsPlaying: BehaviorSubject<Boolean> = BehaviorSubject.create()
 
+    private var audioManager: AudioManager? = null
+
     private var musicService: AppMusicService? = null
     override fun setService(service: AppMusicService) {
         this.musicService = service
@@ -62,6 +71,7 @@ class AppMusicManager
     }
 
     private fun initMediaPlayer() {
+        Log.d(TAG, "init")
         val audioAttributes: AudioAttributes = AudioAttributes.Builder()
                 .setUsage(AudioAttributes.USAGE_MEDIA)
                 .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
@@ -69,6 +79,7 @@ class AppMusicManager
 
         mediaPlayer.setOnCompletionListener(this)
         mediaPlayer.setAudioAttributes(audioAttributes)
+        requestAudioFocus()
     }
 
     override fun getCurrentTrackBehaviour(): BehaviorSubject<Track> = currentTrackBehaviour
@@ -76,6 +87,7 @@ class AppMusicManager
     override fun actionBehaviour(): BehaviorSubject<Boolean> = actionIsPlaying
 
     override fun playTrack() {
+        requestAudioFocus()
         mediaPlayer.stop()
         mediaPlayer.reset()
         mediaPlayer.setDataSource(tracks[currentTrackPosition].data)
@@ -101,6 +113,7 @@ class AppMusicManager
     }
 
     override fun resumeTrack() {
+        requestAudioFocus()
         mediaPlayer.seekTo(resumePosition)
         mediaPlayer.start()
         actionIsPlaying.onNext(true)
@@ -177,6 +190,7 @@ class AppMusicManager
     override fun getTracksSize(): Int = tracks.size
 
     override fun closeMusicPlayer() {
+        abandonAudioFocus()
         actionIsPlaying.onNext(false)
         mediaPlayer.stop()
         musicService?.stopService()
@@ -197,6 +211,66 @@ class AppMusicManager
         nextTrack()
     }
 
+    override fun onAudioFocusChange(focusState: Int) {
+        Log.d(TAG, "FOCUS STATE : $focusState")
+        when(focusState) {
+            AudioManager.AUDIOFOCUS_GAIN -> {
+                Log.d(TAG, "AUDIOFOCUS_GAIN")
+                resumeTrack()
+                mediaPlayer.setVolume(1.0f, 1.0f)
+            }
+            AudioManager.AUDIOFOCUS_LOSS -> {
+                Log.d(TAG, "AUDIOFOCUS_LOSS")
+                pauseTrack()
+            }
+            AudioManager.AUDIOFOCUS_LOSS_TRANSIENT -> {
+                Log.d(TAG, "LOSS_TRANSIENT")
+                pauseTrack()
+            }
+            AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK -> {
+                Log.d(TAG, "LOSS_TRANSIENT_CAN_DUCK")
+                mediaPlayer.setVolume(0.1f, 0.1f)
+            }
+        }
+    }
+
+    private fun requestAudioFocus() {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) requestAudioFocusAndroid8()
+        else requestAudioFocusAndroidPre8()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun requestAudioFocusAndroid8() {
+        audioManager?.requestAudioFocus(getAudioFocusRequestAndroid8())
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun getAudioFocusRequestAndroid8(): AudioFocusRequest {
+        audioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
+        val playbackAttributes = AudioAttributes.Builder()
+                .setUsage(AudioAttributes.USAGE_MEDIA)
+                .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                .build()
+        return AudioFocusRequest.Builder(AudioManager.AUDIOFOCUS_GAIN)
+                .setAudioAttributes(playbackAttributes)
+                .setAcceptsDelayedFocusGain(true)
+                .setOnAudioFocusChangeListener(this)
+                .build()
+    }
+
+    @Suppress("DEPRECATION")
+    private fun abandonAudioFocus() {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) audioManager?.abandonAudioFocusRequest(getAudioFocusRequestAndroid8())
+        else audioManager?.abandonAudioFocus(this)
+    }
+
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    private fun requestAudioFocusAndroidPre8() {
+        audioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
+        audioManager?.requestAudioFocus(this, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN)
+    }
+
     @RequiresApi(Build.VERSION_CODES.O)
     private fun createNotificationChannel(): String {
         val channelId = "android_music_service"
@@ -210,6 +284,7 @@ class AppMusicManager
         service.createNotificationChannel(chan)
         return channelId
     }
+
 
     override fun makeAction(action: MusicManagerAction) {
         if(tracks.size > 0) {
