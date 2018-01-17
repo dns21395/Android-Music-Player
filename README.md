@@ -5,9 +5,9 @@ Android Music Player application written on Kotlin
 
 Libraries 
 -----
-RxJava
-Dagger 2
-Picasso
+* RxJava <br/> 
+* Dagger 2 <br/>
+* Picasso <br/>
 
 Features
 -----
