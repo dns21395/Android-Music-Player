@@ -3,10 +3,11 @@ package denis.musicplayer.ui.main.addplaylist
 import android.content.Context
 import denis.musicplayer.R
 import denis.musicplayer.data.DataManager
+import denis.musicplayer.data.main.EnumMainManager
+import denis.musicplayer.data.main.MainManager
 import denis.musicplayer.di.ActivityContext
 import denis.musicplayer.ui.base.BasePresenter
-import denis.musicplayer.ui.main.base.MainEnumRxBus.*
-import denis.musicplayer.ui.main.base.MainRxBus
+
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -21,7 +22,7 @@ class AddPlaylistPresenter<V: AddPlaylistMvpView>
     @Inject constructor(@ActivityContext context: Context,
                         dataManager: DataManager,
                         compositeDisposable: CompositeDisposable,
-                        val rxBus: MainRxBus)
+                        val mainManager: MainManager)
     : BasePresenter<V>(context, dataManager, compositeDisposable), AddPlaylistMvpPresenter<V> {
     override fun createPlaylist(name: String) {
         compositeDisposable.add(
@@ -29,7 +30,7 @@ class AddPlaylistPresenter<V: AddPlaylistMvpView>
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                         .subscribe {
-                            rxBus.send(UPDATE_PLAYLIST)
+                            mainManager.callAction(EnumMainManager.UPDATE_PLAYLIST)
                             mvpView?.dismissDialog(AddPlaylistDialog.TAG)
                             context.toast(R.string.playlist_created)
                         })
