@@ -25,6 +25,8 @@ interface MusicManager {
 
     fun isPlaying(): Boolean
 
+    fun setVolume(leftVolume: Float, rightVolume: Float)
+
     fun buildNotification()
     fun closeMusicPlayer()
 

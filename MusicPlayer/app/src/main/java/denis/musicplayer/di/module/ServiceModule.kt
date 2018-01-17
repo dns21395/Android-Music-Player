@@ -13,4 +13,6 @@ class ServiceModule(val musicService: AppMusicService) {
 
     @Provides
     fun provideMusicService(): MusicService = musicService
+
+
 }

@@ -27,7 +27,6 @@ import javax.inject.Singleton
 @Singleton
 class AppMusicService : Service(), MusicService, AudioManager.OnAudioFocusChangeListener  {
 
-
     val applicationComponent: ServiceComponent by lazy {
         DaggerServiceComponent
                 .builder()
