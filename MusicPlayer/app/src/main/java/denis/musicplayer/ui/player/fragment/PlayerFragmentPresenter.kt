@@ -34,6 +34,8 @@ class PlayerFragmentPresenter<V : PlayerFragmentMvpView>
         super.onAttach(mvpView)
         updateFragment()
         actionCondition()
+
+        if(musicManager.getTracksSize() == 0) mvpView.updateCover(null)
     }
 
     override fun updateFragment() {

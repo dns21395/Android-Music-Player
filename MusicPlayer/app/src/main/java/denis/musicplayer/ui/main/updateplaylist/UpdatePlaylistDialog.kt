@@ -20,7 +20,7 @@ import javax.inject.Inject
 /**
  * Created by denis on 06/01/2018.
  */
-class UpdatePlaylistDialog : BaseDialog(), UpdatePlaylistMvpView, UpdatePlaylistAdapter.Callback {
+class UpdatePlaylistDialog : BaseDialog(), UpdatePlaylistMvpView {
 
     companion object {
         val TAG = "UpdatePlaylistDialog"
@@ -41,11 +41,20 @@ class UpdatePlaylistDialog : BaseDialog(), UpdatePlaylistMvpView, UpdatePlaylist
 
     @Inject lateinit var layoutManager: LinearLayoutManager
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        when(arguments) {
+            null -> finishDialog(getString(R.string.unknown_error))
+            else -> presenter.setArrayTracks(arguments!!)
+        }
+        super.onViewCreated(view, savedInstanceState)
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.dialog_update_playlist, container, false)
 
         activityComponent?.inject(this)
         presenter.onAttach(this)
+
 
         return view
     }
@@ -62,22 +71,15 @@ class UpdatePlaylistDialog : BaseDialog(), UpdatePlaylistMvpView, UpdatePlaylist
     override fun setUp(view: View?) {
         recyclerView.isMotionEventSplittingEnabled = false
         recyclerView.layoutManager = layoutManager
+        adapter.presenter = presenter
         recyclerView.adapter = adapter
-        adapter.callback = this
     }
 
     override fun updateArray(array: ArrayList<Playlist>) {
         adapter.updateArray(array)
     }
 
-    override fun onPlaylistChose(id: Long) {
-        when(arguments) {
-            null -> finishDialog(R.string.unknown_error)
-            else -> presenter.updatePlaylist(arguments!!, id)
-        }
-    }
-
-    override fun finishDialog(toastText: Int) {
+    override fun finishDialog(toastText: String) {
         toast(toastText)
         dismissDialog(TAG)
     }

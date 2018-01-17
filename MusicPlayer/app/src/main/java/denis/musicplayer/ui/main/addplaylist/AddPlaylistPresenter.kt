@@ -32,7 +32,7 @@ class AddPlaylistPresenter<V: AddPlaylistMvpView>
                         .subscribe {
                             mainManager.callAction(EnumMainManager.UPDATE_PLAYLIST)
                             mvpView?.dismissDialog(AddPlaylistDialog.TAG)
-                            context.toast(R.string.playlist_created)
+                            context.toast(context.getString(R.string.playlist_created, name))
                         })
     }
 }

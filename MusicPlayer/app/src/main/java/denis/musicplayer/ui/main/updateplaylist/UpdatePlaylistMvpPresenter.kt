@@ -1,6 +1,8 @@
 package denis.musicplayer.ui.main.updateplaylist
 
 import android.os.Bundle
+import denis.musicplayer.data.media.model.Track
+import denis.musicplayer.data.playlist.model.Playlist
 import denis.musicplayer.ui.base.MvpPresenter
 
 /**
@@ -9,5 +11,13 @@ import denis.musicplayer.ui.base.MvpPresenter
 interface UpdatePlaylistMvpPresenter<V : UpdatePlaylistMvpView> : MvpPresenter<V> {
     fun getPlaylist()
 
-    fun updatePlaylist(bundle: Bundle, playlistId: Long)
+    fun getPlaylistByPosition(position: Int): Playlist
+
+    fun getArraySize(): Int
+
+    fun setArrayTracks(bundle: Bundle)
+
+    fun updateArray(array: ArrayList<Playlist>)
+
+    fun updatePlaylist(position: Int)
 }

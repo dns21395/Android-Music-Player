@@ -49,10 +49,6 @@ class PlayerFragment : BaseFragment(), PlayerFragmentMvpView {
         playPause.setOnClickListener {
             presenter.callAction()
         }
-        Picasso.with(context)
-                .load(R.drawable.no_music)
-                .transform(ImageTransformToCircle())
-                .into(cover)
     }
 
     override fun updateFragment(track: Track) {

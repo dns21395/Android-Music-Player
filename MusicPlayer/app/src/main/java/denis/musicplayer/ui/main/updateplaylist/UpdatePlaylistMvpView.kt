@@ -9,5 +9,5 @@ import denis.musicplayer.ui.base.MvpView
 interface UpdatePlaylistMvpView : MvpView {
     fun updateArray(array: ArrayList<Playlist>)
 
-    fun finishDialog(toastText: Int)
+    fun finishDialog(toastText: String)
 }

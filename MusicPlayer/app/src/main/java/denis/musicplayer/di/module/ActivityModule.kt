@@ -84,7 +84,7 @@ class ActivityModule(val activity: AppCompatActivity) {
 
     @Provides
     fun provideLinearLayoutManager(@ActivityContext context: Context): LinearLayoutManager = LinearLayoutManager(context)
-    
+
     @Provides
     @PerActivity
     fun provideMainManager(appMainManager: AppMainManager): MainManager = appMainManager
