@@ -1,4 +1,4 @@
-# MusicPlayer
+# Android-Music-Player
 Android Music Player application written on Kotlin
 
 <p align="center"><img src="https://raw.githubusercontent.com/dns21395/MusicPlayer/master/ReadmeFiles/thumb.png" width="360" /></p>
