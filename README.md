@@ -1,10 +1,13 @@
 # MusicPlayer
 Media player app is written on Kotlin. Libraries used for connecting activity and service: RxJava and Dagger 2
 
-<p align="center"><img src="https://raw.githubusercontent.com/dns21395/MusicPlayer/master/ReadmeFiles/tracks.png" width="360" /></p>
+<p align="center"><img src="https://raw.githubusercontent.com/dns21395/MusicPlayer/master/ReadmeFiles/thumb.png" width="360" /></p>
 
 Features
 -----
+Main Category - Tracks
+
+<p align="center"><img src="https://raw.githubusercontent.com/dns21395/MusicPlayer/master/ReadmeFiles/tracks.png" width="360" /></p>
 
 Player Notification 
 <p align="center"><img src="https://raw.githubusercontent.com/dns21395/MusicPlayer/master/ReadmeFiles/notification.png" width="360" /></p>

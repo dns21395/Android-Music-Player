@@ -38,6 +38,7 @@ class PlayerActivity : BaseActivity(), PlayerActivityMvpView {
 
     override fun setUp() {
         transparentStatusBar()
+        backButton.setOnClickListener { finish() }
         playPause.setOnClickListener { presenter.callActions(MusicManagerAction.RESUMEPAUSE) }
         previous.setOnClickListener { presenter.callActions(MusicManagerAction.PREVIOUS) }
         next.setOnClickListener { presenter.callActions(MusicManagerAction.NEXT) }

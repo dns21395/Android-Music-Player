@@ -26,6 +26,19 @@
         app:layout_constraintBottom_toBottomOf="parent" />
 
     <ImageView
+        android:id="@+id/backButton"
+        android:src="@drawable/arrow_left"
+        android:tint="@android:color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+
+
+    <ImageView
         android:id="@+id/cover"
         tools:background="@drawable/no_music"
         android:layout_width="192dp"
