@@ -38,7 +38,10 @@ class PlayerActivity : BaseActivity(), PlayerActivityMvpView {
 
     override fun setUp() {
         transparentStatusBar()
-        backButton.setOnClickListener { finish() }
+        backButton.setOnClickListener {
+            finish()
+            overridePendingTransition(R.anim.left_to_right, R.anim.right_to_left)
+        }
         playPause.setOnClickListener { presenter.callActions(MusicManagerAction.RESUMEPAUSE) }
         previous.setOnClickListener { presenter.callActions(MusicManagerAction.PREVIOUS) }
         next.setOnClickListener { presenter.callActions(MusicManagerAction.NEXT) }
@@ -87,6 +90,6 @@ class PlayerActivity : BaseActivity(), PlayerActivityMvpView {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        overridePendingTransition(R.anim.left_to_right, R.anim.right_to_left);
+        overridePendingTransition(R.anim.left_to_right, R.anim.right_to_left)
     }
 }
