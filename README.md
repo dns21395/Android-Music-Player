@@ -10,7 +10,7 @@ Used Resources
 * [Picasso](https://github.com/square/picasso) <br/>
 * [SystemBarTint](https://github.com/jgilfelt/SystemBarTint) <br/>
 * [Picasso Transformations](https://github.com/wasabeef/picasso-transformations) <br/>
-*  Backgroound provided by [pexels.com](https://www.pexels.com) <br/>
+*  Backgrounds provided by [pexels.com](https://www.pexels.com) <br/>
 *  Icons provided by [materialdesignicons.com](https://materialdesignicons.com) <br/>
 
 Features
