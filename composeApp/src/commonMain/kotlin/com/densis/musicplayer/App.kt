@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -13,6 +14,8 @@ import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import com.densis.musicplayer.permission.Permission
 import com.densis.musicplayer.permission.PermissionViewModel
+import com.densis.musicplayer.permission.presentation.PermissionEffect
+import com.densis.musicplayer.permission.rememberRequestPermission
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -34,10 +37,24 @@ fun App() {
 
                     val permissionState by viewModel.state.collectAsStateWithLifecycle()
 
+                    val requestPermission =
+                        rememberRequestPermission { granted -> viewModel.permissionLog(granted) }
+
+                    LaunchedEffect(Unit) {
+                        viewModel.effects.collect { effect ->
+                            when (effect) {
+                                PermissionEffect.RequestPermission -> {
+                                    requestPermission()
+                                }
+                            }
+                        }
+                    }
+
                     Permission(
                         state = permissionState,
                         onEvent = { viewModel.onEvent(it) },
-                        modifier = Modifier.fillMaxSize().statusBarsPadding())
+                        modifier = Modifier.fillMaxSize().statusBarsPadding()
+                    )
                 }
             }
         }

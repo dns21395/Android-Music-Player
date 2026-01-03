@@ -1,5 +1,6 @@
 package com.densis.musicplayer.di
 
+import com.densis.musicplayer.data.AppLogger
 import com.densis.musicplayer.data.MusicPlayer
 import com.densis.musicplayer.data.PermissionManager
 import org.koin.android.ext.koin.androidApplication
@@ -10,4 +11,5 @@ actual val platformModule: Module
     get() = module {
         single { MusicPlayer(androidApplication()) }
         single { PermissionManager(androidApplication()) }
+        factory { AppLogger() }
     }

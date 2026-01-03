@@ -20,5 +20,8 @@ fun Permission(
         Button(onClick = { onEvent(PermissionEvent.CheckPermission) }) {
             Text("check permission")
         }
+        Button(onClick = { onEvent(PermissionEvent.RequestPermission) }) {
+            Text("request permission")
+        }
     }
 }

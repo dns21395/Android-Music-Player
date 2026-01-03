@@ -1,4 +1,5 @@
 package com.densis.musicplayer.permission.presentation
 
-class PermissionEffect {
+sealed class PermissionEffect {
+    object RequestPermission : PermissionEffect()
 }

@@ -20,6 +20,10 @@ val permissionReducer =
                         )
                     }
                 }
+
+                PermissionEvent.RequestPermission -> {
+                    effects { +PermissionEffect.RequestPermission }
+                }
             }
         }
     }
