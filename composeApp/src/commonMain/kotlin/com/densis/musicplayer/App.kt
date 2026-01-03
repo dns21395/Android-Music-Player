@@ -1,8 +1,11 @@
 package com.densis.musicplayer
 
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -31,7 +34,10 @@ fun App() {
 
                     val permissionState by viewModel.state.collectAsStateWithLifecycle()
 
-                    Permission(permissionState)
+                    Permission(
+                        state = permissionState,
+                        onEvent = { viewModel.onEvent(it) },
+                        modifier = Modifier.fillMaxSize().statusBarsPadding())
                 }
             }
         }

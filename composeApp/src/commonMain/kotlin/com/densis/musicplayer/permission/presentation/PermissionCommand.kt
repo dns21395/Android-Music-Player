@@ -1,4 +1,5 @@
 package com.densis.musicplayer.permission.presentation
 
-class PermissionCommand {
+sealed class PermissionCommand {
+    object CheckPermission : PermissionCommand()
 }

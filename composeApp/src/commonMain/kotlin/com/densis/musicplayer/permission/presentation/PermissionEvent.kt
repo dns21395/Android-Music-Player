@@ -1,4 +1,6 @@
 package com.densis.musicplayer.permission.presentation
 
-class PermissionEvent {
+sealed class PermissionEvent {
+    object CheckPermission : PermissionEvent()
+    data class OnReceivedPermissionStatus(val isGranted: Boolean) : PermissionEvent()
 }
