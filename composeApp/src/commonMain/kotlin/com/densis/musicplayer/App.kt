@@ -1,13 +1,13 @@
 package com.densis.musicplayer
 
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
@@ -35,8 +35,6 @@ fun App() {
                 composable<Route.Permission> {
                     val viewModel = koinViewModel<PermissionViewModel>()
 
-                    val permissionState by viewModel.state.collectAsStateWithLifecycle()
-
                     val requestPermission =
                         rememberRequestPermission { granted -> viewModel.permissionLog(granted) }
 
@@ -51,9 +49,8 @@ fun App() {
                     }
 
                     Permission(
-                        state = permissionState,
                         onEvent = { viewModel.onEvent(it) },
-                        modifier = Modifier.fillMaxSize().statusBarsPadding()
+                        modifier = Modifier.fillMaxSize().statusBarsPadding().padding(16.dp)
                     )
                 }
             }
