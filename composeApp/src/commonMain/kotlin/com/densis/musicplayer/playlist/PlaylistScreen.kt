@@ -1,6 +1,7 @@
 package com.densis.musicplayer.playlist
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -9,6 +10,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.densis.musicplayer.domain.entity.Track
@@ -21,18 +23,27 @@ fun PlaylistScreen(
     onEvent: (PlaylistEvent) -> Unit,
     modifier: Modifier
 ) {
-    LazyColumn(
-        modifier = modifier,
-
+    if (state.playlist.isNotEmpty()) {
+        LazyColumn(
+            modifier = modifier
         ) {
-        items(
-            items = state.playlist,
-            key = { it.id }
-        ) { track ->
-            TrackItem(
-                track = track,
-                onEvent = { onEvent(it) }
-            )
+            items(
+                items = state.playlist,
+                key = { it.id }
+            ) { track ->
+                TrackItem(
+                    track = track,
+                    onEvent = { onEvent(it) }
+                )
+            }
+        }
+    } else {
+        Column(
+            modifier = modifier,
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+        ) {
+            Text("Wow, such empty")
         }
     }
 }
