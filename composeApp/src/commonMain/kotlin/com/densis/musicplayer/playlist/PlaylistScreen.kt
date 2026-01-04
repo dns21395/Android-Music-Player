@@ -6,9 +6,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.densis.musicplayer.playlist.presentation.store.PlaylistState
 
 @Composable
 fun PlaylistScreen(
+    state: PlaylistState,
     modifier: Modifier
 ) {
     Column(
@@ -16,6 +18,6 @@ fun PlaylistScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
-        Text("Playlist screen")
+        Text("Playlist screen : ${state.playlist}")
     }
 }

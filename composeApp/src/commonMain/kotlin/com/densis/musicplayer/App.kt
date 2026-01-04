@@ -20,6 +20,7 @@ import com.densis.musicplayer.permission.presentation.PermissionEffect
 import com.densis.musicplayer.permission.presentation.PermissionEvent
 import com.densis.musicplayer.permission.rememberRequestPermission
 import com.densis.musicplayer.playlist.PlaylistScreen
+import com.densis.musicplayer.playlist.PlaylistViewModel
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -66,7 +67,13 @@ fun App() {
                     )
                 }
                 composable<Route.Playlist> {
-                    PlaylistScreen(Modifier.fillMaxSize().statusBarsPadding().padding(16.dp))
+                    val viewModel = koinViewModel<PlaylistViewModel>()
+                    val state by viewModel.state.collectAsStateWithLifecycle()
+
+                    PlaylistScreen(
+                        state = state,
+                        Modifier.fillMaxSize().statusBarsPadding().padding(16.dp)
+                    )
                 }
             }
         }
