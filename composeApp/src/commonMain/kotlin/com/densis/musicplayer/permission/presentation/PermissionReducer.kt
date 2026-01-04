@@ -13,11 +13,10 @@ val permissionReducer =
                 }
 
                 is PermissionEvent.OnReceivedPermissionStatus -> {
-                    state {
-                        copy(
-                            isPermissionGranted = event.isGranted,
-                            tryCount = tryCount + 1
-                        )
+                    if (event.isGranted) {
+                        effects { +PermissionEffect.OpenPlaylist }
+                    } else {
+                        state { copy(isScreenVisible = true) }
                     }
                 }
 

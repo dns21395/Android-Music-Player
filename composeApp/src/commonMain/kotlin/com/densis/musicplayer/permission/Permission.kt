@@ -11,6 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.densis.musicplayer.permission.presentation.PermissionEvent
+import com.densis.musicplayer.permission.presentation.PermissionState
 import musicplayer.composeapp.generated.resources.Res
 import musicplayer.composeapp.generated.resources.permission_button
 import musicplayer.composeapp.generated.resources.permission_text
@@ -18,18 +19,21 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun Permission(
+    state: PermissionState,
     onEvent: (PermissionEvent) -> Unit,
     modifier: Modifier
 ) {
-    Column(
-        modifier = modifier,
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Text(stringResource(Res.string.permission_text))
-        Spacer(Modifier.height(16.dp))
-        Button(onClick = { onEvent(PermissionEvent.RequestPermission) }) {
-            Text(stringResource(Res.string.permission_button))
+    if (state.isScreenVisible) {
+        Column(
+            modifier = modifier,
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            Text(stringResource(Res.string.permission_text))
+            Spacer(Modifier.height(16.dp))
+            Button(onClick = { onEvent(PermissionEvent.RequestPermission) }) {
+                Text(stringResource(Res.string.permission_button))
+            }
         }
     }
 }

@@ -9,4 +9,7 @@ sealed interface Route {
 
     @Serializable
     data object Permission : Route
+
+    @Serializable
+    data object Playlist : Route
 }

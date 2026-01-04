@@ -21,5 +21,5 @@ val sharedModule = module {
         )
     }
 
-    viewModel { PermissionViewModel(get(named("permission")), get()) }
+    viewModel { PermissionViewModel(get(named("permission"))) }
 }
