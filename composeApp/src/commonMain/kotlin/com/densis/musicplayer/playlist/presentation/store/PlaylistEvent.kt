@@ -5,4 +5,5 @@ import com.densis.musicplayer.domain.entity.Track
 sealed class PlaylistEvent {
     object InitScreen : PlaylistEvent()
     data class OnReceivedPlaylist(val playlist: List<Track>) : PlaylistEvent()
+    data class OnTrackClicked(val track: Track) : PlaylistEvent()
 }

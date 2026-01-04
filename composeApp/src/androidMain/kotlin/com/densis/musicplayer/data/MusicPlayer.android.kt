@@ -1,67 +1,50 @@
 package com.densis.musicplayer.data
 
 import android.content.Context
+import android.media.MediaPlayer
+import android.net.Uri
 import android.provider.MediaStore
 import com.densis.musicplayer.domain.entity.Track
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.withContext
 
 actual class MusicPlayer(
     private val context: Context
 ) {
-    actual suspend fun loadLibrary(): List<Track> = withContext(Dispatchers.IO) {
-        val result = mutableListOf<Track>()
+    private var mediaPlayer: MediaPlayer? = null
+    private var playlist: List<Track> = emptyList()
+    private var currentIndex: Int = -1
 
-        val projection = arrayOf(
-            MediaStore.Audio.Media._ID,
-            MediaStore.Audio.Media.TITLE,
-            MediaStore.Audio.Media.ARTIST
-        )
+    actual fun setPlaylist(tracks: List<Track>) {
+        playlist = tracks
+    }
 
-        val selection = "${MediaStore.Audio.Media.IS_MUSIC}  != 0"
-        val sortOrder = "${MediaStore.Audio.AudioColumns.TITLE} COLLATE LOCALIZED ASC"
+    actual fun play(track: Track) {
+        mediaPlayer?.release()
 
-        val cursor = context.contentResolver.query(
+        val uri = Uri.withAppendedPath(
             MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
-            projection,
-            selection,
-            null,
-            sortOrder
+            track.id
         )
 
-        cursor?.use {
-            val idCol = it.getColumnIndexOrThrow(MediaStore.Audio.Media._ID)
-            val titleCol = it.getColumnIndexOrThrow(MediaStore.Audio.Media.TITLE)
-            val artistCol = it.getColumnIndexOrThrow(MediaStore.Audio.Media.ARTIST)
-
-            while (it.moveToNext()) {
-                result += Track(
-                    id = it.getLong(idCol).toString(),
-                    title = it.getString(titleCol) ?: "",
-                    artist = it.getString(artistCol) ?: ""
-                )
-            }
+        mediaPlayer = MediaPlayer.create(context, uri).apply {
+            start()
         }
 
-        result
-    }
-
-    actual fun playFrom(
-        index: Int,
-        tracks: List<Track>
-    ) {
-    }
-
-    actual fun play() {
+        currentIndex = playlist.indexOfFirst { it.id == track.id }
     }
 
     actual fun pause() {
+        mediaPlayer?.pause()
     }
 
     actual fun next() {
+        if (playlist.isEmpty()) return
+        val nextIndex = (currentIndex + 1).coerceAtMost(playlist.lastIndex)
+        play(playlist[nextIndex])
     }
 
     actual fun previous() {
+        if (playlist.isEmpty()) return
+        val prevIndex = (currentIndex - 1).coerceAtLeast(0)
+        play(playlist[prevIndex])
     }
 }

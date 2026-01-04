@@ -30,7 +30,7 @@ val sharedModule = module {
         PlaylistStore(
             initialState = PlaylistState(),
             reducer = PlaylistReducer,
-            actor = PlaylistActor(get())
+            actor = PlaylistActor(get(), get())
         )
     }
 

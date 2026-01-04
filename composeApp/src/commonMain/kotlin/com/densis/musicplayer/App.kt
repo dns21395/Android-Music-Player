@@ -72,7 +72,8 @@ fun App() {
 
                     PlaylistScreen(
                         state = state,
-                        Modifier.fillMaxSize().statusBarsPadding().padding(16.dp)
+                        onEvent = { viewModel.onEvent(it) },
+                        modifier = Modifier.fillMaxSize().statusBarsPadding().padding(16.dp)
                     )
                 }
             }

@@ -15,6 +15,10 @@ val PlaylistReducer =
                 is PlaylistEvent.OnReceivedPlaylist -> {
                     state { copy(playlist = event.playlist) }
                 }
+
+                is PlaylistEvent.OnTrackClicked -> {
+                    commands { +PlaylistCommand.PlayTrack(event.track) }
+                }
             }
         }
     }
