@@ -33,7 +33,7 @@ class PlayerViewModel(
 
     private fun observeEffects() {
         viewModelScope.launch(Dispatchers.IO) {
-            effects.collect { effect ->
+            store.effects.collect { effect ->
                 when (effect) {
                     is PlayerEffect.LoadTrackCover -> {
                         val imageBitmap = trackCoverLoader.load(effect.id)

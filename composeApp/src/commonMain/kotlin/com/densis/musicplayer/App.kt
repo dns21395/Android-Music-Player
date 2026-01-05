@@ -96,7 +96,6 @@ fun App() {
                     PlayerScreen(
                         state = state,
                         onEvent = { viewModel.onEvent(it) },
-                        modifier = Modifier.fillMaxSize().statusBarsPadding().padding(16.dp)
                     )
                 }
             }

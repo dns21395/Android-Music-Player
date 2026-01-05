@@ -6,18 +6,33 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.blur
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.Shadow
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.densis.musicplayer.player.presentation.store.PlayerEvent
 import com.densis.musicplayer.player.presentation.store.PlayerState
+import musicplayer.composeapp.generated.resources.Res
+import musicplayer.composeapp.generated.resources.ic_album_cover
+import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun PlayerScreen(
@@ -25,15 +40,37 @@ fun PlayerScreen(
     onEvent: (PlayerEvent) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    Box(modifier = Modifier.fillMaxSize()) {
+        BlurredBackground(state.image)
+    }
     Column(
-        modifier = modifier,
+        modifier = Modifier.fillMaxSize().statusBarsPadding().padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
         Cover(state.image)
         Spacer(Modifier.height(16.dp))
-        Text(state.name)
-        Text(state.artist)
+        Text(
+            state.name, style = MaterialTheme.typography.titleLarge.copy(
+                fontWeight = FontWeight.Bold,
+                shadow = Shadow(
+                    color = Color.Black.copy(alpha = 0.6f),
+                    offset = Offset(0f, 2f),
+                    blurRadius = 8f
+                )
+            ),
+            color = Color.White
+        )
+        Spacer(Modifier.height(8.dp))
+        Text(
+            state.artist, style = MaterialTheme.typography.titleSmall.copy(
+                shadow = Shadow(
+                    color = Color.Black.copy(alpha = 0.6f),
+                    offset = Offset(0f, 2f),
+                    blurRadius = 8f
+                )
+            ), color = Color.White
+        )
     }
 }
 
@@ -50,7 +87,46 @@ fun Cover(cover: ImageBitmap?) {
         Box(
             modifier = Modifier
                 .size(240.dp)
-                .background(Color.DarkGray)
+                .background(Color(0xFF2A2A2A)),
+            contentAlignment = Alignment.Center
+        ) {
+            Icon(
+                painter = painterResource(Res.drawable.ic_album_cover),
+                contentDescription = null,
+                tint = Color.White.copy(alpha = 0.6f),
+                modifier = Modifier.size(64.dp)
+            )
+        }
+    }
+}
+
+@Composable
+private fun BlurredBackground(
+    cover: ImageBitmap?
+) {
+    if (cover == null) {
+        Box(
+            modifier = Modifier.fillMaxSize().background(
+                Color(0xFF121212)
+            )
+        )
+
+    } else {
+        Image(
+            bitmap = cover,
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+            modifier = Modifier
+                .fillMaxSize()
+                .blur(radius = 40.dp)
+                .graphicsLayer {
+                    alpha = 0.6f
+                }
+        )
+        Box(
+            modifier = Modifier.fillMaxSize().background(
+                Color.Black.copy(alpha = 0.5f)
+            )
         )
     }
 }

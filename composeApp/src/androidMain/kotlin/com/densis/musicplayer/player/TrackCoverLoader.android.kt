@@ -2,12 +2,11 @@ package com.densis.musicplayer.player
 
 import android.content.Context
 import android.graphics.BitmapFactory
-import android.net.Uri
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
+import androidx.core.net.toUri
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import androidx.core.net.toUri
 
 actual class TrackCoverLoader(
     private val context: Context,
