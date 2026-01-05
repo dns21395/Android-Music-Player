@@ -40,9 +40,11 @@ fun PlayerScreen(
     onEvent: (PlayerEvent) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Box(modifier = Modifier.fillMaxSize()) {
-        BlurredBackground(state.image)
-    }
+    Box(
+        modifier = Modifier.fillMaxSize().background(
+            Color(0xFF121212)
+        )
+    )
     Column(
         modifier = Modifier.fillMaxSize().statusBarsPadding().padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -97,36 +99,5 @@ fun Cover(cover: ImageBitmap?) {
                 modifier = Modifier.size(64.dp)
             )
         }
-    }
-}
-
-@Composable
-private fun BlurredBackground(
-    cover: ImageBitmap?
-) {
-    if (cover == null) {
-        Box(
-            modifier = Modifier.fillMaxSize().background(
-                Color(0xFF121212)
-            )
-        )
-
-    } else {
-        Image(
-            bitmap = cover,
-            contentDescription = null,
-            contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .fillMaxSize()
-                .blur(radius = 40.dp)
-                .graphicsLayer {
-                    alpha = 0.6f
-                }
-        )
-        Box(
-            modifier = Modifier.fillMaxSize().background(
-                Color.Black.copy(alpha = 0.5f)
-            )
-        )
     }
 }

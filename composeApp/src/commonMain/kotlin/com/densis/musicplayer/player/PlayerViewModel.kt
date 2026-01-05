@@ -8,6 +8,7 @@ import com.densis.musicplayer.player.presentation.store.PlayerEventInternal
 import com.densis.musicplayer.player.presentation.store.PlayerEventUi
 import com.densis.musicplayer.player.presentation.store.PlayerState
 import com.densis.musicplayer.player.presentation.store.PlayerStore
+import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.StateFlow
@@ -32,7 +33,7 @@ class PlayerViewModel(
     }
 
     private fun observeEffects() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(Dispatchers.IO, start = CoroutineStart.UNDISPATCHED) {
             store.effects.collect { effect ->
                 when (effect) {
                     is PlayerEffect.LoadTrackCover -> {

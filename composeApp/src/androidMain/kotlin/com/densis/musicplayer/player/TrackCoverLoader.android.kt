@@ -13,7 +13,6 @@ actual class TrackCoverLoader(
 ) {
     actual suspend fun load(artworkKey: String): ImageBitmap? =
         withContext(Dispatchers.IO) {
-
             val albumId = artworkKey.toLongOrNull() ?: return@withContext null
 
             val uri = "content://media/external/audio/albumart/$albumId".toUri()
@@ -22,7 +21,7 @@ actual class TrackCoverLoader(
                 context.contentResolver.openInputStream(uri)?.use { stream ->
                     BitmapFactory.decodeStream(stream)?.asImageBitmap()
                 }
-            } catch (_: Exception) {
+            } catch (e: Exception) {
                 null
             }
         }
