@@ -11,10 +11,13 @@ class PlaylistViewModel(
 ) : ViewModel() {
 
     init {
+        store.start()
         onEvent(PlaylistEvent.InitScreen)
     }
 
     val state: StateFlow<PlaylistState> = store.states
+
+    val effects = store.effects
 
     fun onEvent(event: PlaylistEvent) {
         store.accept(event)

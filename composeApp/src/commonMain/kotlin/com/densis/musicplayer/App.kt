@@ -19,8 +19,12 @@ import com.densis.musicplayer.permission.PermissionViewModel
 import com.densis.musicplayer.permission.presentation.PermissionEffect
 import com.densis.musicplayer.permission.presentation.PermissionEvent
 import com.densis.musicplayer.permission.rememberRequestPermission
+import com.densis.musicplayer.player.PlayerScreen
+import com.densis.musicplayer.player.PlayerViewModel
+import com.densis.musicplayer.player.presentation.store.PlayerEffect
 import com.densis.musicplayer.playlist.PlaylistScreen
 import com.densis.musicplayer.playlist.PlaylistViewModel
+import com.densis.musicplayer.playlist.presentation.store.PlaylistEffect
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -70,7 +74,25 @@ fun App() {
                     val viewModel = koinViewModel<PlaylistViewModel>()
                     val state by viewModel.state.collectAsStateWithLifecycle()
 
+                    LaunchedEffect(Unit) {
+                        viewModel.effects.collect { effect ->
+                            when (effect) {
+                                PlaylistEffect.OpenPlayer -> navController.navigate(Route.Player)
+                            }
+                        }
+                    }
+
                     PlaylistScreen(
+                        state = state,
+                        onEvent = { viewModel.onEvent(it) },
+                        modifier = Modifier.fillMaxSize().statusBarsPadding().padding(16.dp)
+                    )
+                }
+                composable<Route.Player> {
+                    val viewModel = koinViewModel<PlayerViewModel>()
+                    val state by viewModel.state.collectAsStateWithLifecycle()
+
+                    PlayerScreen(
                         state = state,
                         onEvent = { viewModel.onEvent(it) },
                         modifier = Modifier.fillMaxSize().statusBarsPadding().padding(16.dp)

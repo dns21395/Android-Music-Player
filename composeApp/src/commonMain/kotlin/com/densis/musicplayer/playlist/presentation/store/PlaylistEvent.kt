@@ -6,4 +6,5 @@ sealed class PlaylistEvent {
     object InitScreen : PlaylistEvent()
     data class OnReceivedPlaylist(val playlist: List<Track>) : PlaylistEvent()
     data class OnTrackClicked(val track: Track) : PlaylistEvent()
+    data object OpenPlayer : PlaylistEvent()
 }

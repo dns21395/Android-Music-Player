@@ -47,4 +47,11 @@ actual class MusicPlayer(
         val prevIndex = (currentIndex - 1).coerceAtLeast(0)
         play(playlist[prevIndex])
     }
+
+    actual fun getCurrentTrack(): Track? {
+        if (currentIndex == -1) {
+            return null
+        }
+        return playlist[currentIndex]
+    }
 }

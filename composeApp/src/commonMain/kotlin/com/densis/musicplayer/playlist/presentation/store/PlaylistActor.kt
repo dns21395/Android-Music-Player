@@ -2,9 +2,9 @@ package com.densis.musicplayer.playlist.presentation.store
 
 import com.densis.musicplayer.data.MusicPlayer
 import com.densis.musicplayer.playlist.data.repository.PlaylistRepository
-import com.densis.musicplayer.playlist.presentation.store.PlaylistEvent.*
+import com.densis.musicplayer.playlist.presentation.store.PlaylistEvent.OnReceivedPlaylist
+import com.densis.musicplayer.playlist.presentation.store.PlaylistEvent.OpenPlayer
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.flow
 import money.vivid.elmslie.core.store.Actor
 
@@ -20,9 +20,9 @@ class PlaylistActor(
                 emit(OnReceivedPlaylist(playlist))
             }
 
-            is PlaylistCommand.PlayTrack -> {
+            is PlaylistCommand.PlayTrack -> flow {
                 musicPlayer.play(command.track)
-                emptyFlow()
+                emit(OpenPlayer)
             }
         }
     }

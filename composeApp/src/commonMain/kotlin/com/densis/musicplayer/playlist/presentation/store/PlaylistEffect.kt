@@ -1,3 +1,5 @@
 package com.densis.musicplayer.playlist.presentation.store
 
-class PlaylistEffect
+sealed class PlaylistEffect {
+    data object OpenPlayer : PlaylistEffect()
+}

@@ -19,6 +19,10 @@ val PlaylistReducer =
                 is PlaylistEvent.OnTrackClicked -> {
                     commands { +PlaylistCommand.PlayTrack(event.track) }
                 }
+
+                PlaylistEvent.OpenPlayer -> {
+                    effects { +PlaylistEffect.OpenPlayer }
+                }
             }
         }
     }

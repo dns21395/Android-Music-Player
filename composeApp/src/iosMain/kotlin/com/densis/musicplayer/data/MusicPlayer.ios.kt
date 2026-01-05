@@ -43,4 +43,11 @@ actual class MusicPlayer {
         player.skipToPreviousItem()
         currentIndex--
     }
+
+    actual fun getCurrentTrack(): Track? {
+        if (currentIndex == -1) {
+            return null
+        }
+        return playlist[currentIndex]
+    }
 }

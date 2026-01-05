@@ -5,6 +5,11 @@ import com.densis.musicplayer.permission.presentation.PermissionActor
 import com.densis.musicplayer.permission.presentation.PermissionState
 import com.densis.musicplayer.permission.presentation.PermissionStore
 import com.densis.musicplayer.permission.presentation.permissionReducer
+import com.densis.musicplayer.player.PlayerViewModel
+import com.densis.musicplayer.player.presentation.store.PlayerActor
+import com.densis.musicplayer.player.presentation.store.PlayerReducer
+import com.densis.musicplayer.player.presentation.store.PlayerState
+import com.densis.musicplayer.player.presentation.store.PlayerStore
 import com.densis.musicplayer.playlist.PlaylistViewModel
 import com.densis.musicplayer.playlist.presentation.store.PlaylistActor
 import com.densis.musicplayer.playlist.presentation.store.PlaylistReducer
@@ -34,6 +39,15 @@ val sharedModule = module {
         )
     }
 
+    factory(named("player")) {
+        PlayerStore(
+            initialState = PlayerState(),
+            reducer = PlayerReducer,
+            actor = PlayerActor(get())
+        )
+    }
+
     viewModel { PermissionViewModel(get(named("permission"))) }
     viewModel { PlaylistViewModel(get(named("playlist"))) }
+    viewModel { PlayerViewModel(get(named("player"))) }
 }
