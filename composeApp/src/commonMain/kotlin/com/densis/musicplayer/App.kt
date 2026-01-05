@@ -78,6 +78,7 @@ fun App() {
                         viewModel.effects.collect { effect ->
                             when (effect) {
                                 PlaylistEffect.OpenPlayer -> navController.navigate(Route.Player)
+                                else -> Unit
                             }
                         }
                     }

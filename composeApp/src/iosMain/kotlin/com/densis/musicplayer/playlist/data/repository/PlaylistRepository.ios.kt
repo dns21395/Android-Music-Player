@@ -20,7 +20,7 @@ actual class PlaylistRepository {
             val artist = (item.valueForProperty(MPMediaItemPropertyArtist) as? String).orEmpty()
             val id = item.persistentID.toString()
 
-            result += Track(id = id, title = title, artist = artist)
+            result += Track(id = id, title = title, artist = artist, trackCoverId = id)
         }
 
         return result.sortedBy { it.title.lowercase() }

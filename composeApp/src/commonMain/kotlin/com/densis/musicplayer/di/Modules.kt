@@ -49,5 +49,5 @@ val sharedModule = module {
 
     viewModel { PermissionViewModel(get(named("permission"))) }
     viewModel { PlaylistViewModel(get(named("playlist"))) }
-    viewModel { PlayerViewModel(get(named("player"))) }
+    viewModel { PlayerViewModel(get(named("player")), get()) }
 }

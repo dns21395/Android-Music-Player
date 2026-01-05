@@ -15,11 +15,12 @@ actual class PlaylistRepository(
         val projection = arrayOf(
             MediaStore.Audio.Media._ID,
             MediaStore.Audio.Media.TITLE,
-            MediaStore.Audio.Media.ARTIST
+            MediaStore.Audio.Media.ARTIST,
+            MediaStore.Audio.Media.ALBUM_ID,
         )
 
         val selection = "${MediaStore.Audio.Media.IS_MUSIC}  != 0"
-        val sortOrder = "${MediaStore.Audio.AudioColumns.TITLE} ASC"
+        val sortOrder = "${MediaStore.Audio.Media.TITLE} ASC"
 
         val cursor = context.contentResolver.query(
             MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
@@ -33,12 +34,16 @@ actual class PlaylistRepository(
             val idCol = it.getColumnIndexOrThrow(MediaStore.Audio.Media._ID)
             val titleCol = it.getColumnIndexOrThrow(MediaStore.Audio.Media.TITLE)
             val artistCol = it.getColumnIndexOrThrow(MediaStore.Audio.Media.ARTIST)
+            val albumIdCol = it.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM_ID)
 
             while (it.moveToNext()) {
+                val albumId = it.getLong(albumIdCol)
+
                 result += Track(
                     id = it.getLong(idCol).toString(),
                     title = it.getString(titleCol) ?: "",
-                    artist = it.getString(artistCol) ?: ""
+                    artist = it.getString(artistCol) ?: "",
+                    trackCoverId = albumId.toString()
                 )
             }
         }

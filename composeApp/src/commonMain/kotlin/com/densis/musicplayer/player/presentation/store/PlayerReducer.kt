@@ -18,7 +18,17 @@ val PlayerReducer =
                         copy(
                             name = track?.title ?: "",
                             artist = track?.artist ?: "",
+                            image = null,
                         )
+                    }
+                    if (track?.trackCoverId != null) {
+                        effects { +PlayerEffect.LoadTrackCover(track.trackCoverId) }
+                    }
+                }
+
+                is PlayerEventInternal.OnTrackCoverLoaded -> {
+                    state {
+                        copy(image = event.trackCover)
                     }
                 }
             }

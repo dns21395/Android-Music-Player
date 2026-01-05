@@ -1,4 +1,5 @@
 package com.densis.musicplayer.player.presentation.store
 
-class PlayerEffect {
+sealed class PlayerEffect {
+    data class LoadTrackCover(val id: String) : PlayerEffect()
 }
