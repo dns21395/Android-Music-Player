@@ -31,6 +31,23 @@ val PlayerReducer =
                         copy(image = event.trackCover)
                     }
                 }
+
+                is PlayerEventUi.OnPreviousButtonClicked -> {
+                    commands {
+                        +PlayerCommand.PlayPreviousTrack
+                    }
+                }
+
+                is PlayerEventUi.OnNextButtonClicked -> {
+                    commands {
+                        +PlayerCommand.PlayerNextTrack
+                    }
+                }
+
+                is PlayerEventUi.OnPlayPauseButtonClicked -> {
+                    commands { +PlayerCommand.PlayOrPause(state.isPlaying) }
+                    state { copy(isPlaying = !state.isPlaying)}
+                }
             }
         }
     }

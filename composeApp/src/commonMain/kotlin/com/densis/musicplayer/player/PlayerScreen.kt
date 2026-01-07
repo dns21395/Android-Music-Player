@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -12,26 +13,28 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.blur
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.Shadow
-import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.densis.musicplayer.player.presentation.store.PlayerEvent
+import com.densis.musicplayer.player.presentation.store.PlayerEventUi
 import com.densis.musicplayer.player.presentation.store.PlayerState
 import musicplayer.composeapp.generated.resources.Res
 import musicplayer.composeapp.generated.resources.ic_album_cover
+import musicplayer.composeapp.generated.resources.pause
+import musicplayer.composeapp.generated.resources.play
+import musicplayer.composeapp.generated.resources.skip_next
+import musicplayer.composeapp.generated.resources.skip_previous
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
@@ -73,6 +76,35 @@ fun PlayerScreen(
                 )
             ), color = Color.White
         )
+        Spacer(Modifier.height(16.dp))
+        Row {
+            IconButton(onClick = { onEvent(PlayerEventUi.OnPreviousButtonClicked) }) {
+                Icon(
+                    painter = painterResource(Res.drawable.skip_previous),
+                    contentDescription = null,
+                    tint = Color.White,
+                    modifier = Modifier.size(32.dp)
+                )
+            }
+            IconButton(onClick = { onEvent(PlayerEventUi.OnPlayPauseButtonClicked) }) {
+                val painter = if (state.isPlaying) Res.drawable.pause else Res.drawable.play
+                Icon(
+                    painter = painterResource(painter),
+                    contentDescription = null,
+                    tint = Color.White,
+                    modifier = Modifier.size(32.dp)
+                )
+            }
+            IconButton(onClick = { onEvent(PlayerEventUi.OnNextButtonClicked) }) {
+                Icon(
+                    painter = painterResource(Res.drawable.skip_next),
+                    contentDescription = null,
+                    tint = Color.White,
+                    modifier = Modifier.size(32.dp)
+
+                )
+            }
+        }
     }
 }
 

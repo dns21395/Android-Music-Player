@@ -32,19 +32,23 @@ actual class MusicPlayer(
         currentIndex = playlist.indexOfFirst { it.id == track.id }
     }
 
+    actual fun resume() {
+        mediaPlayer?.start()
+    }
+
     actual fun pause() {
         mediaPlayer?.pause()
     }
 
     actual fun next() {
         if (playlist.isEmpty()) return
-        val nextIndex = (currentIndex + 1).coerceAtMost(playlist.lastIndex)
+        val nextIndex = if ((currentIndex + 1) > playlist.lastIndex) 0 else currentIndex + 1
         play(playlist[nextIndex])
     }
 
     actual fun previous() {
         if (playlist.isEmpty()) return
-        val prevIndex = (currentIndex - 1).coerceAtLeast(0)
+        val prevIndex = if ((currentIndex - 1) < 0) playlist.lastIndex else currentIndex - 1
         play(playlist[prevIndex])
     }
 

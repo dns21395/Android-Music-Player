@@ -6,4 +6,5 @@ data class PlayerState(
     val name: String = "",
     val artist: String = "",
     val image: ImageBitmap? = null,
+    val isPlaying: Boolean = true,
 )

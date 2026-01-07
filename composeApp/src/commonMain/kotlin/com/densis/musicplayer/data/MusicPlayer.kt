@@ -6,6 +6,7 @@ expect class MusicPlayer {
     fun setPlaylist(tracks: List<Track>)
     fun getCurrentTrack(): Track?
     fun play(track: Track)
+    fun resume()
     fun pause()
     fun next()
     fun previous()

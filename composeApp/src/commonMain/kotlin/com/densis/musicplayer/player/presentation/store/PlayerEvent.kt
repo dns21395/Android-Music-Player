@@ -7,6 +7,9 @@ interface PlayerEvent
 
 sealed class PlayerEventUi : PlayerEvent {
     object InitScreen : PlayerEventUi()
+    object OnPreviousButtonClicked : PlayerEventUi()
+    object OnNextButtonClicked : PlayerEventUi()
+    object OnPlayPauseButtonClicked : PlayerEventUi()
 }
 
 sealed class PlayerEventInternal : PlayerEvent {
