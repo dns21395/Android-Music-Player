@@ -1,5 +1,6 @@
 package com.densis.musicplayer.di
 
+import androidx.media3.exoplayer.ExoPlayer
 import com.densis.musicplayer.data.AppLogger
 import com.densis.musicplayer.data.MusicPlayer
 import com.densis.musicplayer.data.PermissionManager
@@ -11,7 +12,8 @@ import org.koin.dsl.module
 
 actual val platformModule: Module
     get() = module {
-        single { MusicPlayer(androidApplication()) }
+        single<ExoPlayer> { ExoPlayer.Builder(androidApplication()).build() }
+        single { MusicPlayer(androidApplication(), get()) }
         single { PermissionManager(androidApplication()) }
         factory { AppLogger() }
         factory { PlaylistRepository(androidApplication()) }

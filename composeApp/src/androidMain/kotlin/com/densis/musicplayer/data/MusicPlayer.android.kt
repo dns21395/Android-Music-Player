@@ -1,61 +1,73 @@
 package com.densis.musicplayer.data
 
 import android.content.Context
-import android.media.MediaPlayer
 import android.net.Uri
 import android.provider.MediaStore
+import androidx.media3.common.MediaItem
+import androidx.media3.common.MediaMetadata
+import androidx.media3.common.Player
+import androidx.media3.exoplayer.ExoPlayer
 import com.densis.musicplayer.domain.entity.Track
 
 actual class MusicPlayer(
-    private val context: Context
+    private val context: Context,
+    private val player: ExoPlayer
 ) {
-    private var mediaPlayer: MediaPlayer? = null
     private var playlist: List<Track> = emptyList()
-    private var currentIndex: Int = -1
 
     actual fun setPlaylist(tracks: List<Track>) {
         playlist = tracks
+
+        val items = tracks.map { track ->
+            val uri = Uri.withAppendedPath(
+                MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
+                track.id
+            )
+            MediaItem.Builder()
+                .setUri(uri)
+                .setMediaId(track.id)
+                .setMediaMetadata(
+                    MediaMetadata.Builder()
+                        .setTitle(track.title)
+                        .setArtist(track.artist)
+                        .build()
+                )
+                .build()
+        }
+
+        player.setMediaItems(items)
+        player.prepare()
+        player.repeatMode = Player.REPEAT_MODE_ALL
     }
 
     actual fun play(track: Track) {
-        mediaPlayer?.release()
+        val index = playlist.indexOfFirst { it.id == track.id }
+        if (index == -1) return
 
-        val uri = Uri.withAppendedPath(
-            MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
-            track.id
-        )
-
-        mediaPlayer = MediaPlayer.create(context, uri).apply {
-            start()
-        }
-
-        currentIndex = playlist.indexOfFirst { it.id == track.id }
+        player.seekTo(index, 0L)
+        player.play()
     }
 
     actual fun resume() {
-        mediaPlayer?.start()
+        player.play()
     }
 
     actual fun pause() {
-        mediaPlayer?.pause()
+        player.pause()
     }
 
     actual fun next() {
-        if (playlist.isEmpty()) return
-        val nextIndex = if ((currentIndex + 1) > playlist.lastIndex) 0 else currentIndex + 1
-        play(playlist[nextIndex])
+        player.seekToNextMediaItem()
+        player.play()
     }
 
     actual fun previous() {
-        if (playlist.isEmpty()) return
-        val prevIndex = if ((currentIndex - 1) < 0) playlist.lastIndex else currentIndex - 1
-        play(playlist[prevIndex])
+        player.seekToPreviousMediaItem()
+        player.play()
     }
 
     actual fun getCurrentTrack(): Track? {
-        if (currentIndex == -1) {
-            return null
-        }
-        return playlist[currentIndex]
+        val idx = player.currentMediaItemIndex
+        return playlist.getOrNull(idx)
     }
 }

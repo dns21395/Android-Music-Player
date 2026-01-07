@@ -4,8 +4,10 @@ import com.densis.musicplayer.data.MusicPlayer
 import com.densis.musicplayer.playlist.data.repository.PlaylistRepository
 import com.densis.musicplayer.playlist.presentation.store.PlaylistEvent.OnReceivedPlaylist
 import com.densis.musicplayer.playlist.presentation.store.PlaylistEvent.OpenPlayer
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.withContext
 import money.vivid.elmslie.core.store.Actor
 
 class PlaylistActor(
@@ -16,12 +18,18 @@ class PlaylistActor(
         return when (command) {
             PlaylistCommand.GetPlaylist -> flow {
                 val playlist = playlistRepository.getPlaylist()
-                musicPlayer.setPlaylist(playlist)
+                withContext(Dispatchers.Main) {
+                    musicPlayer.setPlaylist(playlist)
+                }
+
                 emit(OnReceivedPlaylist(playlist))
             }
 
             is PlaylistCommand.PlayTrack -> flow {
-                musicPlayer.play(command.track)
+                withContext(Dispatchers.Main) {
+                    musicPlayer.play(command.track)
+                }
+
                 emit(OpenPlayer)
             }
         }
