@@ -1,6 +1,11 @@
 package com.densis.musicplayer.data
 
 import com.densis.musicplayer.domain.entity.Track
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.callbackFlow
+import platform.Foundation.NSNotification
+import platform.Foundation.NSNotificationCenter
 import platform.Foundation.NSNumber
 import platform.Foundation.numberWithLongLong
 import platform.MediaPlayer.MPMediaItem
@@ -9,7 +14,9 @@ import platform.MediaPlayer.MPMediaItemPropertyPersistentID
 import platform.MediaPlayer.MPMediaPropertyPredicate
 import platform.MediaPlayer.MPMediaQuery
 import platform.MediaPlayer.MPMusicPlayerController
+import platform.MediaPlayer.MPMusicPlayerControllerNowPlayingItemDidChangeNotification
 import platform.MediaPlayer.MPMusicRepeatMode
+import platform.darwin.NSObjectProtocol
 
 actual class MusicPlayer {
     private val player = MPMusicPlayerController.systemMusicPlayer()
@@ -59,9 +66,31 @@ actual class MusicPlayer {
     actual fun next() = player.skipToNextItem()
     actual fun previous() = player.skipToPreviousItem()
 
-    actual fun getCurrentTrack(): Track? {
-        val item = player.nowPlayingItem ?: return null
-        val id = item.persistentID.toString()
-        return playlist.firstOrNull { it.id == id }
+    actual fun getCurrentTrack(): Flow<Track?> = callbackFlow {
+        fun emitNowPlaying() {
+            val item = player.nowPlayingItem
+            val id = item?.persistentID?.toString()
+            val track = id?.let { pid -> playlist.firstOrNull { it.id == pid } }
+            trySend(track)
+        }
+
+        player.beginGeneratingPlaybackNotifications()
+
+        val center = NSNotificationCenter.defaultCenter
+
+        val obs1: NSObjectProtocol = center.addObserverForName(
+            name = MPMusicPlayerControllerNowPlayingItemDidChangeNotification,
+            `object` = player,
+            queue = null
+        ) { _: NSNotification? ->
+            emitNowPlaying()
+        }
+
+        emitNowPlaying()
+
+        awaitClose {
+            center.removeObserver(obs1)
+            player.endGeneratingPlaybackNotifications()
+        }
     }
 }
