@@ -10,6 +10,8 @@ sealed class PlayerEventUi : PlayerEvent {
     object OnPreviousButtonClicked : PlayerEventUi()
     object OnNextButtonClicked : PlayerEventUi()
     object OnPlayPauseButtonClicked : PlayerEventUi()
+    data class StartDragging(val position: Float) : PlayerEventUi()
+    object StopDragging : PlayerEventUi()
     data class OnSeekTo(val seekTo: Float) : PlayerEventUi()
 }
 
@@ -19,4 +21,6 @@ sealed class PlayerEventInternal : PlayerEvent {
     data class OnSeekPositionUpdated(val position: Float) : PlayerEventInternal()
     data class OnPlayPauseStateUpdated(val isPlaying: Boolean) : PlayerEventInternal()
     data class OnReceivedTotalDuration(val duration: Float) : PlayerEventInternal()
+
+    data object OnSeekToUpdated : PlayerEventInternal()
 }

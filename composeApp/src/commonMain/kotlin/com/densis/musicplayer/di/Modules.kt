@@ -43,7 +43,7 @@ val sharedModule = module {
         PlayerStore(
             initialState = PlayerState(),
             reducer = PlayerReducer,
-            actor = PlayerActor(get())
+            actor = PlayerActor(get(), get())
         )
     }
 

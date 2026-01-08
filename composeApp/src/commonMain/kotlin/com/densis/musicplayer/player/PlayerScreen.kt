@@ -20,11 +20,6 @@ import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -63,18 +58,10 @@ fun PlayerScreen(
     ) {
         Cover(state.image)
 
-        var dragging by remember { mutableStateOf(false) }
-        var dragValue by remember { mutableStateOf(state.currentTime) }
-
-        LaunchedEffect(state.currentTime, dragging) {
-            if (!dragging) dragValue = state.currentTime
-        }
-
-
         Spacer(Modifier.height(16.dp))
 
         Slider(
-            value = dragValue,
+            value = state.currentTime,
             modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp),
             valueRange = 0f..state.totalTime,
             colors = SliderDefaults.colors(
@@ -83,12 +70,10 @@ fun PlayerScreen(
                 inactiveTrackColor = MaterialTheme.colorScheme.onBackground
             ),
             onValueChange = {
-                dragging = true
-                dragValue = it
+                onEvent(PlayerEventUi.StartDragging(it))
             },
             onValueChangeFinished = {
-                dragging = false
-                onEvent(PlayerEventUi.OnSeekTo(dragValue))
+                onEvent(PlayerEventUi.StopDragging)
             }
         )
         Spacer(Modifier.height(16.dp))

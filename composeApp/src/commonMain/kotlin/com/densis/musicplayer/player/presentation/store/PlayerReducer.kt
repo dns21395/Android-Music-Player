@@ -17,6 +17,12 @@ val PlayerReducer =
                     }
                 }
 
+                PlayerEventInternal.OnSeekToUpdated -> {
+                    commands {
+                        +PlayerCommand.ObserveCurrentPosition
+                    }
+                }
+
                 is PlayerEventInternal.OnReceivedCurrentTrack -> {
                     val track = event.track
                     state {
@@ -68,9 +74,17 @@ val PlayerReducer =
                     state { copy(totalTime = event.duration) }
                 }
 
-                is PlayerEventUi.OnSeekTo -> {
-                    state { copy(currentTime = event.seekTo) }
-                    commands { +PlayerCommand.SeekTo(event.seekTo) }
+
+                is PlayerEventUi.StopDragging -> {
+                    commands {
+                        +PlayerCommand.SeekTo(state.currentTime)
+                    }
+
+                }
+
+                is PlayerEventUi.StartDragging -> {
+                    state { copy(currentTime = event.position) }
+                    commands { +PlayerCommand.StopObserveCurrentPosition }
                 }
             }
         }
