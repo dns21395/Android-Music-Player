@@ -7,4 +7,6 @@ data class PlayerState(
     val artist: String = "",
     val image: ImageBitmap? = null,
     val isPlaying: Boolean = true,
+    val currentTime: Float = 0f,
+    val totalTime: Float = 0f
 )

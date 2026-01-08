@@ -11,4 +11,8 @@ expect class MusicPlayer {
     fun pause()
     fun next()
     fun previous()
+    fun currentPosition(): Float
+    fun observeTotalDuration(): Flow<Float>
+    fun observeIsPlaying(): Flow<Boolean>
+    fun seekTo(position: Float)
 }

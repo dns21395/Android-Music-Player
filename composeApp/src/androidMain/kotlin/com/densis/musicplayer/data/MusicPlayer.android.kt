@@ -35,6 +35,8 @@ actual class MusicPlayer(
         get() = if (controllerFuture.isDone) controllerFuture.get() else null
 
     private var currentTrack: MutableStateFlow<Track?> = MutableStateFlow(null)
+    private var totalDuration: MutableStateFlow<Float> = MutableStateFlow(0f)
+    private var isPlayingState: MutableStateFlow<Boolean> = MutableStateFlow(false)
 
     init {
         val token = SessionToken(context, ComponentName(context, PlayerService::class.java))
@@ -129,6 +131,8 @@ actual class MusicPlayer(
                 with(player) {
                     scope.launch {
                         currentTrack.emit(currentMediaItem?.toTrack())
+                        totalDuration.emit(duration.coerceAtLeast(0).toFloat())
+                        isPlayingState.emit(isPlaying)
                     }
                 }
             }
@@ -137,4 +141,20 @@ actual class MusicPlayer(
 
     fun MediaItem.toTrack() =
         playlist.find { it.id == mediaId }
+
+    actual fun currentPosition(): Float {
+        return controller?.currentPosition?.toFloat() ?: 0f
+    }
+
+    actual fun observeTotalDuration(): Flow<Float> {
+        return totalDuration
+    }
+
+    actual fun observeIsPlaying(): Flow<Boolean> {
+        return isPlayingState
+    }
+
+    actual fun seekTo(position: Float) {
+        controller?.seekTo(position.toLong())
+    }
 }

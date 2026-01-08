@@ -9,7 +9,12 @@ val PlayerReducer =
         ) {
             when (event) {
                 PlayerEventUi.InitScreen -> {
-                    commands { +PlayerCommand.GetTrack }
+                    commands {
+                        +PlayerCommand.ObserveTrack
+                        +PlayerCommand.ObserveTotalDuration
+                        +PlayerCommand.ObserveCurrentPosition
+                        +PlayerCommand.ObservePlayPause
+                    }
                 }
 
                 is PlayerEventInternal.OnReceivedCurrentTrack -> {
@@ -33,12 +38,15 @@ val PlayerReducer =
                 }
 
                 is PlayerEventUi.OnPreviousButtonClicked -> {
+                    state { copy(currentTime = 0f) }
                     commands {
                         +PlayerCommand.PlayPreviousTrack
                     }
+
                 }
 
                 is PlayerEventUi.OnNextButtonClicked -> {
+                    state { copy(currentTime = 0f) }
                     commands {
                         +PlayerCommand.PlayerNextTrack
                     }
@@ -46,7 +54,23 @@ val PlayerReducer =
 
                 is PlayerEventUi.OnPlayPauseButtonClicked -> {
                     commands { +PlayerCommand.PlayOrPause(state.isPlaying) }
-                    state { copy(isPlaying = !state.isPlaying)}
+                }
+
+                is PlayerEventInternal.OnSeekPositionUpdated -> {
+                    state { copy(currentTime = event.position) }
+                }
+
+                is PlayerEventInternal.OnPlayPauseStateUpdated -> {
+                    state { copy(isPlaying = event.isPlaying) }
+                }
+
+                is PlayerEventInternal.OnReceivedTotalDuration -> {
+                    state { copy(totalTime = event.duration) }
+                }
+
+                is PlayerEventUi.OnSeekTo -> {
+                    state { copy(currentTime = event.seekTo) }
+                    commands { +PlayerCommand.SeekTo(event.seekTo) }
                 }
             }
         }
