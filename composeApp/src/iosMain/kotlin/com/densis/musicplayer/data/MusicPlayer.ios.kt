@@ -6,16 +6,10 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.callbackFlow
-import platform.Foundation.NSMutableSet
 import platform.Foundation.NSNotification
 import platform.Foundation.NSNotificationCenter
-import platform.Foundation.NSNumber
-import platform.Foundation.NSPredicate
-import platform.Foundation.numberWithLongLong
 import platform.MediaPlayer.MPMediaItem
 import platform.MediaPlayer.MPMediaItemCollection
-import platform.MediaPlayer.MPMediaItemPropertyPersistentID
-import platform.MediaPlayer.MPMediaPropertyPredicate
 import platform.MediaPlayer.MPMediaQuery
 import platform.MediaPlayer.MPMusicPlaybackState
 import platform.MediaPlayer.MPMusicPlayerController
@@ -86,15 +80,12 @@ actual class MusicPlayer {
         val wantedIds: List<Long> = tracks.mapNotNull { it.id.toLongOrNull() }
         if (wantedIds.isEmpty()) return emptyList()
 
-        // 1) Берём все айтемы из медиатеки (одним запросом)
         val allItems = MPMediaQuery.songsQuery().items ?: emptyList<Any?>()
 
-        // 2) Мапа: persistentID -> item
         val byId: Map<Long, MPMediaItem> =
             allItems.mapNotNull { it as? MPMediaItem }
                 .associateBy { it.persistentID.toLong() }
 
-        // 3) Собираем список в порядке tracks
         return wantedIds.mapNotNull { byId[it] }
     }
 
