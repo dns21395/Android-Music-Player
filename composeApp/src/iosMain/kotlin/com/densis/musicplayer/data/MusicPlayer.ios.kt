@@ -6,9 +6,11 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.callbackFlow
+import platform.Foundation.NSMutableSet
 import platform.Foundation.NSNotification
 import platform.Foundation.NSNotificationCenter
 import platform.Foundation.NSNumber
+import platform.Foundation.NSPredicate
 import platform.Foundation.numberWithLongLong
 import platform.MediaPlayer.MPMediaItem
 import platform.MediaPlayer.MPMediaItemCollection
@@ -81,24 +83,19 @@ actual class MusicPlayer {
     }
 
     private fun getPersistentIDs(tracks: List<Track>): List<MPMediaItem> {
-        val ids: List<NSNumber> = tracks.mapNotNull { it.id.toLongOrNull() }
-            .map { NSNumber.numberWithLongLong(it) }
+        val wantedIds: List<Long> = tracks.mapNotNull { it.id.toLongOrNull() }
+        if (wantedIds.isEmpty()) return emptyList()
 
-        if (ids.isEmpty()) {
-            queueItems = emptyList()
-            return emptyList()
-        }
+        // 1) Берём все айтемы из медиатеки (одним запросом)
+        val allItems = MPMediaQuery.songsQuery().items ?: emptyList<Any?>()
 
-        val predicate = MPMediaPropertyPredicate.predicateWithValue(
-            value = ids,
-            forProperty = MPMediaItemPropertyPersistentID
-        )
+        // 2) Мапа: persistentID -> item
+        val byId: Map<Long, MPMediaItem> =
+            allItems.mapNotNull { it as? MPMediaItem }
+                .associateBy { it.persistentID.toLong() }
 
-        val query = MPMediaQuery()
-        query.addFilterPredicate(predicate)
-
-        val itemsAny = query.items ?: emptyList<Any?>()
-        return itemsAny.mapNotNull { it as? MPMediaItem }
+        // 3) Собираем список в порядке tracks
+        return wantedIds.mapNotNull { byId[it] }
     }
 
     actual fun play(track: Track) {
