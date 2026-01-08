@@ -3,6 +3,8 @@ package com.densis.musicplayer.data
 import com.densis.musicplayer.domain.entity.Track
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.callbackFlow
 import platform.Foundation.NSNotification
 import platform.Foundation.NSNotificationCenter
@@ -13,8 +15,10 @@ import platform.MediaPlayer.MPMediaItemCollection
 import platform.MediaPlayer.MPMediaItemPropertyPersistentID
 import platform.MediaPlayer.MPMediaPropertyPredicate
 import platform.MediaPlayer.MPMediaQuery
+import platform.MediaPlayer.MPMusicPlaybackState
 import platform.MediaPlayer.MPMusicPlayerController
 import platform.MediaPlayer.MPMusicPlayerControllerNowPlayingItemDidChangeNotification
+import platform.MediaPlayer.MPMusicPlayerControllerPlaybackStateDidChangeNotification
 import platform.MediaPlayer.MPMusicRepeatMode
 import platform.darwin.NSObjectProtocol
 
@@ -22,6 +26,50 @@ actual class MusicPlayer {
     private val player = MPMusicPlayerController.systemMusicPlayer()
     private var playlist: List<Track> = emptyList()
     private var queueItems: List<MPMediaItem> = emptyList()
+
+
+    private val _totalDurationMs = MutableStateFlow(0f)
+    private val _isPlaying = MutableStateFlow(false)
+
+    private var nowPlayingObserver: NSObjectProtocol? = null
+    private var playbackStateObserver: NSObjectProtocol? = null
+
+    init {
+        player.beginGeneratingPlaybackNotifications()
+
+        val center = NSNotificationCenter.defaultCenter
+
+        nowPlayingObserver = center.addObserverForName(
+            name = MPMusicPlayerControllerNowPlayingItemDidChangeNotification,
+            `object` = player,
+            queue = null
+        ) { _: NSNotification? ->
+            _totalDurationMs.value = currentTotalDurationMs()
+            _isPlaying.value =
+                player.playbackState == MPMusicPlaybackState.MPMusicPlaybackStatePlaying
+        }
+
+        playbackStateObserver = center.addObserverForName(
+            name = MPMusicPlayerControllerPlaybackStateDidChangeNotification,
+            `object` = player,
+            queue = null
+        ) { _: NSNotification? ->
+            _isPlaying.value =
+                player.playbackState == MPMusicPlaybackState.MPMusicPlaybackStatePlaying
+        }
+
+        _totalDurationMs.value = currentTotalDurationMs()
+        _isPlaying.value = player.playbackState == MPMusicPlaybackState.MPMusicPlaybackStatePlaying
+    }
+
+    fun release() {
+        val center = NSNotificationCenter.defaultCenter
+        nowPlayingObserver?.let { center.removeObserver(it) }
+        playbackStateObserver?.let { center.removeObserver(it) }
+        nowPlayingObserver = null
+        playbackStateObserver = null
+        player.endGeneratingPlaybackNotifications()
+    }
 
     actual fun setPlaylist(tracks: List<Track>) {
         playlist = tracks
@@ -71,10 +119,11 @@ actual class MusicPlayer {
             val item = player.nowPlayingItem
             val id = item?.persistentID?.toString()
             val track = id?.let { pid -> playlist.firstOrNull { it.id == pid } }
+
+            _totalDurationMs.value = currentTotalDurationMs()
+
             trySend(track)
         }
-
-        player.beginGeneratingPlaybackNotifications()
 
         val center = NSNotificationCenter.defaultCenter
 
@@ -90,7 +139,26 @@ actual class MusicPlayer {
 
         awaitClose {
             center.removeObserver(obs1)
-            player.endGeneratingPlaybackNotifications()
         }
+    }
+
+    actual fun currentPosition(): Float {
+        val sec = player.currentPlaybackTime.coerceAtLeast(0.0)
+        return (sec * 1000.0).toFloat()
+    }
+
+    actual fun observeTotalDuration(): Flow<Float> = _totalDurationMs.asStateFlow()
+
+    actual fun observeIsPlaying(): Flow<Boolean> = _isPlaying.asStateFlow()
+
+    actual fun seekTo(position: Float) {
+        val sec = (position / 1000f).toDouble()
+        player.currentPlaybackTime = sec
+    }
+
+    private fun currentTotalDurationMs(): Float {
+        val item = player.nowPlayingItem ?: return 0f
+        val sec = item.playbackDuration.coerceAtLeast(0.0)
+        return (sec * 1000.0).toFloat()
     }
 }
