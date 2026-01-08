@@ -5,18 +5,18 @@ import android.content.Context
 import android.net.Uri
 import android.provider.MediaStore
 import androidx.media3.common.MediaItem
-import androidx.media3.common.MediaMetadata
 import androidx.media3.common.Player
 import androidx.media3.session.MediaController
 import androidx.media3.session.SessionToken
 import com.densis.musicplayer.domain.entity.Track
 import com.densis.musicplayer.player.PlayerService
-import com.densis.musicplayer.player.domain.entity.PlayerState
 import com.google.common.util.concurrent.ListenableFuture
 import com.google.common.util.concurrent.MoreExecutors
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.cancellation.CancellationException
@@ -34,15 +34,7 @@ actual class MusicPlayer(
     private var controller: MediaController? = null
         get() = if (controllerFuture.isDone) controllerFuture.get() else null
 
-    var mediaControllerCallback: ((
-        playerState: PlayerState,
-        currentMusic: Track?,
-        currentPosition: Long,
-        totalDuration: Long,
-        isShuffleEnabled: Boolean,
-        iRepeatOneEnabled: Boolean,
-    ) -> Unit)? =
-        null
+    private var currentTrack: MutableStateFlow<Track?> = MutableStateFlow(null)
 
     init {
         val token = SessionToken(context, ComponentName(context, PlayerService::class.java))
@@ -72,12 +64,6 @@ actual class MusicPlayer(
             MediaItem.Builder()
                 .setMediaId(track.id)
                 .setUri(uri)
-                .setMediaMetadata(
-                    MediaMetadata.Builder()
-                        .setTitle(track.title)
-                        .setArtist(track.artist)
-                        .build()
-                )
                 .build()
         }
 
@@ -130,37 +116,24 @@ actual class MusicPlayer(
         controller?.seekToPrevious()
     }
 
-    actual fun getCurrentTrack(): Track? {
-        return controller?.currentMediaItem?.toTrack()
+    actual fun getCurrentTrack(): Flow<Track?> {
+        return currentTrack
     }
 
     // TODO release function
-
 
     private fun controllerListener() {
         controller?.addListener(object : Player.Listener {
             override fun onEvents(player: Player, events: Player.Events) {
                 super.onEvents(player, events)
                 with(player) {
-                    mediaControllerCallback?.invoke(
-                        playbackState.toPlayerState(isPlaying),
-                        currentMediaItem?.toTrack(),
-                        currentPosition.coerceAtLeast(0L),
-                        duration.coerceAtLeast(0L),
-                        shuffleModeEnabled,
-                        repeatMode == Player.REPEAT_MODE_ONE
-                    )
+                    scope.launch {
+                        currentTrack.emit(currentMediaItem?.toTrack())
+                    }
                 }
             }
         })
     }
-
-    private fun Int.toPlayerState(isPlaying: Boolean) =
-        when (this) {
-            Player.STATE_IDLE -> PlayerState.PAUSED
-            Player.STATE_ENDED -> PlayerState.PAUSED
-            else -> if (isPlaying) PlayerState.PLAYING else PlayerState.PAUSED
-        }
 
     fun MediaItem.toTrack() =
         playlist.find { it.id == mediaId }

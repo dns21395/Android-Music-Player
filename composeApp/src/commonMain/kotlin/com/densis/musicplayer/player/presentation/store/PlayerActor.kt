@@ -14,27 +14,23 @@ class PlayerActor(
     override fun execute(command: PlayerCommand): Flow<PlayerEvent> {
         return when (command) {
             PlayerCommand.GetTrack -> flow {
-                val track = withContext(Dispatchers.Main) {
-                    musicPlayer.getCurrentTrack()
+                musicPlayer.getCurrentTrack().collect { track ->
+                    emit(OnReceivedCurrentTrack(track))
                 }
-                emit(OnReceivedCurrentTrack(track))
             }
 
+
             PlayerCommand.PlayPreviousTrack -> flow {
-                val track = withContext(Dispatchers.Main) {
+                withContext(Dispatchers.Main) {
                     musicPlayer.previous()
-                    musicPlayer.getCurrentTrack()
                 }
-                emit(OnReceivedCurrentTrack(track))
             }
 
             PlayerCommand.PlayerNextTrack -> flow {
-                val track = withContext(Dispatchers.Main) {
+                withContext(Dispatchers.Main) {
                     musicPlayer.next()
-                    musicPlayer.getCurrentTrack()
                 }
 
-                emit(OnReceivedCurrentTrack(track))
             }
 
             is PlayerCommand.PlayOrPause -> flow {
