@@ -86,7 +86,7 @@ fun App() {
                     PlaylistScreen(
                         state = state,
                         onEvent = { viewModel.onEvent(it) },
-                        modifier = Modifier.fillMaxSize().statusBarsPadding().padding(16.dp)
+                        modifier = Modifier.fillMaxSize()
                     )
                 }
                 composable<Route.Player> {

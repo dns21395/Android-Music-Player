@@ -41,7 +41,7 @@ class PlayerActor(
                         while (isActive) {
                             val position = withContext(Dispatchers.Main) { musicPlayer.currentPosition() }
                             send(OnSeekPositionUpdated(position))
-                            delay(1_000)
+                            delay(500)
                         }
                     }
                 }

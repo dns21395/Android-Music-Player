@@ -32,6 +32,28 @@ class PlaylistActor(
 
                 emit(OpenPlayer)
             }
+
+            PlaylistCommand.ObserveCurrentTrack -> flow {
+                musicPlayer.getCurrentTrack().collect { track ->
+                    emit(PlaylistEvent.OnReceivedCurrentTrack(track))
+                }
+            }
+
+            is PlaylistCommand.PlayOrPause -> flow {
+                withContext(Dispatchers.Main) {
+                    if (command.isPlaying) {
+                        musicPlayer.pause()
+                    } else {
+                        musicPlayer.resume()
+                    }
+                }
+            }
+
+            PlaylistCommand.ObservePlayPause -> flow {
+                musicPlayer.observeIsPlaying().collect { isPlaying ->
+                    emit(PlaylistEvent.OnPlayPauseStateUpdated(isPlaying))
+                }
+            }
         }
     }
 }

@@ -1,6 +1,5 @@
 package com.densis.musicplayer.player
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -27,17 +26,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.Shadow
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.densis.musicplayer.common.presentation.Cover
 import com.densis.musicplayer.player.presentation.store.PlayerEvent
 import com.densis.musicplayer.player.presentation.store.PlayerEventUi
 import com.densis.musicplayer.player.presentation.store.PlayerState
 import com.densis.musicplayer.player.presentation.store.toTime
 import musicplayer.composeapp.generated.resources.Res
-import musicplayer.composeapp.generated.resources.ic_album_cover
 import musicplayer.composeapp.generated.resources.pause
 import musicplayer.composeapp.generated.resources.play
 import musicplayer.composeapp.generated.resources.skip_next
@@ -60,10 +57,13 @@ fun PlayerScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
-        Cover(state.image)
+        Cover(
+            cover = state.image,
+            imageSize = 240.dp,
+            emptyIconSize = 64.dp
+        )
 
-        Spacer(Modifier.height(16.dp))
-
+        Spacer(Modifier.height(24.dp))
         Slider(
             value = state.currentTime,
             modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp),
@@ -80,7 +80,6 @@ fun PlayerScreen(
                 onEvent(PlayerEventUi.StopDragging)
             }
         )
-
         val totalText by remember(state.totalTime) {
             derivedStateOf { state.totalTime.toLong().toTime() }
         }
@@ -88,11 +87,14 @@ fun PlayerScreen(
         val currentText by remember(state.currentTime) {
             derivedStateOf { state.currentTime.toLong().toTime() }
         }
+        Spacer(Modifier.height(8.dp))
         Row(
-            modifier = modifier.fillMaxWidth().padding(end = 16.dp),
+            modifier = modifier.fillMaxWidth().padding(horizontal = 16.dp),
             horizontalArrangement = Arrangement.End
         ) {
-            Text("$currentText / $totalText", color = Color.White)
+            Text(currentText, color = Color.White)
+            Spacer(modifier = Modifier.weight(1f))
+            Text(totalText, color = Color.White)
         }
         Spacer(Modifier.height(16.dp))
         Text(
@@ -144,32 +146,6 @@ fun PlayerScreen(
 
                 )
             }
-        }
-    }
-}
-
-@Composable
-fun Cover(cover: ImageBitmap?) {
-    if (cover != null) {
-        Image(
-            bitmap = cover,
-            contentDescription = null,
-            modifier = Modifier.size(240.dp),
-            contentScale = ContentScale.Crop
-        )
-    } else {
-        Box(
-            modifier = Modifier
-                .size(240.dp)
-                .background(Color(0xFF2A2A2A)),
-            contentAlignment = Alignment.Center
-        ) {
-            Icon(
-                painter = painterResource(Res.drawable.ic_album_cover),
-                contentDescription = null,
-                tint = Color.White.copy(alpha = 0.6f),
-                modifier = Modifier.size(64.dp)
-            )
         }
     }
 }

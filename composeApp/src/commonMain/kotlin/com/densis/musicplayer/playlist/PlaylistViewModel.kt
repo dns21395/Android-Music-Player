@@ -1,16 +1,25 @@
 package com.densis.musicplayer.playlist
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.densis.musicplayer.player.TrackCoverLoader
+import com.densis.musicplayer.playlist.presentation.store.PlaylistEffect
 import com.densis.musicplayer.playlist.presentation.store.PlaylistEvent
 import com.densis.musicplayer.playlist.presentation.store.PlaylistState
 import com.densis.musicplayer.playlist.presentation.store.PlaylistStore
+import kotlinx.coroutines.CoroutineStart
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 
 class PlaylistViewModel(
     private val store: PlaylistStore,
+    private val trackCoverLoader: TrackCoverLoader,
 ) : ViewModel() {
 
     init {
+        observeEffects()
         store.start()
         onEvent(PlaylistEvent.InitScreen)
     }
@@ -21,5 +30,22 @@ class PlaylistViewModel(
 
     fun onEvent(event: PlaylistEvent) {
         store.accept(event)
+    }
+
+    private fun observeEffects() {
+        viewModelScope.launch(Dispatchers.IO, start = CoroutineStart.UNDISPATCHED) {
+            store.effects.collect { effect ->
+                when (effect) {
+                    is PlaylistEffect.LoadTrackCover -> {
+                        val imageBitmap = trackCoverLoader.load(effect.id)
+                        store.accept(
+                            PlaylistEvent.OnTrackCoverLoaded(imageBitmap)
+                        )
+                    }
+
+                    else -> {}
+                }
+            }
+        }
     }
 }
