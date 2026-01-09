@@ -57,6 +57,10 @@ actual class MusicPlayer(
     actual fun setPlaylist(tracks: List<Track>) {
         playlist = tracks
 
+        if (isSamePlaylist(tracks)) {
+            return
+        }
+
         mediaItems = tracks.map { track ->
             val uri: Uri = Uri.withAppendedPath(
                 MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
@@ -73,8 +77,31 @@ actual class MusicPlayer(
         scope.launch {
             val controller = controllerFuture.await()
             controller.setMediaItems(mediaItems)
+            controller.repeatMode = Player.REPEAT_MODE_ALL
             controller.prepare()
         }
+    }
+
+    private fun isSamePlaylist(tracks: List<Track>): Boolean {
+        if (controller == null) {
+            return false
+        }
+
+        val mediaItemCount = controller?.mediaItemCount ?: 0
+
+        if (mediaItemCount != tracks.size) {
+            return false
+        }
+
+
+        for (i in 0 until mediaItemCount) {
+            val mediaItem = controller?.getMediaItemAt(i)
+            if (mediaItem?.mediaId != tracks[i].id) {
+                return false
+            }
+        }
+
+        return true
     }
 
     suspend fun <T> ListenableFuture<T>.await(): T =
