@@ -131,7 +131,7 @@ fun NowPlayingBar(
             Cover(
                 cover = state.currentTrackCover,
                 imageSize = 48.dp,
-                emptyIconSize = 16.dp
+                emptyIconSize = 24.dp
             )
 
             Spacer(Modifier.width(12.dp))

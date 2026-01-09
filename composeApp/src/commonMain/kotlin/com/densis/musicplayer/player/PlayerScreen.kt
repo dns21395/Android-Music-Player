@@ -60,7 +60,7 @@ fun PlayerScreen(
         Cover(
             cover = state.image,
             imageSize = 240.dp,
-            emptyIconSize = 64.dp
+            emptyIconSize = 120.dp
         )
 
         Spacer(Modifier.height(24.dp))
@@ -69,9 +69,11 @@ fun PlayerScreen(
             modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp),
             valueRange = 0f..state.totalTime,
             colors = SliderDefaults.colors(
-                thumbColor = Color.White,
-                activeTrackColor = Color.White.copy(alpha = 0.25f),
-                inactiveTrackColor = MaterialTheme.colorScheme.onBackground
+                thumbColor = MaterialTheme.colorScheme.onBackground,
+                activeTrackColor = MaterialTheme.colorScheme.onBackground,
+                inactiveTrackColor = MaterialTheme.colorScheme.onBackground.copy(
+                    alpha = 0.25f
+                )
             ),
             onValueChange = {
                 onEvent(PlayerEventUi.StartDragging(it))
