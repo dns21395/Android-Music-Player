@@ -12,7 +12,6 @@ sealed class PlayerEventUi : PlayerEvent {
     object OnPlayPauseButtonClicked : PlayerEventUi()
     data class StartDragging(val position: Float) : PlayerEventUi()
     object StopDragging : PlayerEventUi()
-    data class OnSeekTo(val seekTo: Float) : PlayerEventUi()
 }
 
 sealed class PlayerEventInternal : PlayerEvent {

@@ -30,6 +30,7 @@ val PlayerReducer =
                             name = track?.title ?: "",
                             artist = track?.artist ?: "",
                             image = null,
+                            currentTime = 0f,
                         )
                     }
                     if (track?.trackCoverId != null) {

@@ -20,6 +20,9 @@ import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -32,6 +35,7 @@ import androidx.compose.ui.unit.dp
 import com.densis.musicplayer.player.presentation.store.PlayerEvent
 import com.densis.musicplayer.player.presentation.store.PlayerEventUi
 import com.densis.musicplayer.player.presentation.store.PlayerState
+import com.densis.musicplayer.player.presentation.store.toTime
 import musicplayer.composeapp.generated.resources.Res
 import musicplayer.composeapp.generated.resources.ic_album_cover
 import musicplayer.composeapp.generated.resources.pause
@@ -76,6 +80,20 @@ fun PlayerScreen(
                 onEvent(PlayerEventUi.StopDragging)
             }
         )
+
+        val totalText by remember(state.totalTime) {
+            derivedStateOf { state.totalTime.toLong().toTime() }
+        }
+
+        val currentText by remember(state.currentTime) {
+            derivedStateOf { state.currentTime.toLong().toTime() }
+        }
+        Row(
+            modifier = modifier.fillMaxWidth().padding(end = 16.dp),
+            horizontalArrangement = Arrangement.End
+        ) {
+            Text("$currentText / $totalText", color = Color.White)
+        }
         Spacer(Modifier.height(16.dp))
         Text(
             state.name, style = MaterialTheme.typography.titleLarge.copy(
