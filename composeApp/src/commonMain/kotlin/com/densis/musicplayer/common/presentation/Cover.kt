@@ -21,6 +21,7 @@ fun Cover(
     cover: ImageBitmap?,
     imageSize: Dp,
     emptyIconSize: Dp,
+    emptyBackgroundColor: Color,
 ) {
     if (cover != null) {
         Image(
@@ -33,7 +34,7 @@ fun Cover(
         Box(
             modifier = Modifier
                 .size(imageSize)
-                .background(Color(0xFF2A2A2A)),
+                .background(emptyBackgroundColor),
             contentAlignment = Alignment.Center
         ) {
             Icon(

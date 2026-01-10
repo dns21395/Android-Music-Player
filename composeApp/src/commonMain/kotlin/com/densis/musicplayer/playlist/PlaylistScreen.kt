@@ -80,7 +80,11 @@ fun PlaylistScreen(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center,
             ) {
-                Text("Wow, such empty")
+                Text(
+                    "Wow, such empty",
+                    style = MaterialTheme.typography.titleLarge,
+                    color = Color.White
+                )
             }
         }
     }
@@ -123,7 +127,7 @@ fun NowPlayingBar(
 ) {
     Surface(
         modifier = modifier
-            .clickable{onEvent(PlaylistEvent.OpenPlayer)},
+            .clickable { onEvent(PlaylistEvent.OpenPlayer) },
         tonalElevation = 6.dp,
         shadowElevation = 6.dp
     ) {
@@ -137,7 +141,8 @@ fun NowPlayingBar(
             Cover(
                 cover = state.currentTrackCover,
                 imageSize = 48.dp,
-                emptyIconSize = 24.dp
+                emptyIconSize = 24.dp,
+                emptyBackgroundColor = Color.Black.copy(alpha = 0.75f)
             )
 
             Spacer(Modifier.width(12.dp))

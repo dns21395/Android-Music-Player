@@ -58,7 +58,8 @@ fun PlayerScreen(
         Cover(
             cover = state.image,
             imageSize = 240.dp,
-            emptyIconSize = 120.dp
+            emptyIconSize = 120.dp,
+            emptyBackgroundColor = Color(0xFF2A2A2A)
         )
 
         Spacer(Modifier.height(24.dp))
