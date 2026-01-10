@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<resources>
+    <string name="permission_text">Please give permission to read audio library.\nIf you doesn't see alert/dialog then give permission through Settings.</string>
+    <string name="permission_button">Allow access</string>
+</resources>
