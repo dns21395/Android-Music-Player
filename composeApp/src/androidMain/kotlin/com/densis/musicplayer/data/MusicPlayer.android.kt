@@ -121,10 +121,12 @@ actual class MusicPlayer(
         }
 
     actual fun play(track: Track) {
-        controller?.apply {
-            seekToDefaultPosition(playlist.indexOf(track))
-            playWhenReady = true
-            prepare()
+        scope.launch {
+            controller?.apply {
+                seekToDefaultPosition(playlist.indexOf(track))
+                playWhenReady = true
+                prepare()
+            }
         }
     }
 

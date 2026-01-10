@@ -26,10 +26,7 @@ class PlaylistActor(
             }
 
             is PlaylistCommand.PlayTrack -> flow {
-                withContext(Dispatchers.Main) {
-                    musicPlayer.play(command.track)
-                }
-
+                musicPlayer.play(command.track)
                 emit(OpenPlayer)
             }
 

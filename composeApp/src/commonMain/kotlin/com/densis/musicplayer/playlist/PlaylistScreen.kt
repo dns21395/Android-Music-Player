@@ -122,7 +122,8 @@ fun NowPlayingBar(
     modifier: Modifier = Modifier,
 ) {
     Surface(
-        modifier = modifier,
+        modifier = modifier
+            .clickable{onEvent(PlaylistEvent.OpenPlayer)},
         tonalElevation = 6.dp,
         shadowElevation = 6.dp
     ) {

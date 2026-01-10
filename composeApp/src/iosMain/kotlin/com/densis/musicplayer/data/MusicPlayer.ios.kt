@@ -1,11 +1,15 @@
 package com.densis.musicplayer.data
 
 import com.densis.musicplayer.domain.entity.Track
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.launch
 import platform.Foundation.NSNotification
 import platform.Foundation.NSNotificationCenter
 import platform.MediaPlayer.MPMediaItem
@@ -29,6 +33,8 @@ actual class MusicPlayer {
 
     private var nowPlayingObserver: NSObjectProtocol? = null
     private var playbackStateObserver: NSObjectProtocol? = null
+
+    private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
 
     init {
         player.beginGeneratingPlaybackNotifications()
@@ -58,15 +64,6 @@ actual class MusicPlayer {
         _isPlaying.value = player.playbackState == MPMusicPlaybackState.MPMusicPlaybackStatePlaying
     }
 
-    fun release() {
-        val center = NSNotificationCenter.defaultCenter
-        nowPlayingObserver?.let { center.removeObserver(it) }
-        playbackStateObserver?.let { center.removeObserver(it) }
-        nowPlayingObserver = null
-        playbackStateObserver = null
-        player.endGeneratingPlaybackNotifications()
-    }
-
     actual fun setPlaylist(tracks: List<Track>) {
         playlist = tracks
         queueItems = getPersistentIDs(tracks)
@@ -90,11 +87,13 @@ actual class MusicPlayer {
     }
 
     actual fun play(track: Track) {
-        val idx = playlist.indexOfFirst { it.id == track.id }
-        val item = queueItems.getOrNull(idx) ?: return
+        scope.launch {
+            val idx = playlist.indexOfFirst { it.id == track.id }
+            val item = queueItems.getOrNull(idx) ?: return@launch
 
-        player.nowPlayingItem = item
-        player.play()
+            player.nowPlayingItem = item
+            player.play()
+        }
     }
 
     actual fun resume() = player.play()
