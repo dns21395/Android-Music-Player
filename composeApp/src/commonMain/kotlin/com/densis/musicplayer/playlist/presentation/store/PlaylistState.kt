@@ -5,6 +5,7 @@ import com.densis.musicplayer.domain.entity.Track
 
 data class PlaylistState(
     val playlist: List<Track> = emptyList(),
+    val currentTrackId: String = "",
     val currentTrackArtist: String = "",
     val currentTrackName: String = "",
     val currentTrackCover: ImageBitmap? = null,

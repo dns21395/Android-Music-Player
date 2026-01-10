@@ -78,7 +78,6 @@ actual class MusicPlayer(
             val controller = controllerFuture.await()
             controller.setMediaItems(mediaItems)
             controller.repeatMode = Player.REPEAT_MODE_ALL
-            controller.prepare()
         }
     }
 

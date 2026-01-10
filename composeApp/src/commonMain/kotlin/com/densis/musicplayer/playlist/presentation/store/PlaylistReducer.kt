@@ -38,6 +38,7 @@ val PlaylistReducer =
                     val track = event.track
                     state {
                         copy(
+                            currentTrackId = track?.id ?: "",
                             currentTrackArtist = track?.artist ?: "",
                             currentTrackName = track?.title ?: "",
                             currentTrackCover = null,

@@ -1,9 +1,9 @@
 package com.densis.musicplayer.playlist
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
@@ -68,6 +68,7 @@ fun PlaylistScreen(
                     key = { it.id }
                 ) { track ->
                     TrackItem(
+                        isPlayingTrack = state.currentTrackId == track.id,
                         track = track,
                         onEvent = { onEvent(it) }
                     )
@@ -88,12 +89,14 @@ fun PlaylistScreen(
 
 @Composable
 private fun TrackItem(
+    isPlayingTrack: Boolean,
     track: Track,
     onEvent: (PlaylistEvent) -> Unit
 ) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
+            .background(if (isPlayingTrack) Color.White.copy(alpha = 0.08f) else Color.Transparent)
             .clickable(onClick = { onEvent(PlaylistEvent.OnTrackClicked(track)) })
             .padding(vertical = 8.dp, horizontal = 16.dp)
     ) {
