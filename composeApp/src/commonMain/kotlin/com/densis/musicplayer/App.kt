@@ -3,6 +3,8 @@ package com.densis.musicplayer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -31,71 +33,76 @@ import org.koin.compose.viewmodel.koinViewModel
 @Preview
 fun App() {
     MusicPlayerTheme {
-        val navController = rememberNavController()
-
-        NavHost(
-            navController = navController,
-            startDestination = Route.AppGraph
+        Surface(
+            modifier = Modifier.fillMaxSize(),
+            color = MaterialTheme.colorScheme.background,
         ) {
-            navigation<Route.AppGraph>(
-                startDestination = Route.Permission
+            val navController = rememberNavController()
+
+            NavHost(
+                navController = navController,
+                startDestination = Route.AppGraph
             ) {
-                composable<Route.Permission> {
-                    val viewModel = koinViewModel<PermissionViewModel>()
+                navigation<Route.AppGraph>(
+                    startDestination = Route.Permission
+                ) {
+                    composable<Route.Permission> {
+                        val viewModel = koinViewModel<PermissionViewModel>()
 
-                    val requestPermission =
-                        rememberRequestPermission { granted ->
-                            viewModel.onEvent(
-                                PermissionEvent.OnReceivedPermissionStatus(
-                                    granted
+                        val requestPermission =
+                            rememberRequestPermission { granted ->
+                                viewModel.onEvent(
+                                    PermissionEvent.OnReceivedPermissionStatus(
+                                        granted
+                                    )
                                 )
-                            )
-                        }
+                            }
 
-                    val state by viewModel.state.collectAsStateWithLifecycle()
+                        val state by viewModel.state.collectAsStateWithLifecycle()
 
-                    LaunchedEffect(Unit) {
-                        viewModel.onEvent(PermissionEvent.CheckPermission)
-                        viewModel.effects.collect { effect ->
-                            when (effect) {
-                                PermissionEffect.RequestPermission -> requestPermission()
-                                PermissionEffect.OpenPlaylist -> navController.navigate(Route.Playlist)
+                        LaunchedEffect(Unit) {
+                            viewModel.onEvent(PermissionEvent.CheckPermission)
+                            viewModel.effects.collect { effect ->
+                                when (effect) {
+                                    PermissionEffect.RequestPermission -> requestPermission()
+                                    PermissionEffect.OpenPlaylist -> navController.navigate(Route.Playlist)
+                                }
                             }
                         }
+                        Permission(
+                            state = state,
+                            onEvent = { viewModel.onEvent(it) },
+                            modifier = Modifier.fillMaxSize().statusBarsPadding().padding(16.dp)
+                        )
                     }
-                    Permission(
-                        state = state,
-                        onEvent = { viewModel.onEvent(it) },
-                        modifier = Modifier.fillMaxSize().statusBarsPadding().padding(16.dp)
-                    )
-                }
-                composable<Route.Playlist> {
-                    val viewModel = koinViewModel<PlaylistViewModel>()
-                    val state by viewModel.state.collectAsStateWithLifecycle()
+                    composable<Route.Playlist> {
+                        val viewModel = koinViewModel<PlaylistViewModel>()
+                        val state by viewModel.state.collectAsStateWithLifecycle()
 
-                    LaunchedEffect(Unit) {
-                        viewModel.effects.collect { effect ->
-                            when (effect) {
-                                PlaylistEffect.OpenPlayer -> navController.navigate(Route.Player)
-                                else -> Unit
+                        LaunchedEffect(Unit) {
+                            viewModel.effects.collect { effect ->
+                                when (effect) {
+                                    PlaylistEffect.OpenPlayer -> navController.navigate(Route.Player)
+                                    else -> Unit
+                                }
                             }
                         }
+
+                        PlaylistScreen(
+                            state = state,
+                            onEvent = { viewModel.onEvent(it) },
+                            modifier = Modifier.fillMaxSize()
+                        )
                     }
+                    composable<Route.Player> {
+                        val viewModel = koinViewModel<PlayerViewModel>()
+                        val state by viewModel.state.collectAsStateWithLifecycle()
 
-                    PlaylistScreen(
-                        state = state,
-                        onEvent = { viewModel.onEvent(it) },
-                        modifier = Modifier.fillMaxSize()
-                    )
-                }
-                composable<Route.Player> {
-                    val viewModel = koinViewModel<PlayerViewModel>()
-                    val state by viewModel.state.collectAsStateWithLifecycle()
-
-                    PlayerScreen(
-                        state = state,
-                        onEvent = { viewModel.onEvent(it) },
-                    )
+                        PlayerScreen(
+                            state = state,
+                            onEvent = { viewModel.onEvent(it) },
+                        )
+                    }
                 }
             }
         }

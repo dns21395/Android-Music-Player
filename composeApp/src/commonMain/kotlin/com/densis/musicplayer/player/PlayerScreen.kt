@@ -48,9 +48,7 @@ fun PlayerScreen(
     modifier: Modifier = Modifier
 ) {
     Box(
-        modifier = Modifier.fillMaxSize().background(
-            Color(0xFF121212)
-        )
+        modifier = Modifier.fillMaxSize()
     )
     Column(
         modifier = Modifier.fillMaxSize().statusBarsPadding().padding(16.dp),

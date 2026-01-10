@@ -47,12 +47,14 @@ fun PlaylistScreen(
     Scaffold(
         modifier = modifier.fillMaxSize(),
         bottomBar = {
-            NowPlayingBar(
-                state = state,
-                onEvent = onEvent,
-                modifier = Modifier
-                    .fillMaxWidth()
-            )
+            if (state.playlist.isNotEmpty()) {
+                NowPlayingBar(
+                    state = state,
+                    onEvent = onEvent,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                )
+            }
         }) { innerPadding ->
         if (state.playlist.isNotEmpty()) {
             LazyColumn(
