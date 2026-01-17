@@ -121,11 +121,28 @@ actual class MusicPlayer(
         }
 
     actual fun play(track: Track) {
+        // TODO REMOVE
         scope.launch {
-            controller?.apply {
-                seekToDefaultPosition(playlist.indexOf(track))
-                playWhenReady = true
-                prepare()
+
+        }
+    }
+
+    actual fun playTrackId(trackId: String) {
+        scope.launch {
+            var index = -1
+            for (i in 0 until playlist.size) {
+                if (playlist[i].id == trackId) {
+                    index = i
+                    break
+                }
+            }
+
+            if (index != -1) {
+                controller?.apply {
+                    seekToDefaultPosition(index)
+                    playWhenReady = true
+                    prepare()
+                }
             }
         }
     }

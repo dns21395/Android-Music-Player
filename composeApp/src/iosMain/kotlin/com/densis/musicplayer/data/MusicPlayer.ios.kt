@@ -96,6 +96,14 @@ actual class MusicPlayer {
         }
     }
 
+    actual fun playTrackId(trackId: String) {
+        val trackIndex = playlist.indexOfFirst { it.id == trackId }
+        val item = queueItems.getOrNull(trackIndex) ?: return
+
+        player.nowPlayingItem = item
+        player.play()
+    }
+
     actual fun resume() = player.play()
     actual fun pause() = player.pause()
     actual fun next() = player.skipToNextItem()

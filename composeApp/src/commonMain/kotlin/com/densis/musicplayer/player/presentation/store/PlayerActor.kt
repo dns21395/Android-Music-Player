@@ -100,6 +100,11 @@ class PlayerActor(
                 positionJob = null
                 emptyFlow()
             }
+
+            is PlayerCommand.PlayTrack -> {
+                musicPlayer.playTrackId(command.trackId)
+                emptyFlow()
+            }
         }
     }
 }

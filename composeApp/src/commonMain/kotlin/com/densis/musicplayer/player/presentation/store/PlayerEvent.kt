@@ -7,11 +7,13 @@ interface PlayerEvent
 
 sealed class PlayerEventUi : PlayerEvent {
     object InitScreen : PlayerEventUi()
+    data class PlayTrack(val trackId: String) : PlayerEventUi()
     object OnPreviousButtonClicked : PlayerEventUi()
     object OnNextButtonClicked : PlayerEventUi()
     object OnPlayPauseButtonClicked : PlayerEventUi()
     data class StartDragging(val position: Float) : PlayerEventUi()
     object StopDragging : PlayerEventUi()
+    data object OnBackButtonClicked : PlayerEventUi()
 }
 
 sealed class PlayerEventInternal : PlayerEvent {

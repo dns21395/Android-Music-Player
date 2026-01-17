@@ -8,7 +8,7 @@ sealed class PlaylistEvent {
     data object OnPlayPauseButtonClicked : PlaylistEvent()
     data class OnReceivedPlaylist(val playlist: List<Track>) : PlaylistEvent()
     data class OnTrackClicked(val track: Track) : PlaylistEvent()
-    data object OpenPlayer : PlaylistEvent()
+    data class OpenPlayer(val trackId: String? = null) : PlaylistEvent()
     data class OnReceivedCurrentTrack(val track: Track?) : PlaylistEvent()
     data class OnTrackCoverLoaded(val trackCover: ImageBitmap?) : PlaylistEvent()
     data class OnPlayPauseStateUpdated(val isPlaying: Boolean) : PlaylistEvent()

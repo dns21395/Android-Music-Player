@@ -42,6 +42,8 @@ class PlayerViewModel(
                             PlayerEventInternal.OnTrackCoverLoaded(imageBitmap)
                         )
                     }
+
+                    else -> {}
                 }
             }
         }

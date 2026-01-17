@@ -7,6 +7,7 @@ expect class MusicPlayer {
     fun setPlaylist(tracks: List<Track>)
     fun getCurrentTrack(): Flow<Track?>
     fun play(track: Track)
+    fun playTrackId(trackId: String)
     fun resume()
     fun pause()
     fun next()

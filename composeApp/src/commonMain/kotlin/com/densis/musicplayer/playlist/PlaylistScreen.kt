@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -38,6 +39,7 @@ import musicplayer.composeapp.generated.resources.pause
 import musicplayer.composeapp.generated.resources.play
 import org.jetbrains.compose.resources.painterResource
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PlaylistScreen(
     state: PlaylistState,
@@ -127,7 +129,7 @@ fun NowPlayingBar(
 ) {
     Surface(
         modifier = modifier
-            .clickable { onEvent(PlaylistEvent.OpenPlayer) },
+            .clickable { onEvent(PlaylistEvent.OpenPlayer()) },
         tonalElevation = 6.dp,
         shadowElevation = 6.dp
     ) {

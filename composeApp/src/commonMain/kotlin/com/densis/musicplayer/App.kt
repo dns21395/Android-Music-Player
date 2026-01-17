@@ -15,6 +15,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
 import com.densis.musicplayer.common.presentation.MusicPlayerTheme
 import com.densis.musicplayer.permission.Permission
 import com.densis.musicplayer.permission.PermissionViewModel
@@ -23,6 +24,8 @@ import com.densis.musicplayer.permission.presentation.PermissionEvent
 import com.densis.musicplayer.permission.rememberRequestPermission
 import com.densis.musicplayer.player.PlayerScreen
 import com.densis.musicplayer.player.PlayerViewModel
+import com.densis.musicplayer.player.presentation.store.PlayerEffect
+import com.densis.musicplayer.player.presentation.store.PlayerEventUi
 import com.densis.musicplayer.playlist.PlaylistScreen
 import com.densis.musicplayer.playlist.PlaylistViewModel
 import com.densis.musicplayer.playlist.presentation.store.PlaylistEffect
@@ -82,7 +85,12 @@ fun App() {
                         LaunchedEffect(Unit) {
                             viewModel.effects.collect { effect ->
                                 when (effect) {
-                                    PlaylistEffect.OpenPlayer -> navController.navigate(Route.Player)
+                                    is PlaylistEffect.OpenPlayer -> navController.navigate(
+                                        Route.Player(
+                                            effect.trackId
+                                        )
+                                    )
+
                                     else -> Unit
                                 }
                             }
@@ -94,9 +102,23 @@ fun App() {
                             modifier = Modifier.fillMaxSize()
                         )
                     }
-                    composable<Route.Player> {
+                    composable<Route.Player> { backStackEntry ->
+                        val args = backStackEntry.toRoute<Route.Player>()
                         val viewModel = koinViewModel<PlayerViewModel>()
                         val state by viewModel.state.collectAsStateWithLifecycle()
+
+                        LaunchedEffect(args.trackId) {
+                            if (args.trackId != null) {
+                                viewModel.onEvent(PlayerEventUi.PlayTrack(args.trackId))
+                            }
+
+                            viewModel.effects.collect { effect ->
+                                when (effect) {
+                                    PlayerEffect.NavigationPopBackStack -> navController.popBackStack()
+                                    else -> Unit
+                                }
+                            }
+                        }
 
                         PlayerScreen(
                             state = state,

@@ -87,6 +87,14 @@ val PlayerReducer =
                     state { copy(currentTime = event.position) }
                     commands { +PlayerCommand.StopObserveCurrentPosition }
                 }
+
+                is PlayerEventUi.PlayTrack -> {
+                    commands { +PlayerCommand.PlayTrack(event.trackId) }
+                }
+
+                is PlayerEventUi.OnBackButtonClicked -> {
+                    effects { +PlayerEffect.NavigationPopBackStack }
+                }
             }
         }
     }

@@ -30,8 +30,8 @@ val PlaylistReducer =
                     commands { +PlayTrack(event.track) }
                 }
 
-                PlaylistEvent.OpenPlayer -> {
-                    effects { +OpenPlayer }
+                is PlaylistEvent.OpenPlayer -> {
+                    effects { +OpenPlayer(event.trackId) }
                 }
 
                 is PlaylistEvent.OnReceivedCurrentTrack -> {
