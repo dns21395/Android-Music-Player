@@ -8,6 +8,9 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -81,6 +84,7 @@ fun App() {
                     composable<Route.Playlist> {
                         val viewModel = koinViewModel<PlaylistViewModel>()
                         val state by viewModel.state.collectAsStateWithLifecycle()
+                        var coverBytes by remember { mutableStateOf<ByteArray?>(null) }
 
                         LaunchedEffect(Unit) {
                             viewModel.effects.collect { effect ->
@@ -91,12 +95,17 @@ fun App() {
                                         )
                                     )
 
+                                    is PlaylistEffect.OnLoadedCover -> {
+                                        coverBytes = effect.byteArray
+                                    }
+
                                     else -> Unit
                                 }
                             }
                         }
 
                         PlaylistScreen(
+                            coverBytes = coverBytes,
                             state = state,
                             onEvent = { viewModel.onEvent(it) },
                             modifier = Modifier.fillMaxSize()
@@ -106,15 +115,22 @@ fun App() {
                         val args = backStackEntry.toRoute<Route.Player>()
                         val viewModel = koinViewModel<PlayerViewModel>()
                         val state by viewModel.state.collectAsStateWithLifecycle()
+                        var coverBytes by remember { mutableStateOf<ByteArray?>(null) }
 
                         LaunchedEffect(args.trackId) {
-                            if (args.trackId != null) {
-                                viewModel.onEvent(PlayerEventUi.PlayTrack(args.trackId))
-                            }
+                            coverBytes = null
+                            args.trackId?.let { viewModel.onEvent(PlayerEventUi.PlayTrack(it)) }
+                        }
 
+                        LaunchedEffect(Unit) {
                             viewModel.effects.collect { effect ->
                                 when (effect) {
                                     PlayerEffect.NavigationPopBackStack -> navController.popBackStack()
+
+                                    is PlayerEffect.OnLoadedCover -> {
+                                        coverBytes = effect.byteArray
+                                    }
+
                                     else -> Unit
                                 }
                             }
@@ -122,6 +138,7 @@ fun App() {
 
                         PlayerScreen(
                             state = state,
+                            coverBytes = coverBytes,
                             onEvent = { viewModel.onEvent(it) },
                         )
                     }

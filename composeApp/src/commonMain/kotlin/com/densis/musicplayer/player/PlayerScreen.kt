@@ -44,6 +44,7 @@ import org.jetbrains.compose.resources.painterResource
 @Composable
 fun PlayerScreen(
     state: PlayerState,
+    coverBytes: ByteArray?,
     onEvent: (PlayerEvent) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -68,7 +69,7 @@ fun PlayerScreen(
             verticalArrangement = Arrangement.Center,
         ) {
             Cover(
-                cover = state.image,
+                coverBytes = coverBytes,
                 imageSize = 240.dp,
                 emptyIconSize = 120.dp,
                 emptyBackgroundColor = Color(0xFF2A2A2A)

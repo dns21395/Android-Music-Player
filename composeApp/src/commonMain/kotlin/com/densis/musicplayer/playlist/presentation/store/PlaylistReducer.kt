@@ -50,8 +50,8 @@ val PlaylistReducer =
                 }
 
                 is PlaylistEvent.OnTrackCoverLoaded -> {
-                    state {
-                        copy(currentTrackCover = event.trackCover)
+                    effects {
+                        +PlaylistEffect.OnLoadedCover(event.trackCover)
                     }
                 }
 

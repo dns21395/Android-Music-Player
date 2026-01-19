@@ -21,7 +21,7 @@ import money.vivid.elmslie.core.store.Actor
 
 class PlayerActor(
     private val musicPlayer: MusicPlayer,
-   val  appLogger: AppLogger,
+    val appLogger: AppLogger,
 ) : Actor<PlayerCommand, PlayerEvent>() {
 
     private var positionJob: Job? = null

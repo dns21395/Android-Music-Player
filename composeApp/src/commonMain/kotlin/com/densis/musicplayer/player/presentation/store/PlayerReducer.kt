@@ -25,8 +25,14 @@ val PlayerReducer =
 
                 is PlayerEventInternal.OnReceivedCurrentTrack -> {
                     val track = event.track
+
+                    if (track?.id == state.trackId) {
+                        return
+                    }
+
                     state {
                         copy(
+                            trackId = track?.id ?: "",
                             name = track?.title ?: "",
                             artist = track?.artist ?: "",
                             image = null,
@@ -39,8 +45,8 @@ val PlayerReducer =
                 }
 
                 is PlayerEventInternal.OnTrackCoverLoaded -> {
-                    state {
-                        copy(image = event.trackCover)
+                    effects {
+                        +PlayerEffect.OnLoadedCover(event.byteArray)
                     }
                 }
 

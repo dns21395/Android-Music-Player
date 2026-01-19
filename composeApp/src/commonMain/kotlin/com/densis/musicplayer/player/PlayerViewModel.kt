@@ -2,6 +2,7 @@ package com.densis.musicplayer.player
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.densis.musicplayer.data.AppLogger
 import com.densis.musicplayer.player.presentation.store.PlayerEffect
 import com.densis.musicplayer.player.presentation.store.PlayerEvent
 import com.densis.musicplayer.player.presentation.store.PlayerEventInternal
@@ -17,6 +18,7 @@ import kotlinx.coroutines.launch
 class PlayerViewModel(
     private val store: PlayerStore,
     private val trackCoverLoader: TrackCoverLoader,
+    private val appLogger: AppLogger,
 ) : ViewModel() {
     init {
         store.start()
@@ -37,6 +39,7 @@ class PlayerViewModel(
             store.effects.collect { effect ->
                 when (effect) {
                     is PlayerEffect.LoadTrackCover -> {
+                        appLogger.d("GTA5", "load track cover")
                         val imageBitmap = trackCoverLoader.load(effect.id)
                         store.accept(
                             PlayerEventInternal.OnTrackCoverLoaded(imageBitmap)

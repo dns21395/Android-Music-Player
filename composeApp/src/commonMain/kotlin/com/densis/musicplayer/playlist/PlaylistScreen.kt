@@ -43,6 +43,7 @@ import org.jetbrains.compose.resources.painterResource
 @Composable
 fun PlaylistScreen(
     state: PlaylistState,
+    coverBytes: ByteArray?,
     onEvent: (PlaylistEvent) -> Unit,
     modifier: Modifier
 ) {
@@ -51,6 +52,7 @@ fun PlaylistScreen(
         bottomBar = {
             if (state.playlist.isNotEmpty()) {
                 NowPlayingBar(
+                    coverBytes = coverBytes,
                     state = state,
                     onEvent = onEvent,
                     modifier = Modifier
@@ -123,6 +125,7 @@ private fun TrackItem(
 
 @Composable
 fun NowPlayingBar(
+    coverBytes: ByteArray?,
     state: PlaylistState,
     onEvent: (PlaylistEvent) -> Unit,
     modifier: Modifier = Modifier,
@@ -141,7 +144,7 @@ fun NowPlayingBar(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Cover(
-                cover = state.currentTrackCover,
+                coverBytes = coverBytes,
                 imageSize = 48.dp,
                 emptyIconSize = 24.dp,
                 emptyBackgroundColor = Color.Black.copy(alpha = 0.75f)
