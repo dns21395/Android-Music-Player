@@ -8,6 +8,7 @@ data class PlaylistState(
     val currentTrackId: String = "",
     val currentTrackArtist: String = "",
     val currentTrackName: String = "",
-    val currentTrackCover: ImageBitmap? = null,
+    val currentTrackCoverId: String? = null,
     val isPlaying: Boolean = false,
+    val isLoadedCover: Boolean = false
 )

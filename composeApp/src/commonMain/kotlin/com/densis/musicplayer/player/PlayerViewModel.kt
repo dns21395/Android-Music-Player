@@ -39,7 +39,6 @@ class PlayerViewModel(
             store.effects.collect { effect ->
                 when (effect) {
                     is PlayerEffect.LoadTrackCover -> {
-                        appLogger.d("GTA5", "load track cover")
                         val imageBitmap = trackCoverLoader.load(effect.id)
                         store.accept(
                             PlayerEventInternal.OnTrackCoverLoaded(imageBitmap)

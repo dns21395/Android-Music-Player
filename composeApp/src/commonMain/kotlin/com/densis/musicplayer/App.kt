@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -13,6 +14,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -32,6 +36,7 @@ import com.densis.musicplayer.player.presentation.store.PlayerEventUi
 import com.densis.musicplayer.playlist.PlaylistScreen
 import com.densis.musicplayer.playlist.PlaylistViewModel
 import com.densis.musicplayer.playlist.presentation.store.PlaylistEffect
+import com.densis.musicplayer.playlist.presentation.store.PlaylistEvent
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -85,6 +90,20 @@ fun App() {
                         val viewModel = koinViewModel<PlaylistViewModel>()
                         val state by viewModel.state.collectAsStateWithLifecycle()
                         var coverBytes by remember { mutableStateOf<ByteArray?>(null) }
+                        val lifecycleOwner = LocalLifecycleOwner.current
+
+                        DisposableEffect(LocalLifecycleOwner.current) {
+                            val observer = LifecycleEventObserver { _, event ->
+                                if (event == Lifecycle.Event.ON_RESUME) {
+                                    viewModel.onEvent(PlaylistEvent.OnResume)
+                                }
+                            }
+
+                            lifecycleOwner.lifecycle.addObserver(observer)
+                            onDispose {
+                                lifecycleOwner.lifecycle.removeObserver(observer)
+                            }
+                        }
 
                         LaunchedEffect(Unit) {
                             viewModel.effects.collect { effect ->
