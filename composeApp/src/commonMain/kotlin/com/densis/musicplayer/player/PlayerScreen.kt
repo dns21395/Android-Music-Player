@@ -27,6 +27,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.densis.musicplayer.common.presentation.Cover
 import com.densis.musicplayer.player.presentation.store.PlayerEvent
@@ -117,9 +118,11 @@ fun PlayerScreen(
                     shadow = Shadow(
                         color = Color.Black.copy(alpha = 0.6f),
                         offset = Offset(0f, 2f),
-                        blurRadius = 8f
+                        blurRadius = 8f,
                     )
                 ),
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp),
+                textAlign = TextAlign.Center,
                 color = Color.White
             )
             Spacer(Modifier.height(8.dp))
@@ -130,7 +133,10 @@ fun PlayerScreen(
                         offset = Offset(0f, 2f),
                         blurRadius = 8f
                     )
-                ), color = Color.White
+                ),
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp),
+                color = Color.White
             )
             Spacer(Modifier.height(16.dp))
             Row {

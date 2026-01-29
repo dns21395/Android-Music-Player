@@ -17,5 +17,5 @@ actual val platformModule: Module
         single { PermissionManager(androidApplication()) }
         factory { AppLogger() }
         factory { PlaylistRepository(androidApplication()) }
-        factory { TrackCoverLoader(androidApplication(), get()) }
+        factory { TrackCoverLoader(androidApplication()) }
     }

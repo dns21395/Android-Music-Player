@@ -1,6 +1,5 @@
 package com.densis.musicplayer.player
 
-import com.densis.musicplayer.data.AppLogger
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.memScoped
 import kotlinx.cinterop.refTo
@@ -16,12 +15,9 @@ import platform.UIKit.UIImage
 import platform.UIKit.UIImageJPEGRepresentation
 import platform.posix.memcpy
 
-actual class TrackCoverLoader(
-    private val appLogger: AppLogger,
-) {
+actual class TrackCoverLoader() {
     @OptIn(ExperimentalForeignApi::class)
     actual suspend fun load(artworkKey: String): ByteArray? {
-        appLogger.d("GTA5", "load : $artworkKey")
         val query = MPMediaQuery.songsQuery()
         query.addFilterPredicate(
             MPMediaPropertyPredicate.predicateWithValue(
