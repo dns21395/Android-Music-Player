@@ -1,34 +1,56 @@
 package com.densis.musicplayer.player
 
-import androidx.compose.ui.graphics.ImageBitmap
-import androidx.compose.ui.graphics.toComposeImageBitmap
-import com.densis.musicplayer.playlist.data.repository.toSkiaImage
 import kotlinx.cinterop.ExperimentalForeignApi
+import kotlinx.cinterop.memScoped
+import kotlinx.cinterop.refTo
 import platform.CoreGraphics.CGSizeMake
+import platform.Foundation.NSData
 import platform.Foundation.NSNumber
 import platform.Foundation.numberWithLongLong
 import platform.MediaPlayer.MPMediaItem
 import platform.MediaPlayer.MPMediaItemPropertyPersistentID
 import platform.MediaPlayer.MPMediaPropertyPredicate
 import platform.MediaPlayer.MPMediaQuery
+import platform.UIKit.UIImage
+import platform.UIKit.UIImageJPEGRepresentation
+import platform.posix.memcpy
 
-// source : https://slack-chats.kotlinlang.org/t/12086405/hi-all-how-to-convert-ios-uiimage-to-compose-imagebitmap-in-
-actual class TrackCoverLoader {
+actual class TrackCoverLoader() {
     @OptIn(ExperimentalForeignApi::class)
-    actual suspend fun load(artworkKey: String): ImageBitmap? {
-        val predicate = MPMediaPropertyPredicate.predicateWithValue(
-            NSNumber.numberWithLongLong(artworkKey.toLong()),
-            MPMediaItemPropertyPersistentID
+    actual suspend fun load(artworkKey: String): ByteArray? {
+        val query = MPMediaQuery.songsQuery()
+        query.addFilterPredicate(
+            MPMediaPropertyPredicate.predicateWithValue(
+                NSNumber.numberWithLongLong(artworkKey.toLong()),
+                MPMediaItemPropertyPersistentID
+            )
         )
 
-        val query = MPMediaQuery()
-        query.addFilterPredicate(predicate)
 
-        val item = query.items?.firstOrNull() as? MPMediaItem
-        val uiImage = item?.artwork
-            ?.imageWithSize(CGSizeMake(512.0, 512.0))
+        val item: MPMediaItem = (query.items?.firstOrNull() as? MPMediaItem) ?: return null
 
-        return uiImage?.toSkiaImage()?.toComposeImageBitmap()
+        val artwork = item.artwork ?: return null
+
+        val uiImage = artwork.imageWithSize(
+            CGSizeMake(512.0, 512.0)
+        ) ?: return null
+
+        return uiImage.toJpegByteArray()
     }
 }
+
+
+@OptIn(ExperimentalForeignApi::class)
+fun UIImage.toJpegByteArray(quality: Double = 0.75): ByteArray? {
+    val nsData: NSData = UIImageJPEGRepresentation(this, quality) ?: return null
+    val length = nsData.length.toInt()
+    if (length <= 0) return null
+
+    val bytes = ByteArray(length)
+    memScoped {
+        memcpy(bytes.refTo(0), nsData.bytes, nsData.length)
+    }
+    return bytes
+}
+
 

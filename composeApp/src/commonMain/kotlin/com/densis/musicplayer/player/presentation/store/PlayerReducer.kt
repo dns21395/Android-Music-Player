@@ -25,8 +25,14 @@ val PlayerReducer =
 
                 is PlayerEventInternal.OnReceivedCurrentTrack -> {
                     val track = event.track
+
+                    if (track?.id == state.trackId) {
+                        return
+                    }
+
                     state {
                         copy(
+                            trackId = track?.id ?: "",
                             name = track?.title ?: "",
                             artist = track?.artist ?: "",
                             image = null,
@@ -39,8 +45,8 @@ val PlayerReducer =
                 }
 
                 is PlayerEventInternal.OnTrackCoverLoaded -> {
-                    state {
-                        copy(image = event.trackCover)
+                    effects {
+                        +PlayerEffect.OnLoadedCover(event.byteArray)
                     }
                 }
 
@@ -86,6 +92,14 @@ val PlayerReducer =
                 is PlayerEventUi.StartDragging -> {
                     state { copy(currentTime = event.position) }
                     commands { +PlayerCommand.StopObserveCurrentPosition }
+                }
+
+                is PlayerEventUi.PlayTrack -> {
+                    commands { +PlayerCommand.PlayTrack(event.trackId) }
+                }
+
+                is PlayerEventUi.OnBackButtonClicked -> {
+                    effects { +PlayerEffect.NavigationPopBackStack }
                 }
             }
         }

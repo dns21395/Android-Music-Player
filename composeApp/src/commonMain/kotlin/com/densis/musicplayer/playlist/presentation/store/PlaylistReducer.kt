@@ -4,6 +4,7 @@ import com.densis.musicplayer.playlist.presentation.store.PlaylistCommand.GetPla
 import com.densis.musicplayer.playlist.presentation.store.PlaylistCommand.ObserveCurrentTrack
 import com.densis.musicplayer.playlist.presentation.store.PlaylistCommand.PlayOrPause
 import com.densis.musicplayer.playlist.presentation.store.PlaylistCommand.PlayTrack
+import com.densis.musicplayer.playlist.presentation.store.PlaylistEffect.*
 import com.densis.musicplayer.playlist.presentation.store.PlaylistEffect.LoadTrackCover
 import com.densis.musicplayer.playlist.presentation.store.PlaylistEffect.OpenPlayer
 import money.vivid.elmslie.core.store.StateReducer
@@ -22,6 +23,7 @@ val PlaylistReducer =
                     }
                 }
 
+
                 is PlaylistEvent.OnReceivedPlaylist -> {
                     state { copy(playlist = event.playlist) }
                 }
@@ -30,29 +32,33 @@ val PlaylistReducer =
                     commands { +PlayTrack(event.track) }
                 }
 
-                PlaylistEvent.OpenPlayer -> {
-                    effects { +OpenPlayer }
+                is PlaylistEvent.OpenPlayer -> {
+                    effects { +OpenPlayer(event.trackId) }
                 }
 
                 is PlaylistEvent.OnReceivedCurrentTrack -> {
                     val track = event.track
+
+                    if (track?.id == state.currentTrackId) {
+                        return
+                    }
+
                     state {
                         copy(
                             currentTrackId = track?.id ?: "",
                             currentTrackArtist = track?.artist ?: "",
                             currentTrackName = track?.title ?: "",
-                            currentTrackCover = null,
+                            currentTrackCoverId = track?.trackCoverId,
+                            isLoadedCover = false
                         )
-                    }
-                    if (track?.trackCoverId != null) {
-                        effects { +LoadTrackCover(track.trackCoverId) }
                     }
                 }
 
                 is PlaylistEvent.OnTrackCoverLoaded -> {
-                    state {
-                        copy(currentTrackCover = event.trackCover)
+                    effects {
+                        +OnLoadedCover(event.trackCover)
                     }
+                    state { copy(isLoadedCover = true) }
                 }
 
                 PlaylistEvent.OnPlayPauseButtonClicked -> {
@@ -61,6 +67,12 @@ val PlaylistReducer =
 
                 is PlaylistEvent.OnPlayPauseStateUpdated -> {
                     state { copy(isPlaying = event.isPlaying) }
+                }
+
+                PlaylistEvent.OnResume -> {
+                    if (state.currentTrackCoverId != null && !state.isLoadedCover) {
+                        effects { +LoadTrackCover(state.currentTrackCoverId!!) }
+                    }
                 }
             }
         }

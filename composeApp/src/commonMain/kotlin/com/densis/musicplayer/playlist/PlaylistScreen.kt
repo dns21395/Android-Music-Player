@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -28,6 +29,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.densis.musicplayer.common.presentation.Cover
 import com.densis.musicplayer.domain.entity.Track
@@ -38,9 +40,11 @@ import musicplayer.composeapp.generated.resources.pause
 import musicplayer.composeapp.generated.resources.play
 import org.jetbrains.compose.resources.painterResource
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PlaylistScreen(
     state: PlaylistState,
+    coverBytes: ByteArray?,
     onEvent: (PlaylistEvent) -> Unit,
     modifier: Modifier
 ) {
@@ -49,6 +53,7 @@ fun PlaylistScreen(
         bottomBar = {
             if (state.playlist.isNotEmpty()) {
                 NowPlayingBar(
+                    coverBytes = coverBytes,
                     state = state,
                     onEvent = onEvent,
                     modifier = Modifier
@@ -121,13 +126,14 @@ private fun TrackItem(
 
 @Composable
 fun NowPlayingBar(
+    coverBytes: ByteArray?,
     state: PlaylistState,
     onEvent: (PlaylistEvent) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Surface(
         modifier = modifier
-            .clickable { onEvent(PlaylistEvent.OpenPlayer) },
+            .clickable { onEvent(PlaylistEvent.OpenPlayer()) },
         tonalElevation = 6.dp,
         shadowElevation = 6.dp
     ) {
@@ -139,7 +145,7 @@ fun NowPlayingBar(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Cover(
-                cover = state.currentTrackCover,
+                coverBytes = coverBytes,
                 imageSize = 48.dp,
                 emptyIconSize = 24.dp,
                 emptyBackgroundColor = Color.Black.copy(alpha = 0.75f)
@@ -152,7 +158,8 @@ fun NowPlayingBar(
             ) {
                 Text(
                     text = state.currentTrackName,
-                    style = MaterialTheme.typography.bodyLarge
+                    style = MaterialTheme.typography.bodyLarge,
+                    fontWeight = FontWeight.Bold
                 )
                 Text(
                     text = state.currentTrackArtist,

@@ -10,4 +10,5 @@ sealed class PlayerCommand {
     data object StopObserveCurrentPosition : PlayerCommand()
     data class PlayOrPause(val isPlaying: Boolean) : PlayerCommand()
     data class SeekTo(val seekTo: Float) : PlayerCommand()
+    data class PlayTrack(val trackId: String) : PlayerCommand()
 }

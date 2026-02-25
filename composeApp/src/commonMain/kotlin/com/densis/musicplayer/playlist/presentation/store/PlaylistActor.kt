@@ -26,8 +26,7 @@ class PlaylistActor(
             }
 
             is PlaylistCommand.PlayTrack -> flow {
-                musicPlayer.play(command.track)
-                emit(OpenPlayer)
+                emit(OpenPlayer(command.track.id))
             }
 
             PlaylistCommand.ObserveCurrentTrack -> flow {

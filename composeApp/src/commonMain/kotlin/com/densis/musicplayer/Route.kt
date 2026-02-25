@@ -14,5 +14,5 @@ sealed interface Route {
     data object Playlist : Route
 
     @Serializable
-    data object Player : Route
+    data class Player(val trackId: String?) : Route
 }
