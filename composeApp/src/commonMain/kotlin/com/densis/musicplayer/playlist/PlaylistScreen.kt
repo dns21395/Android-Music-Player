@@ -29,6 +29,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.densis.musicplayer.common.presentation.Cover
 import com.densis.musicplayer.domain.entity.Track
@@ -157,7 +158,8 @@ fun NowPlayingBar(
             ) {
                 Text(
                     text = state.currentTrackName,
-                    style = MaterialTheme.typography.bodyLarge
+                    style = MaterialTheme.typography.bodyLarge,
+                    fontWeight = FontWeight.Bold
                 )
                 Text(
                     text = state.currentTrackArtist,

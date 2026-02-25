@@ -43,11 +43,11 @@ val sharedModule = module {
         PlayerStore(
             initialState = PlayerState(),
             reducer = PlayerReducer,
-            actor = PlayerActor(get(), get())
+            actor = PlayerActor(get())
         )
     }
 
     viewModel { PermissionViewModel(get(named("permission"))) }
-    viewModel { PlaylistViewModel(get(named("playlist")), get(), get()) }
-    viewModel { PlayerViewModel(get(named("player")), get(), get()) }
+    viewModel { PlaylistViewModel(get(named("playlist")), get()) }
+    viewModel { PlayerViewModel(get(named("player")), get()) }
 }

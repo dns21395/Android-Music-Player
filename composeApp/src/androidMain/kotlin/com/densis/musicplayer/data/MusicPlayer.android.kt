@@ -25,7 +25,6 @@ import kotlin.coroutines.resumeWithException
 
 actual class MusicPlayer(
     private val context: Context,
-    private val appLogger: AppLogger,
 ) {
     private var playlist: List<Track> = emptyList()
     private var mediaItems: List<MediaItem> = emptyList()

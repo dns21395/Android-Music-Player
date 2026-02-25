@@ -1,6 +1,5 @@
 package com.densis.musicplayer.player.presentation.store
 
-import com.densis.musicplayer.data.AppLogger
 import com.densis.musicplayer.data.MusicPlayer
 import com.densis.musicplayer.player.presentation.store.PlayerEventInternal.OnPlayPauseStateUpdated
 import com.densis.musicplayer.player.presentation.store.PlayerEventInternal.OnReceivedCurrentTrack
@@ -21,7 +20,6 @@ import money.vivid.elmslie.core.store.Actor
 
 class PlayerActor(
     private val musicPlayer: MusicPlayer,
-    val appLogger: AppLogger,
 ) : Actor<PlayerCommand, PlayerEvent>() {
 
     private var positionJob: Job? = null
